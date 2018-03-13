@@ -13,11 +13,11 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 // MONGODB address to connect to.
 const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/DomoMaker';
 
-mongoose.connect(dbURL, (err) =>{
-	if(err){
-		console.log('could not connect to database');
-		throw err;
-	}
+mongoose.connect(dbURL, (err) => {
+  if (err) {
+    console.log('could not connect to database');
+    throw err;
+  }
 });
 
 const router = require('./router.js');
@@ -29,7 +29,7 @@ app.use(favicon(`${__dirname}/../client/img/favicon.png`));
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.engine('handlebars', expressHandlebars({defaultLayout: 'main'}));
+app.engine('handlebars', expressHandlebars({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/../views`);
 app.use(cookieParser());
