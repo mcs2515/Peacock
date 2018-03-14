@@ -32,7 +32,7 @@ const makeDomo = (req, res) => {
   domoPromise.catch((err) => {
     console.log(err);
 
-		//no way to get here
+		// no way to get here
     if (err.code === 11000) {
       return res.status(400).json({ error: 'Domo already exists.' });
     }
