@@ -10,6 +10,7 @@ const signupPage = (req, res) => {
 };
 
 const logout = (req, res) => {
+  req.session.destroy();
   res.redirect('/');
 };
 
@@ -21,6 +22,7 @@ const login = (request, response) => {
   const password = `${req.body.pass}`;
 
   if (!username || !password) {
+    console.log('login issue');
     return res.status(400).json({ error: 'RAWR! All fields are required' });
   }
 
@@ -28,6 +30,7 @@ const login = (request, response) => {
     if (err || !account) {
       return res.status(401).json({ error: 'Wrong username or password' });
     }
+    req.session.account = Account.AccountModel.toAPI(account);
 
     return res.json({ redirect: '/maker' });
   });
@@ -58,7 +61,12 @@ const signup = (request, response) => {
 
     const newAccount = new Account.AccountModel(accountData);
     const savePromise = newAccount.save();
-    savePromise.then(() => res.json({ redirect: '/maker' }));
+
+    savePromise.then(() => {
+      req.session.account = Account.AccountModel.toAPI(newAccount);
+      return res.json({ redirect: '/maker' });
+    });
+
     savePromise.catch((err) => {
       console.log(err);
 
@@ -70,6 +78,7 @@ const signup = (request, response) => {
     });
   });
 };
+
 
 module.exports.loginPage = loginPage;
 module.exports.login = login;
