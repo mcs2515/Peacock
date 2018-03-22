@@ -10,6 +10,7 @@ const expressHandlebars = require('express-handlebars');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const url = require('url');
+const csrf = require('csurf');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
@@ -53,12 +54,27 @@ app.use(session({
   secret: 'Domo Arigato',
   resave: true,
   saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+  },
 }));
 
 app.engine('handlebars', expressHandlebars({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/../views`);
+
+app.disable('x-powered-by');
 app.use(cookieParser());
+
+// must come AFTER app.use(cookieParser());
+app.use(csrf());
+app.use((err, req, res, next) => {
+  if (err.code !== 'EBADCSRFTOKEN') return next(err);
+
+  console.log('Missing CSRF token');
+  return false;
+});
+
 
 router(app);
 
@@ -68,5 +84,3 @@ app.listen(port, (err) => {
   }
   console.log(`Listening on port ${port}`);
 });
-
-//TEST
