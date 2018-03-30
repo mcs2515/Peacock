@@ -13,14 +13,15 @@ const makerPage = (req, res) => {
 };
 
 const makeDomo = (req, res) => {
-  if (!req.body.name || !req.body.age) {
+  if (!req.body.name || !req.body.age || !req.body.rarity) {
     console.log('domo make issue');
-    return res.status(400).json({ error: 'RAWR! Both name and age are required' });
+    return res.status(400).json({ error: 'RAWR! All fields are required' });
   }
 
   const domoData = {
     name: req.body.name,
     age: req.body.age,
+    rarity: req.body.rarity,
     owner: req.session.account._id,
   };
 
@@ -31,13 +32,6 @@ const makeDomo = (req, res) => {
 
   domoPromise.catch((err) => {
     console.log(err);
-
-		// no way to get here
-    if (err.code === 11000) {
-      return res.status(400).json({ error: 'Domo already exists.' });
-    }
-
-    return res.status(400).json({ error: 'An error occurred' });
   });
 
   console.log('domo made');
