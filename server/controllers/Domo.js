@@ -53,6 +53,21 @@ const getDomos = (request, response) => {
   });
 };
 
+const deleteDomo = (req, res) => {
+  console.log(req.body);
+  const domo = Domo.DomoModel.deleteDomo(req.session.account._id, req.body.domo_id, (err, docs) => {
+    if (err) {
+      console.log(err);
+
+      return res.status(400).json({ error: 'An error occured.' });
+    }
+    
+    //random return value
+    res.json({success: "true"});
+  });
+};
+
 module.exports.makerPage = makerPage;
 module.exports.getDomos = getDomos;
 module.exports.make = makeDomo;
+module.exports.delete = deleteDomo;

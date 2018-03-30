@@ -1,3 +1,5 @@
+var csrf;
+
 const handleDomo = (e) => {
   e.preventDefault();
   
@@ -15,6 +17,18 @@ const handleDomo = (e) => {
   return false;
 }
 
+const deleteDomo = (e) =>{
+  
+  console.dir(e.target);
+  e.preventDefault();
+  
+  sendAjax('POST', $(e.target).attr("action"),$(e.target).serialize(),function() {
+      loadDomosFromServer();
+  });
+  
+  return false;
+}
+
 const DomoForm = (props) => {
   return (
     <form id="domoForm" onSubmit={handleDomo} name="domoForm" action="/maker" method="POST" className="domoForm">
@@ -24,7 +38,7 @@ const DomoForm = (props) => {
       <input id="domoAge" type="text" name="age" placeholder="Domo Age"/>
       <label htmlFor="rarity">Rarity: </label>
       <input id="domoRarity" type="text" name="rarity" placeholder="Domo Rarity"/>
-      <input type="hidden" name="_csrf" value={props.csrf} />
+      <input type="hidden" name="_csrf" value={csrf} />
       <input className="makeDomoSubmit" type="submit" value="Make Domo"/>
     </form>
   );
@@ -47,9 +61,9 @@ const DomoList = function(props) {
         <h3 className="domoRarity"> rarity: {domo.rarity}</h3>
         <h3 className="domoAge"> age: {domo.age}</h3>
         
-        //deletes domo
-        <form id="domoForm" onSubmit={handleDomo} name="domoForm" action="/delete" method="POST" className="deleteDomo">
-          <input type="hidden" name="_csrf" value={props.csrf} />
+        <form id="deleteForm" onSubmit={deleteDomo} name="deleteForm" action="/delete" method="POST" className="deleteDomo">
+          <input type="hidden" name="_csrf" value={csrf} />
+          <input type="hidden" name="domo_id" value={domo._id} />
           <input className="deleteDomoSubmit" type="submit" value="Delete Domo"/>
         </form>
       </div>
@@ -71,15 +85,15 @@ const loadDomosFromServer = () => {
   });
 };
 
-const setup = function(csrf) {
+const setup = function() {
   //renders form
   ReactDOM.render(
-    <DomoForm csrf={csrf} />,document.querySelector("#makeDomo")
+    <DomoForm/>,document.querySelector("#makeDomo")
   );
   
   //renders default domo list display
   ReactDOM.render(
-    <DomoList domos={[]} />,document.querySelector("#domos")
+    <DomoList domos={[]}/>,document.querySelector("#domos")
   );
   
   loadDomosFromServer();
@@ -87,7 +101,8 @@ const setup = function(csrf) {
 
 const getToken = () => {
 	sendAjax('GET', '/getToken', null, (result) =>{
-		setup(result.csrfToken);
+        csrf = result.csrfToken;
+		setup();
 	});
 };
 

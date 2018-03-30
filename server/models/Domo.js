@@ -31,8 +31,8 @@ const DomoSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-	
-	rarity: {
+
+  rarity: {
     type: Number,
     min: 0,
     required: true,
@@ -53,7 +53,7 @@ DomoSchema.statics.findByOwner = (ownerId, callback) => {
   return DomoModel.find(search).select('name age rarity').exec(callback);
 };
 
-DomoSchema.statics.findById = (ownerId, domoId,callback) => {
+DomoSchema.statics.deleteDomo = (ownerId, domoId, callback) => {
   const search = {
     owner: convertId(ownerId),
     _id: convertId(domoId),

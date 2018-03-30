@@ -1,5 +1,7 @@
 "use strict";
 
+var csrf;
+
 var handleDomo = function handleDomo(e) {
   e.preventDefault();
 
@@ -11,6 +13,18 @@ var handleDomo = function handleDomo(e) {
   }
 
   sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function () {
+    loadDomosFromServer();
+  });
+
+  return false;
+};
+
+var deleteDomo = function deleteDomo(e) {
+
+  console.dir(e.target);
+  e.preventDefault();
+
+  sendAjax('POST', $(e.target).attr("action"), $(e.target).serialize(), function () {
     loadDomosFromServer();
   });
 
@@ -39,7 +53,7 @@ var DomoForm = function DomoForm(props) {
       "Rarity: "
     ),
     React.createElement("input", { id: "domoRarity", type: "text", name: "rarity", placeholder: "Domo Rarity" }),
-    React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
+    React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
     React.createElement("input", { className: "makeDomoSubmit", type: "submit", value: "Make Domo" })
   );
 };
@@ -60,7 +74,7 @@ var DomoList = function DomoList(props) {
   var domoNodes = props.domos.map(function (domo) {
     return React.createElement(
       "div",
-      { key: domo._id, className: "domo" },
+      { "data-key": domo._id, className: "domo" },
       React.createElement("img", { src: "/assets/img/domoface.jpeg", alt: "domo face", className: "domoFace" }),
       React.createElement(
         "h3",
@@ -79,6 +93,13 @@ var DomoList = function DomoList(props) {
         { className: "domoAge" },
         " age: ",
         domo.age
+      ),
+      React.createElement(
+        "form",
+        { id: "deleteForm", onSubmit: deleteDomo, name: "deleteForm", action: "/delete", method: "POST", className: "deleteDomo" },
+        React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
+        React.createElement("input", { type: "hidden", name: "domo_id", value: domo._id }),
+        React.createElement("input", { className: "deleteDomoSubmit", type: "submit", value: "Delete Domo" })
       )
     );
   });
@@ -96,9 +117,9 @@ var loadDomosFromServer = function loadDomosFromServer() {
   });
 };
 
-var setup = function setup(csrf) {
+var setup = function setup() {
   //renders form
-  ReactDOM.render(React.createElement(DomoForm, { csrf: csrf }), document.querySelector("#makeDomo"));
+  ReactDOM.render(React.createElement(DomoForm, null), document.querySelector("#makeDomo"));
 
   //renders default domo list display
   ReactDOM.render(React.createElement(DomoList, { domos: [] }), document.querySelector("#domos"));
@@ -108,7 +129,8 @@ var setup = function setup(csrf) {
 
 var getToken = function getToken() {
   sendAjax('GET', '/getToken', null, function (result) {
-    setup(result.csrfToken);
+    csrf = result.csrfToken;
+    setup();
   });
 };
 
