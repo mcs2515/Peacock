@@ -53,17 +53,19 @@ const getDomos = (request, response) => {
   });
 };
 
-const deleteDomo = (req, res) => {
-  console.log(req.body);
-  const domo = Domo.DomoModel.deleteDomo(req.session.account._id, req.body.domo_id, (err, docs) => {
+const deleteDomo = (request, response) => {
+  const req = request;
+  const res = response;
+
+  return Domo.DomoModel.deleteDomo(req.session.account._id, req.body.domo_id, (err) => {
     if (err) {
       console.log(err);
 
       return res.status(400).json({ error: 'An error occured.' });
     }
-    
-    //random return value
-    res.json({success: "true"});
+
+    // random return value
+    return res.json({ success: 'true' });
   });
 };
 
