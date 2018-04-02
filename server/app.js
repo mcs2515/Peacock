@@ -15,7 +15,7 @@ const csrf = require('csurf');
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 // MONGODB address to connect to.
-const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/DomoMaker';
+const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/FeatherMaker';
 
 mongoose.connect(dbURL, (err) => {
   if (err) {
@@ -51,7 +51,7 @@ app.use(session({
     port: redisURL.port,
     pass: redisPASS,
   }),
-  secret: 'Domo Arigato',
+  secret: 'Feather Arigato',
   resave: true,
   saveUninitialized: true,
   cookie: {

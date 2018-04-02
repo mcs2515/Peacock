@@ -1,86 +1,84 @@
 var csrf;
 
-const handleDomo = (e) => {
+const handleFeather = (e) => {
   e.preventDefault();
   
-  $("#domoMessage").animate({width:'hide'},350);
-  
-  if($("#domoName").val() == '' || $("#domoAge").val() == ''){
+  $("#featherMessage").animate({width:'hide'},350);
+	
+  if($("#featherName").val() == '' || $("#featherImg").val() == ''){
     handleError("RAWR! All fields are required");
+		console.log('trigger1');
     return false;
   }
   
-  sendAjax('POST', $("#domoForm").attr("action"),$("#domoForm").serialize(),function() {
-    loadDomosFromServer();
+  sendAjax('POST', $("#featherForm").attr("action"),$("#featherForm").serialize(),function() {
+    loadFeathersFromServer();
   });
   
   return false;
 }
 
-const deleteDomo = (e) =>{
+const deleteFeather = (e) =>{
   
   console.dir(e.target);
   e.preventDefault();
   
   sendAjax('POST', $(e.target).attr("action"),$(e.target).serialize(),function() {
-      loadDomosFromServer();
+      loadFeathersFromServer();
   });
   
   return false;
 }
 
-const DomoForm = (props) => {
+const FeatherForm = (props) => {
   return (
-    <form id="domoForm" onSubmit={handleDomo} name="domoForm" action="/maker" method="POST" className="domoForm">
+    <form id="featherForm" onSubmit={handleFeather} name="featherForm" action="/maker" method="POST" className="featherForm">
       <label htmlFor="name">Name: </label>
-      <input id="domoName" type="text" name="name" placeholder="Domo Name"/>
-      <label htmlFor="age">Age: </label>
-      <input id="domoAge" type="text" name="age" placeholder="Domo Age"/>
-      <label htmlFor="rarity">Rarity: </label>
-      <input id="domoRarity" type="text" name="rarity" placeholder="Domo Rarity"/>
+      <input id="featherName" type="text" name="name" placeholder="Feather Name"/>
+      <label htmlFor="img">Image: </label>
+      <input id="featherImg" type="text" name="imageUrl" placeholder="url"/>
       <input type="hidden" name="_csrf" value={csrf} />
-      <input className="makeDomoSubmit" type="submit" value="Make Domo"/>
+      <input className="makeFeatherSubmit" type="submit" value="Make Feather"/>
     </form>
   );
 }
 
-const DomoList = function(props) {
-  if(props.domos.length === 0){
+const FeatherList = function(props) {
+  if(props.feathers.length === 0){
     return (
-      <div className="domoList">
-        <h3 className="emptyDomo">No Domos yet</h3>
+      <div className="featherList">
+        <h3 className="emptyFeather">No Feathers yet</h3>
       </div>
     );
   }
   
-  const domoNodes = props.domos.map(function(domo) {
+  const featherNodes = props.feathers.map(function(feather) {
     return (
-      <div data-key={domo._id} className="domo">
-        <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-        <h3 className="domoName"> Name: {domo.name}</h3>
-        <h3 className="domoRarity"> rarity: {domo.rarity}</h3>
-        <h3 className="domoAge"> age: {domo.age}</h3>
+      <div data-key={feather._id} className="feather">
+        <img src={feather.imageUrl} alt="feather face" className="featherFace" />
+        <h3 className="featherName"> Name: {feather.name}</h3>
+        <h3 className="featherRarity"> Favorite: {feather.favorite}</h3>
         
-        <form id="deleteForm" onSubmit={deleteDomo} name="deleteForm" action="/delete" method="POST" className="deleteDomo">
+        <form id="deleteForm" onSubmit={deleteFeather} name="deleteForm" action="/delete" method="POST" className="deleteFeather">
           <input type="hidden" name="_csrf" value={csrf} />
-          <input type="hidden" name="domo_id" value={domo._id} />
-          <input className="deleteDomoSubmit" type="submit" value="Delete Domo"/>
+          <input type="hidden" name="feather_id" value={feather._id} />
+          <input className="deleteFeatherSubmit" type="submit" value="Delete Feather"/>
         </form>
       </div>
     );
   });
   
   return (
-    <div id="domoList">
-      {domoNodes}
+    <div id="featherList">
+      {featherNodes}
     </div>
   );
 };
 
-const loadDomosFromServer = () => {
-  sendAjax('GET','/getDomos', null, (data) => {
+const loadFeathersFromServer = () => {
+  sendAjax('GET','/getFeathers', null, (data) => {
     ReactDOM.render(
-      <DomoList domos={data.domos} />, document.querySelector("#domos")
+      <FeatherList feathers={data.feathers} />, document.querySelector("#feathers")
     );
   });
 };
@@ -88,15 +86,15 @@ const loadDomosFromServer = () => {
 const setup = function() {
   //renders form
   ReactDOM.render(
-    <DomoForm/>,document.querySelector("#makeDomo")
+    <FeatherForm/>,document.querySelector("#makeFeather")
   );
   
-  //renders default domo list display
+  //renders default feather list display
   ReactDOM.render(
-    <DomoList domos={[]}/>,document.querySelector("#domos")
+    <FeatherList feathers={[]}/>,document.querySelector("#feathers")
   );
   
-  loadDomosFromServer();
+  loadFeathersFromServer();
 };
 
 const getToken = () => {

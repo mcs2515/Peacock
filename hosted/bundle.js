@@ -2,129 +2,118 @@
 
 var csrf;
 
-var handleDomo = function handleDomo(e) {
+var handleFeather = function handleFeather(e) {
   e.preventDefault();
 
-  $("#domoMessage").animate({ width: 'hide' }, 350);
+  $("#featherMessage").animate({ width: 'hide' }, 350);
 
-  if ($("#domoName").val() == '' || $("#domoAge").val() == '') {
+  if ($("#featherName").val() == '' || $("#featherImg").val() == '') {
     handleError("RAWR! All fields are required");
+    console.log('trigger1');
     return false;
   }
 
-  sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function () {
-    loadDomosFromServer();
+  sendAjax('POST', $("#featherForm").attr("action"), $("#featherForm").serialize(), function () {
+    loadFeathersFromServer();
   });
 
   return false;
 };
 
-var deleteDomo = function deleteDomo(e) {
+var deleteFeather = function deleteFeather(e) {
 
   console.dir(e.target);
   e.preventDefault();
 
   sendAjax('POST', $(e.target).attr("action"), $(e.target).serialize(), function () {
-    loadDomosFromServer();
+    loadFeathersFromServer();
   });
 
   return false;
 };
 
-var DomoForm = function DomoForm(props) {
+var FeatherForm = function FeatherForm(props) {
   return React.createElement(
     "form",
-    { id: "domoForm", onSubmit: handleDomo, name: "domoForm", action: "/maker", method: "POST", className: "domoForm" },
+    { id: "featherForm", onSubmit: handleFeather, name: "featherForm", action: "/maker", method: "POST", className: "featherForm" },
     React.createElement(
       "label",
       { htmlFor: "name" },
       "Name: "
     ),
-    React.createElement("input", { id: "domoName", type: "text", name: "name", placeholder: "Domo Name" }),
+    React.createElement("input", { id: "featherName", type: "text", name: "name", placeholder: "Feather Name" }),
     React.createElement(
       "label",
-      { htmlFor: "age" },
-      "Age: "
+      { htmlFor: "img" },
+      "Image: "
     ),
-    React.createElement("input", { id: "domoAge", type: "text", name: "age", placeholder: "Domo Age" }),
-    React.createElement(
-      "label",
-      { htmlFor: "rarity" },
-      "Rarity: "
-    ),
-    React.createElement("input", { id: "domoRarity", type: "text", name: "rarity", placeholder: "Domo Rarity" }),
+    React.createElement("input", { id: "featherImg", type: "text", name: "imageUrl", placeholder: "url" }),
     React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
-    React.createElement("input", { className: "makeDomoSubmit", type: "submit", value: "Make Domo" })
+    React.createElement("input", { className: "makeFeatherSubmit", type: "submit", value: "Make Feather" })
   );
 };
 
-var DomoList = function DomoList(props) {
-  if (props.domos.length === 0) {
+var FeatherList = function FeatherList(props) {
+  if (props.feathers.length === 0) {
     return React.createElement(
       "div",
-      { className: "domoList" },
+      { className: "featherList" },
       React.createElement(
         "h3",
-        { className: "emptyDomo" },
-        "No Domos yet"
+        { className: "emptyFeather" },
+        "No Feathers yet"
       )
     );
   }
 
-  var domoNodes = props.domos.map(function (domo) {
+  var featherNodes = props.feathers.map(function (feather) {
     return React.createElement(
       "div",
-      { "data-key": domo._id, className: "domo" },
-      React.createElement("img", { src: "/assets/img/domoface.jpeg", alt: "domo face", className: "domoFace" }),
+      { "data-key": feather._id, className: "feather" },
+      React.createElement("img", { src: feather.imageUrl, alt: "feather face", className: "featherFace" }),
       React.createElement(
         "h3",
-        { className: "domoName" },
+        { className: "featherName" },
         " Name: ",
-        domo.name
+        feather.name
       ),
       React.createElement(
         "h3",
-        { className: "domoRarity" },
-        " rarity: ",
-        domo.rarity
-      ),
-      React.createElement(
-        "h3",
-        { className: "domoAge" },
-        " age: ",
-        domo.age
+        { className: "featherRarity" },
+        " Favorite: ",
+        feather.favorite
       ),
       React.createElement(
         "form",
-        { id: "deleteForm", onSubmit: deleteDomo, name: "deleteForm", action: "/delete", method: "POST", className: "deleteDomo" },
+        { id: "deleteForm", onSubmit: deleteFeather, name: "deleteForm", action: "/delete", method: "POST", className: "deleteFeather" },
         React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
-        React.createElement("input", { type: "hidden", name: "domo_id", value: domo._id }),
-        React.createElement("input", { className: "deleteDomoSubmit", type: "submit", value: "Delete Domo" })
+        React.createElement("input", { type: "hidden", name: "feather_id", value: feather._id }),
+        React.createElement("input", { className: "deleteFeatherSubmit", type: "submit", value: "Delete Feather" })
       )
     );
   });
 
   return React.createElement(
     "div",
-    { id: "domoList" },
-    domoNodes
+    { id: "featherList" },
+    featherNodes
   );
 };
 
-var loadDomosFromServer = function loadDomosFromServer() {
-  sendAjax('GET', '/getDomos', null, function (data) {
-    ReactDOM.render(React.createElement(DomoList, { domos: data.domos }), document.querySelector("#domos"));
+var loadFeathersFromServer = function loadFeathersFromServer() {
+  sendAjax('GET', '/getFeathers', null, function (data) {
+    ReactDOM.render(React.createElement(FeatherList, { feathers: data.feathers }), document.querySelector("#feathers"));
   });
 };
 
 var setup = function setup() {
   //renders form
-  ReactDOM.render(React.createElement(DomoForm, null), document.querySelector("#makeDomo"));
+  ReactDOM.render(React.createElement(FeatherForm, null), document.querySelector("#makeFeather"));
 
-  //renders default domo list display
-  ReactDOM.render(React.createElement(DomoList, { domos: [] }), document.querySelector("#domos"));
+  //renders default feather list display
+  ReactDOM.render(React.createElement(FeatherList, { feathers: [] }), document.querySelector("#feathers"));
 
-  loadDomosFromServer();
+  loadFeathersFromServer();
 };
 
 var getToken = function getToken() {
@@ -141,11 +130,11 @@ $(document).ready(function () {
 
 var handleError = function handleError(message) {
 	$("#errorMessage").text(message);
-	$("#domoMessage").animate({ width: 'toggle' }, 350);
+	$("#featherMessage").animate({ width: 'toggle' }, 350);
 };
 
 var redirect = function redirect(response) {
-	$("#domoMessage").animate({ width: 'hide' }, 350);
+	$("#featherMessage").animate({ width: 'hide' }, 350);
 	window.location = response.redirect;
 };
 
