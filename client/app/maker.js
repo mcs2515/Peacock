@@ -55,7 +55,7 @@ const FeatherList = function(props) {
   const featherNodes = props.feathers.map(function(feather) {
     return (
       <div data-key={feather._id} className="feather">
-        <img src={feather.imageUrl} alt="feather face" className="featherFace" />
+        <img src={feather.imageUrl} alt="feather face" className="featherFace" onLoad = {LoadColors}/>
         <h3 className="featherName"> Name: {feather.name}</h3>
         <h3 className="featherRarity"> Favorite: {feather.favorite}</h3>
         
@@ -97,9 +97,15 @@ const setup = function() {
   loadFeathersFromServer();
 };
 
+const LoadColors = (e) =>{
+	Vibrant.from(e.target.src).getPalette(function(err, palette) {
+		console.log(palette);
+	});
+}
+
 const getToken = () => {
 	sendAjax('GET', '/getToken', null, (result) =>{
-        csrf = result.csrfToken;
+		csrf = result.csrfToken;
 		setup();
 	});
 };

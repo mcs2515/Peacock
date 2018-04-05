@@ -70,7 +70,7 @@ var FeatherList = function FeatherList(props) {
     return React.createElement(
       "div",
       { "data-key": feather._id, className: "feather" },
-      React.createElement("img", { src: feather.imageUrl, alt: "feather face", className: "featherFace" }),
+      React.createElement("img", { src: feather.imageUrl, alt: "feather face", className: "featherFace", onLoad: LoadColors }),
       React.createElement(
         "h3",
         { className: "featherName" },
@@ -114,6 +114,12 @@ var setup = function setup() {
   ReactDOM.render(React.createElement(FeatherList, { feathers: [] }), document.querySelector("#feathers"));
 
   loadFeathersFromServer();
+};
+
+var LoadColors = function LoadColors(e) {
+  Vibrant.from(e.target.src).getPalette(function (err, palette) {
+    console.log(palette);
+  });
 };
 
 var getToken = function getToken() {
