@@ -1,4 +1,5 @@
 var csrf;
+var render_colors;
 
 const handleFeather = (e) => {
   e.preventDefault();
@@ -7,7 +8,6 @@ const handleFeather = (e) => {
 	
   if($("#featherName").val() == '' || $("#featherImg").val() == ''){
     handleError("RAWR! All fields are required");
-		console.log('trigger1');
     return false;
   }
   
@@ -19,8 +19,7 @@ const handleFeather = (e) => {
 }
 
 const deleteFeather = (e) =>{
-  
-  console.dir(e.target);
+
   e.preventDefault();
   
   sendAjax('POST', $(e.target).attr("action"),$(e.target).serialize(),function() {
@@ -34,7 +33,7 @@ const FeatherForm = (props) => {
   return (
     <form id="featherForm" onSubmit={handleFeather} name="featherForm" action="/maker" method="POST" className="featherForm">
       <label htmlFor="name">Name: </label>
-      <input id="featherName" type="text" name="name" placeholder="Feather Name"/>
+      <input id="featherName" type="text" name="name" placeholder="name"/>
       <label htmlFor="img">Image: </label>
       <input id="featherImg" type="text" name="imageUrl" placeholder="url"/>
       <input type="hidden" name="_csrf" value={csrf} />
@@ -43,7 +42,7 @@ const FeatherForm = (props) => {
   );
 }
 
-const FeatherList = function(props) {
+const FeatherList = (props) =>{
   if(props.feathers.length === 0){
     return (
       <div className="featherList">
@@ -53,12 +52,17 @@ const FeatherList = function(props) {
   }
   
   const featherNodes = props.feathers.map(function(feather) {
+		
     return (
       <div data-key={feather._id} className="feather">
         <img src={feather.imageUrl} alt="feather face" className="featherFace" onLoad = {LoadColors}/>
         <h3 className="featherName"> Name: {feather.name}</h3>
         <h3 className="featherRarity"> Favorite: {feather.favorite}</h3>
-        
+
+				<div id= "colorsContainer">
+
+				</div>
+				
         <form id="deleteForm" onSubmit={deleteFeather} name="deleteForm" action="/delete" method="POST" className="deleteFeather">
           <input type="hidden" name="_csrf" value={csrf} />
           <input type="hidden" name="feather_id" value={feather._id} />
@@ -81,6 +85,8 @@ const loadFeathersFromServer = () => {
       <FeatherList feathers={data.feathers} />, document.querySelector("#feathers")
     );
   });
+	
+	//console.log(palette);
 };
 
 const setup = function() {
@@ -99,8 +105,53 @@ const setup = function() {
 
 const LoadColors = (e) =>{
 	Vibrant.from(e.target.src).getPalette(function(err, palette) {
-		console.log(palette);
+
+//    https://embed.plnkr.co/plunk/DGLrkj 
+		let colorArray= [];
+		
+		for ( var swatch in palette ) {
+			if (palette.hasOwnProperty(swatch) && palette[swatch]) { 
+				
+				let bg_color = palette[swatch].getHex();
+				let title_text_color =  palette[swatch].getTitleTextColor();			
+				let body_text_color = palette[swatch].getBodyTextColor();
+				let swatch_name = swatch;
+				
+				const code = {
+					backgroundColor: bg_color,
+					bodyTColor: body_text_color,
+					titleTColor: body_text_color,
+					swatchName: swatch,
+				}
+				
+				colorArray.push(code);
+			}
+    }
+		
+		ReactDOM.render(<RenderColors colors={colorArray} />, document.querySelector('#colorsContainer'));
+		//console.log(colorArray);
 	});
+};
+
+const RenderColors = (props) => {
+	
+	const colorNodes = props.colors.map(function(color) {
+
+    return (
+      <li style={{backgroundColor: color.backgroundColor}}>
+				<p style = {{color: color.titleTColor}}> {color.backgroundColor}</p>
+				<small style ={{color: color.bodyTColor}}> {color.swatchName} </small>
+			</li>
+    );
+  });
+  
+	console.log("reached");
+  return (
+		<ul class="colors">
+      {colorNodes}
+		</ul>
+  );
+	console.log("done");
 }
 
 const getToken = () => {

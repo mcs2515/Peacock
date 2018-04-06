@@ -1,6 +1,7 @@
 "use strict";
 
 var csrf;
+var render_colors;
 
 var handleFeather = function handleFeather(e) {
   e.preventDefault();
@@ -9,7 +10,6 @@ var handleFeather = function handleFeather(e) {
 
   if ($("#featherName").val() == '' || $("#featherImg").val() == '') {
     handleError("RAWR! All fields are required");
-    console.log('trigger1');
     return false;
   }
 
@@ -22,7 +22,6 @@ var handleFeather = function handleFeather(e) {
 
 var deleteFeather = function deleteFeather(e) {
 
-  console.dir(e.target);
   e.preventDefault();
 
   sendAjax('POST', $(e.target).attr("action"), $(e.target).serialize(), function () {
@@ -41,7 +40,7 @@ var FeatherForm = function FeatherForm(props) {
       { htmlFor: "name" },
       "Name: "
     ),
-    React.createElement("input", { id: "featherName", type: "text", name: "name", placeholder: "Feather Name" }),
+    React.createElement("input", { id: "featherName", type: "text", name: "name", placeholder: "name" }),
     React.createElement(
       "label",
       { htmlFor: "img" },
@@ -67,6 +66,7 @@ var FeatherList = function FeatherList(props) {
   }
 
   var featherNodes = props.feathers.map(function (feather) {
+
     return React.createElement(
       "div",
       { "data-key": feather._id, className: "feather" },
@@ -83,6 +83,7 @@ var FeatherList = function FeatherList(props) {
         " Favorite: ",
         feather.favorite
       ),
+      React.createElement("div", { id: "colorsContainer" }),
       React.createElement(
         "form",
         { id: "deleteForm", onSubmit: deleteFeather, name: "deleteForm", action: "/delete", method: "POST", className: "deleteFeather" },
@@ -104,6 +105,8 @@ var loadFeathersFromServer = function loadFeathersFromServer() {
   sendAjax('GET', '/getFeathers', null, function (data) {
     ReactDOM.render(React.createElement(FeatherList, { feathers: data.feathers }), document.querySelector("#feathers"));
   });
+
+  //console.log(palette);
 };
 
 var setup = function setup() {
@@ -118,8 +121,64 @@ var setup = function setup() {
 
 var LoadColors = function LoadColors(e) {
   Vibrant.from(e.target.src).getPalette(function (err, palette) {
-    console.log(palette);
+
+    //    https://embed.plnkr.co/plunk/DGLrkj 
+    var colorArray = [];
+
+    for (var swatch in palette) {
+      if (palette.hasOwnProperty(swatch) && palette[swatch]) {
+
+        var bg_color = palette[swatch].getHex();
+        var title_text_color = palette[swatch].getTitleTextColor();
+        var body_text_color = palette[swatch].getBodyTextColor();
+        var swatch_name = swatch;
+
+        var code = {
+          backgroundColor: bg_color,
+          bodyTColor: body_text_color,
+          titleTColor: body_text_color,
+          swatchName: swatch
+        };
+
+        colorArray.push(code);
+      }
+    }
+
+    ReactDOM.render(React.createElement(RenderColors, { colors: colorArray }), document.querySelector('#colorsContainer'));
+    //console.log(colorArray);
   });
+};
+
+var RenderColors = function RenderColors(props) {
+
+  var colorNodes = props.colors.map(function (color) {
+
+    return React.createElement(
+      "li",
+      { style: { backgroundColor: color.backgroundColor } },
+      React.createElement(
+        "p",
+        { style: { color: color.titleTColor } },
+        " ",
+        color.backgroundColor
+      ),
+      React.createElement(
+        "small",
+        { style: { color: color.bodyTColor } },
+        " ",
+        color.swatchName,
+        " "
+      )
+    );
+  });
+
+  console.log("reached");
+  return React.createElement(
+    "ul",
+    { "class": "colors" },
+    colorNodes
+  );
+  console.log("done");
 };
 
 var getToken = function getToken() {
