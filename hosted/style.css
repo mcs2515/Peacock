@@ -63,7 +63,7 @@ nav:nth-child(1) {
 
 .featherForm {
     height: 45px;
-    width: 950px;
+    width: 690px;
     margin-top:60px;
     padding: 0px;
     padding-top:15px;
@@ -76,26 +76,33 @@ nav:nth-child(1) {
 
 .featherForm label {
     display: inline-block;
-    width: 75px;
-    margin-left: 10px;
+    width: 70px;
+		height: 30px;
+    margin-left: 30px;
     font-size: 1.2em;
     float: left;
-    color: white;
+    color: white;vertical-align: middle;
+		line-height: 30px;  
 }
 
 .featherForm input[type=text] {
     float:left;
+		height: 30px;
+		border-radius: 50px;
+		padding: 0px 10px;
 }
 
 .makeFeatherSubmit {
     transition: background-color 0.4s ease;
+		width: 60px;
     height: 30px;
     display: inline;
     background-color: #55acee;
     border: 0;
-    border-radius: 5px;
+    border-radius: 50px;
     color: white;
     text-decoration: none;
+		margin-left: 20px;
 }
 
 .makeFeatherSubmit:link, .makeFeatherSubmit:visited, .makeFeatherSubmit:hover, .makeFeatherSubmit:active {
@@ -105,6 +112,7 @@ nav:nth-child(1) {
 .makeFeatherSubmit:hover {
     transition: background-color 0.4s ease;
     background-color: #338acc;
+    cursor: pointer;
 }
 
 .mainForm {
@@ -219,14 +227,15 @@ nav:nth-child(1) {
 }
 
 .feather {
-    width:30%;
-		min-width: 430px;
+    width:100%;
+    max-width: 360px;
     margin: 0 auto;
     margin: 1%;
     border: 2px solid #c0bfbf;
     border-radius: 4px;
     background-color: #f8f8f8;
     padding: 10px;
+    padding-bottom: 0px;
     min-height:60px;
     overflow: hidden;
 		display: inline-block;
@@ -254,6 +263,7 @@ h3.featherName {
     float: left;
     width: 100px;
     margin-top: 10px;
+		margin-bottom: 10px;
     font-weight: bold;
     text-align: left;
     font-size: 1.5em;
@@ -262,7 +272,8 @@ h3.featherName {
 h3.featherRarity {
     float: right;
     width: 100px;
-  margin-top: 10px;
+    margin-top: 10px;
+		margin-bottom: 10px;
     font-weight: bold;
     font-size: 1.5em;
 }
@@ -283,7 +294,7 @@ h3.featherRarity {
 }
 
 .colors p {
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 700;
     margin: 0;
 }
@@ -295,17 +306,22 @@ h3.featherRarity {
     flex-direction: row;
     list-style: none;
     padding: 0;
+    margin-bottom: 5px;
 }
 
 #deleteForm{
   text-align: right;
   background-color: none;
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 
-#deleteForm input{
+.deleteFeatherSubmit{
     height: 30px;
     background: none;
     border: 0;
     color: grey;
+}
+
+.deleteFeatherSubmit:hover{
+    cursor: pointer;
 }

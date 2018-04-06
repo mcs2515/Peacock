@@ -48,7 +48,7 @@ var FeatherForm = function FeatherForm(props) {
     ),
     React.createElement("input", { id: "featherImg", type: "text", name: "imageUrl", placeholder: "url" }),
     React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
-    React.createElement("input", { className: "makeFeatherSubmit", type: "submit", value: "Make Feather" })
+    React.createElement("input", { className: "makeFeatherSubmit", type: "submit", value: "Add" })
   );
 };
 
@@ -65,7 +65,7 @@ var FeatherList = function FeatherList(props) {
     );
   }
 
-  var featherNodes = props.feathers.map(function (feather) {
+  var featherNodes = props.feathers.map(function (feather, index) {
 
     return React.createElement(
       "div",
@@ -87,7 +87,7 @@ var FeatherList = function FeatherList(props) {
         )
       ),
       React.createElement("img", { src: feather.imageUrl, alt: "feather face", className: "featherFace", onLoad: LoadColors }),
-      React.createElement("div", { id: "colorsContainer", className: "colors" }),
+      React.createElement("div", { id: "colorsContainer_" + index, className: "colors" }),
       React.createElement(
         "form",
         { id: "deleteForm", onSubmit: deleteFeather, name: "deleteForm", action: "/delete", method: "POST", className: "deleteFeather" },
@@ -131,24 +131,26 @@ var LoadColors = function LoadColors(e) {
 
     for (var swatch in palette) {
       if (palette.hasOwnProperty(swatch) && palette[swatch]) {
+        console.log(palette);
 
         var bg_color = palette[swatch].getHex();
         var title_text_color = palette[swatch].getTitleTextColor();
         var body_text_color = palette[swatch].getBodyTextColor();
         var swatch_name = swatch;
+        if (swatch != 'LightMuted') {
+          var code = {
+            backgroundColor: bg_color,
+            bodyTColor: body_text_color,
+            titleTColor: body_text_color,
+            swatchName: swatch
+          };
 
-        var code = {
-          backgroundColor: bg_color,
-          bodyTColor: body_text_color,
-          titleTColor: body_text_color,
-          swatchName: swatch
-        };
-
-        colorArray.push(code);
+          colorArray.push(code);
+        }
       }
     }
 
-    ReactDOM.render(React.createElement(RenderColors, { colors: colorArray }), document.querySelector('#colorsContainer'));
+    ReactDOM.render(React.createElement(RenderColors, { colors: colorArray }), document.querySelector('[id^="colorsContainer_"]'));
     //console.log(colorArray);
   });
 };
@@ -176,7 +178,6 @@ var RenderColors = function RenderColors(props) {
     );
   });
 
-  console.log("reached");
   return React.createElement(
     "ul",
     { "class": "colors" },

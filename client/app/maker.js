@@ -37,7 +37,7 @@ const FeatherForm = (props) => {
       <label htmlFor="img">Image: </label>
       <input id="featherImg" type="text" name="imageUrl" placeholder="url"/>
       <input type="hidden" name="_csrf" value={csrf} />
-      <input className="makeFeatherSubmit" type="submit" value="Make Feather"/>
+      <input className="makeFeatherSubmit" type="submit" value="Add"/>
     </form>
   );
 }
@@ -51,7 +51,7 @@ const FeatherList = (props) =>{
     );
   }
   
-  const featherNodes = props.feathers.map(function(feather) {
+  const featherNodes = props.feathers.map(function(feather,index) {
 		
     return (
       <div data-key={feather._id} className="feather">
@@ -61,7 +61,7 @@ const FeatherList = (props) =>{
         </div>
         <img src={feather.imageUrl} alt="feather face" className="featherFace" onLoad = {LoadColors}/>
         
-        <div id= "colorsContainer" className= "colors">
+        <div id= {"colorsContainer_"+index} className= "colors">
 
         </div>
 				
@@ -113,24 +113,27 @@ const LoadColors = (e) =>{
 		
 		for ( var swatch in palette ) {
 			if (palette.hasOwnProperty(swatch) && palette[swatch]) { 
+          console.log(palette);
+          
 				
 				let bg_color = palette[swatch].getHex();
 				let title_text_color =  palette[swatch].getTitleTextColor();			
 				let body_text_color = palette[swatch].getBodyTextColor();
 				let swatch_name = swatch;
-				
-				const code = {
-					backgroundColor: bg_color,
-					bodyTColor: body_text_color,
-					titleTColor: body_text_color,
-					swatchName: swatch,
-				}
-				
-				colorArray.push(code);
+				if (swatch !='LightMuted') {
+            const code = {
+              backgroundColor: bg_color,
+              bodyTColor: body_text_color,
+              titleTColor: body_text_color,
+              swatchName: swatch,
+            }
+
+            colorArray.push(code);
+        }
 			}
     }
 	
-		ReactDOM.render(<RenderColors colors={colorArray} />, document.querySelector('#colorsContainer'));
+		ReactDOM.render(<RenderColors colors={colorArray} />, document.querySelector('[id^="colorsContainer_"]'));
 		//console.log(colorArray);
 	});
 };
@@ -146,8 +149,7 @@ const RenderColors = (props) => {
       </li>
     );
   });
-  
-	console.log("reached");
+	
   return (
 		<ul class="colors">
       {colorNodes}
