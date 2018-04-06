@@ -4,7 +4,7 @@ var render_colors;
 const handleFeather = (e) => {
   e.preventDefault();
   
-  $("#featherMessage").animate({width:'hide'},350);
+  $("#errorMessage").animate({width:'hide'},350);
 	
   if($("#featherName").val() == '' || $("#featherImg").val() == ''){
     handleError("RAWR! All fields are required");
@@ -84,7 +84,7 @@ const FeatherList = (props) =>{
 const loadFeathersFromServer = () => {
   sendAjax('GET','/getFeathers', null, (data) => {
     ReactDOM.render(
-      <FeatherList feathers={data.feathers} />, document.querySelector("#feathers")
+      <FeatherList feathers={data.feathers} />, document.querySelector("#contentContainer")
     );
   });
 	
@@ -99,7 +99,7 @@ const setup = function() {
   
   //renders default feather list display
   ReactDOM.render(
-    <FeatherList feathers={[]}/>,document.querySelector("#feathers")
+    <FeatherList feathers={[]}/>,document.querySelector("#contentContainer")
   );
   
   loadFeathersFromServer();
