@@ -55,18 +55,20 @@ const FeatherList = (props) =>{
 		
     return (
       <div data-key={feather._id} className="feather">
+        <div className= "imageHeader">
+          <h3 className="featherName"> {feather.name}</h3>
+          <h3 className="featherRarity"> Favorite: {feather.favorite}</h3>
+        </div>
         <img src={feather.imageUrl} alt="feather face" className="featherFace" onLoad = {LoadColors}/>
-        <h3 className="featherName"> Name: {feather.name}</h3>
-        <h3 className="featherRarity"> Favorite: {feather.favorite}</h3>
+        
+        <div id= "colorsContainer" className= "colors">
 
-				<div id= "colorsContainer">
-
-				</div>
+        </div>
 				
         <form id="deleteForm" onSubmit={deleteFeather} name="deleteForm" action="/delete" method="POST" className="deleteFeather">
           <input type="hidden" name="_csrf" value={csrf} />
           <input type="hidden" name="feather_id" value={feather._id} />
-          <input className="deleteFeatherSubmit" type="submit" value="Delete Feather"/>
+          <input className="deleteFeatherSubmit" type="submit" value="Remove"/>
         </form>
       </div>
     );

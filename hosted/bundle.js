@@ -70,26 +70,30 @@ var FeatherList = function FeatherList(props) {
     return React.createElement(
       "div",
       { "data-key": feather._id, className: "feather" },
+      React.createElement(
+        "div",
+        { className: "imageHeader" },
+        React.createElement(
+          "h3",
+          { className: "featherName" },
+          " ",
+          feather.name
+        ),
+        React.createElement(
+          "h3",
+          { className: "featherRarity" },
+          " Favorite: ",
+          feather.favorite
+        )
+      ),
       React.createElement("img", { src: feather.imageUrl, alt: "feather face", className: "featherFace", onLoad: LoadColors }),
-      React.createElement(
-        "h3",
-        { className: "featherName" },
-        " Name: ",
-        feather.name
-      ),
-      React.createElement(
-        "h3",
-        { className: "featherRarity" },
-        " Favorite: ",
-        feather.favorite
-      ),
-      React.createElement("div", { id: "colorsContainer" }),
+      React.createElement("div", { id: "colorsContainer", className: "colors" }),
       React.createElement(
         "form",
         { id: "deleteForm", onSubmit: deleteFeather, name: "deleteForm", action: "/delete", method: "POST", className: "deleteFeather" },
         React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
         React.createElement("input", { type: "hidden", name: "feather_id", value: feather._id }),
-        React.createElement("input", { className: "deleteFeatherSubmit", type: "submit", value: "Delete Feather" })
+        React.createElement("input", { className: "deleteFeatherSubmit", type: "submit", value: "Remove" })
       )
     );
   });

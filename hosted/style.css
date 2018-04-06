@@ -4,7 +4,7 @@ html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-		background: #303030;
+    background: #303030;
 }
 
 #logo {
@@ -56,7 +56,7 @@ nav:nth-child(1) {
 }
 
 .navlink a:hover {
-		color:gray;
+    color:gray;
     transition: 0.8s ease;
 }
 
@@ -192,54 +192,52 @@ nav:nth-child(1) {
     font-style: italic;
 }
 
+#featherList{
+  margin: 0 auto;
+  width: 90%;
+  font-family: Arial;
+}
+
 #feather {
     z-index: 225;
     margin-top: -20px;
     margin-left: 135px;
     height: 450px;
-    width: 300px;
+    width: 200px;
     -ms-transform: rotate(330deg);
     -webkit-transform: rotate(330deg); 
     transform: rotate(330deg);
 }
 
 #feathers {
-    width: 40%;
-    min-width: 400px;
-    border: 2px solid #55acee;
+    width: 30%;
+    min-width: 540px;
     border-radius: 4px;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 80px;
+    padding: 10px;
+    display: inline-block;
 }
 
 .feather {
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
     margin-top: 2px;
     margin-bottom: 2px;
-    border: 2px solid #55acee;
+    border: 2px solid #c0bfbf;
     border-radius: 4px;
-    background-color: #55acee;
+    background-color: #f8f8f8;
     padding: 10px;
     min-height:60px;
     overflow: hidden;
-}
-
-.feather:hover {
-    transition: border-color 0.2s ease-out;
-    border-color: rgba(255,255,255, 0.8);
-    transition: background-color 2.6s ease-out;
-    background-color: #66bfff;
+  box-shadow: inset 0 1px 0 rgba( 255, 255, 255, .15 ), 0 0 1.25em rgba( 0, 0, 0, .9 );
 }
 
 img.featherFace {
-    margin-left: 25px;
-    margin-right: 10px;
-    height: 50px;
-    width: 50px;
-    border-radius: 4px;
-    margin-top:10px;
-    float:left;
+    height: 40%;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
 }
 
 h3.emptyFeather {
@@ -251,27 +249,19 @@ h3.emptyFeather {
 }
 
 h3.featherName {
-    float:left;
-    width: 200px;
-    font-weight: bold;
-    padding-left: 65px;
-    font-size: 1.5em;
-}
-
-h3.featherAge {
-    float:right;
-    text-align: left;
+    float: left;
     width: 100px;
+    margin-top: 10px;
     font-weight: bold;
+    text-align: left;
     font-size: 1.5em;
 }
 
 h3.featherRarity {
-    float:right;
-    text-align: left;
+    float: right;
     width: 100px;
+  margin-top: 10px;
     font-weight: bold;
-    padding-right: 40px;
     font-size: 1.5em;
 }
 
@@ -290,18 +280,29 @@ h3.featherRarity {
 }
 
 .colors p {
-    font-size: 1.3em;
+    font-size: 1.1em;
     font-weight: 700;
     margin: 0;
 }
 
-.colors small {
-    font-weight: 500;
-}
-
 .colors ul {
+    text-align: center;
+    width: 100%;
     display: flex;
     flex-direction: row;
     list-style: none;
     padding: 0;
+}
+
+#deleteForm{
+  text-align: right;
+  background-color: none;
+  margin-bottom: 0;
+}
+
+#deleteForm input{
+    height: 30px;
+    background: none;
+    border: 0;
+    color: grey;
 }
