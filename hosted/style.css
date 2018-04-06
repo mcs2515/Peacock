@@ -211,7 +211,7 @@ nav:nth-child(1) {
 
 #feathers {
     width: 30%;
-    min-width: 540px;
+    min-width: 550px;
     border-radius: 4px;
     margin: 0 auto;
     margin-top: 80px;
@@ -280,7 +280,7 @@ h3.featherRarity {
 }
 
 .colors p {
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: 700;
     margin: 0;
 }

@@ -129,7 +129,7 @@ const LoadColors = (e) =>{
 				colorArray.push(code);
 			}
     }
-		
+	
 		ReactDOM.render(<RenderColors colors={colorArray} />, document.querySelector('#colorsContainer'));
 		//console.log(colorArray);
 	});
@@ -141,9 +141,9 @@ const RenderColors = (props) => {
 
     return (
       <li style={{backgroundColor: color.backgroundColor}}>
-				<p style = {{color: color.titleTColor}}> {color.backgroundColor}</p>
-				<small style ={{color: color.bodyTColor}}> {color.swatchName} </small>
-			</li>
+          <p style = {{color: color.titleTColor}}> {color.backgroundColor}</p>
+          <small style ={{color: color.bodyTColor}}> {color.swatchName} </small>
+      </li>
     );
   });
   
