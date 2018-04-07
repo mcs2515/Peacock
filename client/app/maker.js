@@ -61,7 +61,7 @@ const FeatherList = (props) =>{
         </div>
         <img src={feather.imageUrl} alt="feather face" className="featherFace" onLoad = {LoadColors}/>
         
-        <div id= {"colorsContainer_"+index} className= "colors">
+        <div id= {"colorsContainer_"+feather._id} className= "colors">
 
         </div>
 				
@@ -87,8 +87,6 @@ const loadFeathersFromServer = () => {
       <FeatherList feathers={data.feathers} />, document.querySelector("#contentContainer")
     );
   });
-	
-	//console.log(palette);
 };
 
 const setup = function() {
@@ -106,16 +104,15 @@ const setup = function() {
 };
 
 const LoadColors = (e) =>{
+	let index = e.target.parentElement.getAttribute("data-key");
+	
 	Vibrant.from(e.target.src).getPalette(function(err, palette) {
 
-//    https://embed.plnkr.co/plunk/DGLrkj 
 		let colorArray= [];
 		
 		for ( var swatch in palette ) {
 			if (palette.hasOwnProperty(swatch) && palette[swatch]) { 
-          console.log(palette);
-          
-				
+
 				let bg_color = palette[swatch].getHex();
 				let title_text_color =  palette[swatch].getTitleTextColor();			
 				let body_text_color = palette[swatch].getBodyTextColor();
@@ -132,9 +129,9 @@ const LoadColors = (e) =>{
         }
 			}
     }
-	
-		ReactDOM.render(<RenderColors colors={colorArray} />, document.querySelector('[id^="colorsContainer_"]'));
-		//console.log(colorArray);
+
+		ReactDOM.render(<RenderColors colors={colorArray} />, document.querySelector("#colorsContainer_" + index));
+    
 	});
 };
 

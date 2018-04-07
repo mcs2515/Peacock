@@ -87,7 +87,7 @@ var FeatherList = function FeatherList(props) {
         )
       ),
       React.createElement("img", { src: feather.imageUrl, alt: "feather face", className: "featherFace", onLoad: LoadColors }),
-      React.createElement("div", { id: "colorsContainer_" + index, className: "colors" }),
+      React.createElement("div", { id: "colorsContainer_" + feather._id, className: "colors" }),
       React.createElement(
         "form",
         { id: "deleteForm", onSubmit: deleteFeather, name: "deleteForm", action: "/delete", method: "POST", className: "deleteFeather" },
@@ -109,8 +109,6 @@ var loadFeathersFromServer = function loadFeathersFromServer() {
   sendAjax('GET', '/getFeathers', null, function (data) {
     ReactDOM.render(React.createElement(FeatherList, { feathers: data.feathers }), document.querySelector("#contentContainer"));
   });
-
-  //console.log(palette);
 };
 
 var setup = function setup() {
@@ -124,14 +122,14 @@ var setup = function setup() {
 };
 
 var LoadColors = function LoadColors(e) {
+  var index = e.target.parentElement.getAttribute("data-key");
+
   Vibrant.from(e.target.src).getPalette(function (err, palette) {
 
-    //    https://embed.plnkr.co/plunk/DGLrkj 
     var colorArray = [];
 
     for (var swatch in palette) {
       if (palette.hasOwnProperty(swatch) && palette[swatch]) {
-        console.log(palette);
 
         var bg_color = palette[swatch].getHex();
         var title_text_color = palette[swatch].getTitleTextColor();
@@ -150,8 +148,7 @@ var LoadColors = function LoadColors(e) {
       }
     }
 
-    ReactDOM.render(React.createElement(RenderColors, { colors: colorArray }), document.querySelector('[id^="colorsContainer_"]'));
-    //console.log(colorArray);
+    ReactDOM.render(React.createElement(RenderColors, { colors: colorArray }), document.querySelector("#colorsContainer_" + index));
   });
 };
 
