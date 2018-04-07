@@ -3,7 +3,7 @@
 var handleLogin = function handleLogin(e) {
   e.preventDefault();
 
-  $("#featherMessage").animate({ width: 'hide' }, 350);
+  $("#errorContainer").animate({ width: 'hide' }, 350);
 
   if ($("#user").val() == '' || $("#pass").val() == '') {
     handleError("RAWR! Username or password is empty");
@@ -11,6 +11,7 @@ var handleLogin = function handleLogin(e) {
   }
 
   console.log($("input[name=_csrf]").val());
+  //why
 
   sendAjax('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
 
@@ -20,7 +21,7 @@ var handleLogin = function handleLogin(e) {
 var handleSignup = function handleSignup(e) {
   e.preventDefault();
 
-  $("#featherMessage").animate({ width: 'hide' }, 350);
+  $("#errorContainer").animate({ width: 'hide' }, 350);
 
   if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
     handleError("RAWR! All fields are required");
@@ -125,11 +126,11 @@ $(document).ready(function () {
 
 var handleError = function handleError(message) {
 	$("#errorMessage").text(message);
-	$("#featherMessage").animate({ width: 'toggle' }, 350);
+	$("#errorContainer").animate({ width: 'toggle' }, 350);
 };
 
 var redirect = function redirect(response) {
-	$("#featherMessage").animate({ width: 'hide' }, 350);
+	$("#errorContainer").animate({ width: 'hide' }, 350);
 	window.location = response.redirect;
 };
 

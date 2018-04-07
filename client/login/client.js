@@ -1,7 +1,7 @@
 const handleLogin = (e) => {
 	e.preventDefault();
 	
-  $("#featherMessage").animate({width:'hide'},350);
+  $("#errorContainer").animate({width:'hide'},350);
 	
 	if($("#user").val() == '' || $("#pass").val() == ''){
 		handleError("RAWR! Username or password is empty");
@@ -9,6 +9,7 @@ const handleLogin = (e) => {
 	}
 	
 	console.log($("input[name=_csrf]").val());
+	//why
 	
 	sendAjax('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
 	
@@ -18,7 +19,7 @@ const handleLogin = (e) => {
 const handleSignup = (e) => {
 	e.preventDefault();
 	
-  $("#featherMessage").animate({width:'hide'},350);
+  $("#errorContainer").animate({width:'hide'},350);
 	
 	if($("#user").val() == '' || $("#pass").val() == ''|| $("#pass2").val() == ''){
 		handleError("RAWR! All fields are required");

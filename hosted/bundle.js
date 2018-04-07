@@ -1,15 +1,15 @@
 "use strict";
 
 var csrf;
-var render_colors;
 
 var handleFeather = function handleFeather(e) {
   e.preventDefault();
 
-  $("#errorMessage").animate({ width: 'hide' }, 350);
+  $("#errorContainer").animate({ width: 'hide' }, 350);
 
   if ($("#featherName").val() == '' || $("#featherImg").val() == '') {
     handleError("RAWR! All fields are required");
+    console.log("called");
     return false;
   }
 
@@ -197,11 +197,11 @@ $(document).ready(function () {
 
 var handleError = function handleError(message) {
 	$("#errorMessage").text(message);
-	$("#featherMessage").animate({ width: 'toggle' }, 350);
+	$("#errorContainer").animate({ width: 'toggle' }, 350);
 };
 
 var redirect = function redirect(response) {
-	$("#featherMessage").animate({ width: 'hide' }, 350);
+	$("#errorContainer").animate({ width: 'hide' }, 350);
 	window.location = response.redirect;
 };
 

@@ -1,10 +1,10 @@
 const handleError = (message) => {
   $("#errorMessage").text(message);
-  $("#featherMessage").animate({width:'toggle'},350);
+  $("#errorContainer").animate({width:'toggle'},350);
 }
 
 const redirect = (response) =>{
-	$("#featherMessage").animate({width:'hide'},350);
+	$("#errorContainer").animate({width:'hide'},350);
 	window.location = response.redirect;
 }
 

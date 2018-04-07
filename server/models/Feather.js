@@ -28,10 +28,10 @@ const FeatherSchema = new mongoose.Schema({
 
   favorite: {
     type: Boolean,
-		default: false,
+    default: false,
   },
-	
-	imageUrl: {
+
+  imageUrl: {
     type: String,
     required: true,
   },

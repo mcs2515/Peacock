@@ -13,10 +13,9 @@ const makerPage = (req, res) => {
 };
 
 const makeFeather = (req, res) => {
-	
 //	console.log("name: " + req.body.name);
 //	console.log("url: " + req.body.imageUrl);
-	
+
   if (!req.body.name || !req.body.imageUrl) {
     console.log('feather make issue');
     return res.status(400).json({ error: 'RAWR! All fields are required' });

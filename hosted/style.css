@@ -183,7 +183,7 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
-#errorMessage h3 {
+#errorContainer h3 {
     width: 200px;
     position: absolute;
     top: 0px;
@@ -203,44 +203,37 @@ nav:nth-child(1) {
     font-style: italic;
 }
 
-#featherList{
-	position: relative;
-  margin: 0 auto;
-	width: 95%;
-  font-family: Arial;
-}
-
 #errorImage {
     z-index: 225;
     margin-top: -20px;
     margin-left: 135px;
     height: 450px;
-    width: 200px;
+    width: 300px;
     -ms-transform: rotate(330deg);
     -webkit-transform: rotate(330deg); 
     transform: rotate(330deg);
 }
 
-#contentContainer {
+#featherlist {
     width: 100%;
     margin-top: 10em;
 		margin-bottom:2em;
+    text-align: center;
+		font-family: "Arial";
 }
 
 .feather {
     width:100%;
     max-width: 360px;
-    margin: 0 auto;
     margin: 1%;
-    border: 2px solid #c0bfbf;
+    border: 1px solid #c0bfbf;
     border-radius: 4px;
     background-color: #f8f8f8;
     padding: 10px;
     padding-bottom: 0px;
     min-height:60px;
     overflow: hidden;
-		display: inline-block;
-    justify-content: space-between;
+    display: inline-block;
   	box-shadow: inset 0 1px 0 rgba( 255, 255, 255, .15 ), 0 0 1.25em rgba( 0, 0, 0, .9 );
 }
 
@@ -263,7 +256,7 @@ h3.emptyFeather {
 h3.featherName {
     float: left;
     width: 100px;
-    margin-top: 10px;
+    margin-top: 0px;
 		margin-bottom: 10px;
     font-weight: bold;
     text-align: left;
@@ -273,18 +266,10 @@ h3.featherName {
 h3.featherRarity {
     float: right;
     width: 100px;
-    margin-top: 10px;
+    margin-top: 0px;
 		margin-bottom: 10px;
     font-weight: bold;
     font-size: 1.5em;
-}
-
-.feather:first-child {
-    margin-top: 10px;
-}
-
-.feather:last-child {
-    margin-bottom:10px;
 }
 
 .colors ul li {

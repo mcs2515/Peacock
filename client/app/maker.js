@@ -1,13 +1,13 @@
 var csrf;
-var render_colors;
 
 const handleFeather = (e) => {
   e.preventDefault();
   
-  $("#errorMessage").animate({width:'hide'},350);
+  $("#errorContainer").animate({width:'hide'},350);
 	
   if($("#featherName").val() == '' || $("#featherImg").val() == ''){
     handleError("RAWR! All fields are required");
+		console.log("called");
     return false;
   }
   
