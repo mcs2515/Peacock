@@ -88,7 +88,7 @@ nav:nth-child(1) {
 .featherForm input[type=text] {
     float:left;
 		height: 30px;
-		border-radius: 50px;
+		border-radius: 5px;
 		padding: 0px 10px;
 }
 
@@ -99,7 +99,7 @@ nav:nth-child(1) {
     display: inline;
     background-color: #55acee;
     border: 0;
-    border-radius: 50px;
+    border-radius: 5px;
     color: white;
     text-decoration: none;
 		margin-left: 20px;
@@ -117,22 +117,21 @@ nav:nth-child(1) {
 
 .mainForm {
     height: 300px;
-    width: 350px;
+    width: 300px;
     margin: 0 auto;
     padding-top: 350px;
     font-size: 1.2em;
+    color: white;
 }
 
 .mainForm h3 {
-    text-align: center;
+    text-align: left;
+		font-family: "Arial";
 }
 
-.mainForm label {
-    display: inline-block;
-    width: 100px;
-    margin-right: 10px;
-    text-align: right;
-    font-size: 1.2em;
+.mainForm input[type=text]{
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .formSubmit {
@@ -142,7 +141,7 @@ nav:nth-child(1) {
     margin: 0 auto;
     margin-top: 14px;
     font-size: 1.2em;
-    width: 100px;
+    width: 100%;
     background-color: #55acee;
     border-radius: 5px;
     border: 0;
@@ -161,10 +160,10 @@ nav:nth-child(1) {
 }
 
 #user, #pass, #pass2 {
-    text-align: center;
+    text-align: left;
+    padding-left: 10px;
     font-size: 1.1em;
-    width: 180px;
-    border-radius: 6px;
+    border-radius: 5px;
 }
 
 #user:focus, #pass:focus, #pass2:focus {
@@ -310,4 +309,56 @@ h3.featherRarity {
 
 .deleteFeatherSubmit:hover{
     cursor: pointer;
+}
+
+.passwordForm {
+    font-family: "Arial";
+    height: 300px;
+    width: 300px;
+    margin: 0 auto;
+    padding-top: 300px;
+    font-size: 1.2em;
+}
+
+.passwordForm h3 {
+    text-align: left;
+    width: 100%;
+    color: white;
+}
+
+.passwordSubmit {
+    transition: background-color 0.4s ease;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 1.2em;
+    width: 100%;
+    background-color: #55acee;
+    border-radius: 5px;
+    border: 0;
+    padding: 3px 0px;
+    color: white;
+    text-decoration: none;
+}
+
+.passwordSubmit:link, .passwordSubmit:visited, .passwordSubmit:hover, .passwordSubmit:active {
+    color: white;
+}
+
+.passwordSubmit:hover {
+    transition: background-color 0.4s ease;
+    background-color: #338acc;
+}
+
+#oldPass, #newPass, #newPass2 {
+    text-align: left;
+    padding-left: 10px;
+    font-size: 1.1em;
+    border-radius: 5px;
+}
+
+.passwordForm input[type=text] {
+    width: 100%;
+    margin-bottom: 15px;
 }

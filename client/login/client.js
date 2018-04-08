@@ -39,10 +39,9 @@ const handleSignup = (e) => {
 const LoginWindow = (props) =>{
 	return(
 		<form id="loginForm" name="loginForm" onSubmit={handleLogin} action="/login" method="POST" className="mainForm"> 
-			<label htmlFor="username">Username: </label>
-      <input id="user" type="text" name="username" placeholder="username"/>
-      <label htmlFor="pass">Password: </label>
-      <input id="pass" type="text" name="pass" placeholder="password"/>
+			<h3>Login</h3>
+      <input id="user" type="text" name="username" placeholder="Username"/>
+      <input id="pass" type="text" name="pass" placeholder="Password"/>
       <input type="hidden" name="_csrf" value={props.csrf}/>
       <input className="formSubmit" type="submit" value="Sign In" />
     </form>
@@ -52,12 +51,10 @@ const LoginWindow = (props) =>{
 const SignupWindow = (props) => {
   return (
   <form id="signupForm" name="signupForm" onSubmit={handleSignup} action="/signup" method="POST" className="mainForm">
-      <label htmlFor="username">Username: </label>
-      <input id="user" type="text" name="username" placeholder="username"/>
-      <label htmlFor="pass">Password: </label>
-      <input id="pass" type="text" name="pass" placeholder="password"/>
-      <label htmlFor="pass2">Password: </label>
-      <input id="pass2" type="text" name="pass2" placeholder="retype password"/>
+      <h3>Signup</h3>
+      <input id="user" type="text" name="username" placeholder="Username"/>
+      <input id="pass" type="text" name="pass" placeholder="Password"/>
+      <input id="pass2" type="text" name="pass2" placeholder="Re-type Password"/>
       <input type="hidden" name="_csrf" value={props.csrf}/>
       <input className="formSubmit" type="submit" value="Sign Up" />
     </form>

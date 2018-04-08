@@ -111,16 +111,6 @@ var loadFeathersFromServer = function loadFeathersFromServer() {
   });
 };
 
-var setup = function setup() {
-  //renders form
-  ReactDOM.render(React.createElement(FeatherForm, null), document.querySelector("#makeFeather"));
-
-  //renders default feather list display
-  ReactDOM.render(React.createElement(FeatherList, { feathers: [] }), document.querySelector("#contentContainer"));
-
-  loadFeathersFromServer();
-};
-
 var LoadColors = function LoadColors(e) {
   var index = e.target.parentElement.getAttribute("data-key");
 
@@ -183,6 +173,22 @@ var RenderColors = function RenderColors(props) {
   console.log("done");
 };
 
+var setup = function setup() {
+  var contentContainer = document.querySelector("#contentContainer");
+
+  console.log("contentContainer: " + contentContainer);
+
+  if (contentContainer) {
+    //renders form
+    ReactDOM.render(React.createElement(FeatherForm, null), document.querySelector("#makeFeather"));
+
+    //renders default feather list display
+    ReactDOM.render(React.createElement(FeatherList, { feathers: [] }), contentContainer);
+
+    loadFeathersFromServer();
+  }
+};
+
 var getToken = function getToken() {
   sendAjax('GET', '/getToken', null, function (result) {
     csrf = result.csrfToken;
@@ -192,6 +198,63 @@ var getToken = function getToken() {
 
 $(document).ready(function () {
   getToken();
+});
+"use strict";
+
+var handlePassChange = function handlePassChange(e) {
+  e.preventDefault();
+
+  $("#errorContainer").animate({ width: 'hide' }, 350);
+
+  if ($("#oldPass").val() == '' || $("#newPass").val() == '' || $("#newPass2").val() == '') {
+    handleError("RAWR! All fields are required");
+    return false;
+  }
+
+  sendAjax('POST', $("#passwordForm").attr("action"), $("#passwordForm").serialize(), redirect);
+
+  return false;
+};
+
+var SettingsForm = function SettingsForm(props) {
+  //renders form
+  return React.createElement(
+    "form",
+    { id: "passwordForm", name: "passwordForm", onSubmit: handlePassChange, action: "/changePassword", method: "POST", className: "passwordForm" },
+    React.createElement(
+      "h3",
+      null,
+      "Change Password"
+    ),
+    React.createElement("input", { id: "oldPass", type: "text", name: "oldPass", placeholder: "Old Password" }),
+    React.createElement("input", { id: "newPass", type: "text", name: "newPass", placeholder: "New Password" }),
+    React.createElement("input", { id: "newPass2", type: "text", name: "newPass2", placeholder: "Re-type Password" }),
+    React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
+    React.createElement("input", { className: "passwordSubmit", type: "submit", value: "Update" })
+  );
+};
+
+var setupSettings = function setupSettings(csrf) {
+
+  var settingsContainer = document.querySelector("#settingsContainer");
+
+  console.log("settingsContainer: " + settingsContainer);
+
+  if (settingsContainer) {
+    //renders form
+    ReactDOM.render(React.createElement(SettingsForm, { csrf: csrf }), settingsContainer);
+  }
+};
+
+var getSettingsToken = function getSettingsToken() {
+  sendAjax('GET', '/getToken', null, function (result) {
+    //console.log(result.csrfToken);
+    setupSettings(result.csrfToken);
+  });
+};
+
+$(document).ready(function () {
+  getSettingsToken();
 });
 "use strict";
 

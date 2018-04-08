@@ -89,20 +89,6 @@ const loadFeathersFromServer = () => {
   });
 };
 
-const setup = function() {
-  //renders form
-  ReactDOM.render(
-    <FeatherForm/>,document.querySelector("#makeFeather")
-  );
-  
-  //renders default feather list display
-  ReactDOM.render(
-    <FeatherList feathers={[]}/>,document.querySelector("#contentContainer")
-  );
-  
-  loadFeathersFromServer();
-};
-
 const LoadColors = (e) =>{
 	let index = e.target.parentElement.getAttribute("data-key");
 	
@@ -153,7 +139,28 @@ const RenderColors = (props) => {
 		</ul>
   );
 	console.log("done");
-}
+};
+
+const setup = function() {
+	const contentContainer = document.querySelector("#contentContainer");
+	
+	console.log("contentContainer: " + contentContainer);
+	
+	if(contentContainer){
+		//renders form
+		ReactDOM.render(
+			<FeatherForm/>,document.querySelector("#makeFeather")
+		);
+
+		//renders default feather list display
+		ReactDOM.render(
+			<FeatherList feathers={[]}/>,contentContainer
+		);
+
+		loadFeathersFromServer();
+	}
+};
+
 
 const getToken = () => {
 	sendAjax('GET', '/getToken', null, (result) =>{
