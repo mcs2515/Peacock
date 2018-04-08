@@ -18,7 +18,7 @@ const makeFeather = (req, res) => {
 
   if (!req.body.name || !req.body.imageUrl) {
     console.log('feather make issue');
-    return res.status(400).json({ error: 'RAWR! All fields are required' });
+    return res.status(400).json({ error: 'All fields are required' });
   }
 
   const featherData = {

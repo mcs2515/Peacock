@@ -8,7 +8,7 @@ var handleFeather = function handleFeather(e) {
   $("#errorContainer").animate({ width: 'hide' }, 350);
 
   if ($("#featherName").val() == '' || $("#featherImg").val() == '') {
-    handleError("RAWR! All fields are required");
+    handleError("All fields are required");
     console.log("called");
     return false;
   }
@@ -207,7 +207,7 @@ var handlePassChange = function handlePassChange(e) {
   $("#errorContainer").animate({ width: 'hide' }, 350);
 
   if ($("#oldPass").val() == '' || $("#newPass").val() == '' || $("#newPass2").val() == '') {
-    handleError("RAWR! All fields are required");
+    handleError("All fields are required");
     return false;
   }
 

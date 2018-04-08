@@ -6,7 +6,7 @@ const handleFeather = (e) => {
   $("#errorContainer").animate({width:'hide'},350);
 	
   if($("#featherName").val() == '' || $("#featherImg").val() == ''){
-    handleError("RAWR! All fields are required");
+    handleError("All fields are required");
 		console.log("called");
     return false;
   }
