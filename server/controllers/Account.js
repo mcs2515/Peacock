@@ -75,11 +75,6 @@ const signup = (request, response) => {
   });
 };
 
-const getPassword = (req, res) => {
-  const password = req.session.account.password;
-  return res.json({ username: `${password}` });
-};
-
 const changePassword = (request, response) => {
   const req = request;
   const res = response;
@@ -88,40 +83,40 @@ const changePassword = (request, response) => {
   req.body.newPass = `${req.body.newPass}`;
   req.body.newPass2 = `${req.body.newPass2}`;
 
-	console.log(req.body.newPass);
-	console.log(req.body.newPass2);
-	
+  console.log(req.body.newPass);
+  console.log(req.body.newPass2);
+
   if (req.body.newPass !== req.body.newPass2) {
     return res.status(400).json({ error: 'New passwords do not match' });
   }
 
   const username = req.session.account.username;
-	
+
   return Account.AccountModel.authenticate(username, req.body.oldPass, (error, account) => {
     if (error || !account) {
       return res.status(401).json({ error: 'Current password is incorrect' });
     }
-		
+
 		// make new account, set to old account
-		const newAccount = account;
+    const newAccount = account;
 
-		return Account.AccountModel.generateHash(req.body.newPass, (salt, hash) => {
-			newAccount.password = hash;
-			newAccount.salt = salt;
+    return Account.AccountModel.generateHash(req.body.newPass, (salt, hash) => {
+      newAccount.password = hash;
+      newAccount.salt = salt;
 
-			const savePromise = newAccount.save();
+      const savePromise = newAccount.save();
 
-			savePromise.then(() => res.json({
-				password: newAccount.password,
-			}));
+      savePromise.then(() => res.json({
+        password: newAccount.password,
+      }));
 
-			savePromise.catch((err) => {
-				res.json(err);
-			});
+      savePromise.catch((err) => {
+        res.json(err);
+      });
 
-			return res.json({ redirect: '/logout' });
-		});
-	});
+      return res.json({ redirect: '/logout' });
+    });
+  });
 };
 
 const settingsPage = (req, res) => {
