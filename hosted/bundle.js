@@ -9,12 +9,13 @@ var handleFeather = function handleFeather(e) {
 
   if ($("#featherName").val() == '' || $("#featherImg").val() == '') {
     handleError("All fields are required");
-    console.log("called");
     return false;
   }
 
   sendAjax('POST', $("#featherForm").attr("action"), $("#featherForm").serialize(), function () {
     loadFeathersFromServer();
+    $('#featherName').val('');
+    $('#featherImg').val('');
   });
 
   return false;
@@ -216,6 +217,11 @@ var handlePassChange = function handlePassChange(e) {
   return false;
 };
 
+var handleDonate = function handleDonate(e) {
+  e.preventDefault();
+  return false;
+};
+
 var SettingsForm = function SettingsForm(props) {
   //renders form
   return React.createElement(
@@ -234,15 +240,44 @@ var SettingsForm = function SettingsForm(props) {
   );
 };
 
+var DonateForm = function DonateForm(props) {
+  //renders form
+  return React.createElement(
+    "form",
+    { id: "donateForm", name: "donateForm", onSubmit: handleDonate, action: "/donate", method: "POST", className: "donateForm" },
+    React.createElement(
+      "h3",
+      null,
+      "Donate"
+    ),
+    React.createElement(
+      "p",
+      null,
+      "I am poor. Please help keep this webpage up by donating -winky face-"
+    ),
+    React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
+    React.createElement("input", { className: "donateSubmit", type: "submit", value: "$1" }),
+    React.createElement("input", { className: "donateSubmit", type: "submit", value: "$5" }),
+    React.createElement("input", { className: "donateSubmit", type: "submit", value: "$10" }),
+    React.createElement("input", { className: "donateSubmit", type: "submit", value: "$25" })
+  );
+};
+
 var setupSettings = function setupSettings(csrf) {
 
   var settingsContainer = document.querySelector("#settingsContainer");
+  var donateContainer = document.querySelector("#donateContainer");
 
   console.log("settingsContainer: " + settingsContainer);
 
   if (settingsContainer) {
     //renders form
     ReactDOM.render(React.createElement(SettingsForm, { csrf: csrf }), settingsContainer);
+  }
+
+  if (donateContainer) {
+    //renders form
+    ReactDOM.render(React.createElement(DonateForm, { csrf: csrf }), donateContainer);
   }
 };
 

@@ -10,7 +10,7 @@ html, body {
 #logo {
     height: 40px;
     width: 40px;
-		padding-left: 35px; 
+    padding-left: 35px; 
     padding-top: 5px;
     float:left;
     border-radius: 8px;
@@ -20,9 +20,9 @@ nav {
     position: absolute;
     width: 100%;
     height: 60px;
-		background: linear-gradient(#444, #222);
-		border-bottom: 1px solid #1b1b1b;
-		box-shadow: inset 0 1px 0 rgba( 255, 255, 255, .15 ), 0 0 1.25em rgba( 0, 0, 0, .2 );
+    background: linear-gradient(#444, #222);
+    border-bottom: 1px solid #1b1b1b;
+    box-shadow: inset 0 1px 0 rgba( 255, 255, 255, .15 ), 0 0 1.25em rgba( 0, 0, 0, .2 );
     z-index: 1;
 }
 
@@ -31,17 +31,24 @@ nav:nth-child(1) {
 }
 
 #title{
+    transition: 0.5s ease;
 	margin: 0;
 	padding: 0;
 	letter-spacing: 2px;
 	padding-top: 10px;
 	padding-left: 20px;
 	color: white;
-  font-size: 2em;
+    font-size: 2em;
 	float: left;
 }
 
+#title:hover{
+  transition: color 0.4s ease;
+  color: #00eca6;
+}
+
 .navlink {
+    transition: 0.5s ease;
     padding: 5px;
     padding-top: 15px;
     padding-right: 20px;
@@ -51,14 +58,15 @@ nav:nth-child(1) {
 }
 
 .navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
+    transition: 0.5s ease;
     color: white;
     text-decoration: none;
     padding: 5px;
 }
 
 .navlink a:hover {
-    color:gray;
-    transition: 0.8s ease;
+    color: #00eca6;
+    transition: 0.5s ease;
 }
 
 .featherForm {
@@ -77,24 +85,24 @@ nav:nth-child(1) {
 .featherForm label {
     display: inline-block;
     width: 70px;
-		height: 30px;
+    height: 30px;
     margin-left: 30px;
     font-size: 1.2em;
     float: left;
     color: white;vertical-align: middle;
-		line-height: 30px;  
+    line-height: 30px;  
 }
 
 .featherForm input[type=text] {
     float:left;
-		height: 30px;
-		border-radius: 5px;
-		padding: 0px 10px;
+    height: 30px;
+    border-radius: 5px;
+    padding: 0px 10px;
 }
 
 .makeFeatherSubmit {
     transition: background-color 0.4s ease;
-		width: 60px;
+    width: 60px;
     height: 30px;
     display: inline;
     background-color: #55acee;
@@ -102,7 +110,7 @@ nav:nth-child(1) {
     border-radius: 5px;
     color: white;
     text-decoration: none;
-		margin-left: 20px;
+    margin-left: 20px;
 }
 
 .makeFeatherSubmit:link, .makeFeatherSubmit:visited, .makeFeatherSubmit:hover, .makeFeatherSubmit:active {
@@ -126,7 +134,7 @@ nav:nth-child(1) {
 
 .mainForm h3 {
     text-align: left;
-		font-family: "Arial";
+    font-family: "Arial";
 }
 
 .mainForm input[type=text]{
@@ -216,9 +224,9 @@ nav:nth-child(1) {
 #featherlist {
     width: 100%;
     margin-top: 10em;
-		margin-bottom:2em;
+    margin-bottom:2em;
     text-align: center;
-		font-family: "Arial";
+    font-family: "Arial";
 }
 
 .feather {
@@ -238,7 +246,7 @@ nav:nth-child(1) {
 
 img.featherFace {
     height: 40%;
-		max-height: 300px;
+    max-height: 300px;
     object-fit: cover;
     object-position: center;
     width: 100%;
@@ -256,7 +264,7 @@ h3.featherName {
     float: left;
     width: 100px;
     margin-top: 0px;
-		margin-bottom: 10px;
+    margin-bottom: 10px;
     font-weight: bold;
     text-align: left;
     font-size: 1.5em;
@@ -266,7 +274,7 @@ h3.featherRarity {
     float: right;
     width: 100px;
     margin-top: 0px;
-		margin-bottom: 10px;
+    margin-bottom: 10px;
     font-weight: bold;
     font-size: 1.5em;
 }
@@ -295,9 +303,9 @@ h3.featherRarity {
 }
 
 #deleteForm{
-  text-align: right;
-  background-color: none;
-	margin-bottom: 0;
+    text-align: right;
+    background-color: none;
+    margin-bottom: 0;
 }
 
 .deleteFeatherSubmit{
@@ -311,6 +319,15 @@ h3.featherRarity {
     cursor: pointer;
 }
 
+
+#accountPage{
+  margin: 0 auto;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .passwordForm {
     font-family: "Arial";
     height: 300px;
@@ -320,7 +337,7 @@ h3.featherRarity {
     font-size: 1.2em;
 }
 
-.passwordForm h3 {
+.passwordForm h3{
     text-align: left;
     width: 100%;
     color: white;
@@ -349,6 +366,7 @@ h3.featherRarity {
 .passwordSubmit:hover {
     transition: background-color 0.4s ease;
     background-color: #338acc;
+    cursor: pointer;
 }
 
 #oldPass, #newPass, #newPass2 {
@@ -360,5 +378,42 @@ h3.featherRarity {
 
 .passwordForm input[type=text] {
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.donateForm {
+    font-family: "Arial";
+    height: 300px;
+    width: 400px;
+    margin: 0 auto;
+    padding-top: 300px;
+    font-size: 1.2em;
+}
+
+.donateForm h3, p {
+    width: 100%;
+    color: white;
+}
+
+.donateSubmit{
+    transition: background-color 0.4s ease;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 1.2em;
+    width: 80px;
+    background-color: #ffcc53 ;
+    border-radius: 5px;
+    border: 0;
+    padding: 3px 0px;
+    padding-top: 5px;
+    color: black;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.donateSubmit:hover {
+    transition: background-color 0.4s ease;
+    background-color: #ffb506 ;
+    cursor: pointer;
 }

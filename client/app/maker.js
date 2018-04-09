@@ -7,12 +7,13 @@ const handleFeather = (e) => {
 	
   if($("#featherName").val() == '' || $("#featherImg").val() == ''){
     handleError("All fields are required");
-		console.log("called");
     return false;
   }
   
   sendAjax('POST', $("#featherForm").attr("action"),$("#featherForm").serialize(),function() {
     loadFeathersFromServer();
+    $('#featherName').val('');
+    $('#featherImg').val('');
   });
   
   return false;
