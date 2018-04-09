@@ -18,7 +18,7 @@ const handleDonate = (e) =>{
   return false;
 }
 
-const SettingsForm= (props) =>{
+const PasswordForm= (props) =>{
 	//renders form
   return (
   	<form id="passwordForm" name="passwordForm" onSubmit={handlePassChange} action="/changePassword" method="POST" className="passwordForm">
@@ -37,7 +37,7 @@ const DonateForm= (props) =>{
   return (
   	<form id="donateForm" name="donateForm" onSubmit={handleDonate} action="/donate" method="POST" className="donateForm">
       <h3>Donate</h3>
-      <p>I am poor. Please help keep this webpage up by donating -winky face-</p>
+      <p>Please help keep this webpage up by donating ;)</p>
       <input type="hidden" name="_csrf" value={props.csrf}/>
       <input className="donateSubmit" type="submit" value="$1" />
       <input className="donateSubmit" type="submit" value="$5" />
@@ -49,15 +49,13 @@ const DonateForm= (props) =>{
 
 const setupSettings= function(csrf){
     
-  const settingsContainer = document.querySelector("#settingsContainer");
+  const passwordContainer = document.querySelector("#passwordContainer");
   const donateContainer = document.querySelector("#donateContainer");
 
-  console.log("settingsContainer: " + settingsContainer);
-
-  if(settingsContainer){	
+  if(passwordContainer){	
     //renders form
     ReactDOM.render(
-      <SettingsForm csrf={csrf} />,settingsContainer
+      <PasswordForm csrf={csrf} />,document.querySelector("#updateForm")
     );
   } 
   

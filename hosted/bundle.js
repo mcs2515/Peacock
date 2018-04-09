@@ -222,7 +222,7 @@ var handleDonate = function handleDonate(e) {
   return false;
 };
 
-var SettingsForm = function SettingsForm(props) {
+var PasswordForm = function PasswordForm(props) {
   //renders form
   return React.createElement(
     "form",
@@ -253,7 +253,7 @@ var DonateForm = function DonateForm(props) {
     React.createElement(
       "p",
       null,
-      "I am poor. Please help keep this webpage up by donating -winky face-"
+      "Please help keep this webpage up by donating ;)"
     ),
     React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
     React.createElement("input", { className: "donateSubmit", type: "submit", value: "$1" }),
@@ -265,14 +265,12 @@ var DonateForm = function DonateForm(props) {
 
 var setupSettings = function setupSettings(csrf) {
 
-  var settingsContainer = document.querySelector("#settingsContainer");
+  var passwordContainer = document.querySelector("#passwordContainer");
   var donateContainer = document.querySelector("#donateContainer");
 
-  console.log("settingsContainer: " + settingsContainer);
-
-  if (settingsContainer) {
+  if (passwordContainer) {
     //renders form
-    ReactDOM.render(React.createElement(SettingsForm, { csrf: csrf }), settingsContainer);
+    ReactDOM.render(React.createElement(PasswordForm, { csrf: csrf }), document.querySelector("#updateForm"));
   }
 
   if (donateContainer) {

@@ -320,7 +320,7 @@ h3.featherRarity {
 }
 
 
-#accountPage{
+#passwordContainer{
   margin: 0 auto;
   width: 100%;
   max-width: 900px;
@@ -328,19 +328,29 @@ h3.featherRarity {
   justify-content: space-between;
 }
 
-.passwordForm {
+.passwordForm, #passwordInfo {
     font-family: "Arial";
     height: 300px;
     width: 300px;
-    margin: 0 auto;
     padding-top: 300px;
     font-size: 1.2em;
+}
+
+#passwordInfo {
+  width: 500px;
 }
 
 .passwordForm h3{
     text-align: left;
     width: 100%;
     color: white;
+}
+
+#passwordInfo p{
+    text-align: left;
+    width: 100%;
+    color: grey;
+    padding-top: 50px;
 }
 
 .passwordSubmit {
@@ -384,20 +394,23 @@ h3.featherRarity {
 .donateForm {
     font-family: "Arial";
     height: 300px;
-    width: 400px;
+    width: 900px;
     margin: 0 auto;
-    padding-top: 300px;
+    padding-top: 100px;
     font-size: 1.2em;
 }
 
-.donateForm h3, p {
+.donateForm h3{
     width: 100%;
     color: white;
 }
 
+.donateForm p{
+  color: grey;
+}
+
 .donateSubmit{
     transition: background-color 0.4s ease;
-    text-align: center;
     margin: 0 auto;
     margin-top: 20px;
     font-size: 1.2em;
@@ -416,4 +429,19 @@ h3.featherRarity {
     transition: background-color 0.4s ease;
     background-color: #ffb506 ;
     cursor: pointer;
+}
+
+#donateContainer{
+  margin: 0 auto;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#donateContainer img{
+  width: auto;
+  max-width: 600px;
+  height: auto;
+  max-height: 100px;
 }
