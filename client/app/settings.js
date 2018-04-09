@@ -36,13 +36,13 @@ const DonateForm= (props) =>{
 	//renders form
   return (
   	<form id="donateForm" name="donateForm" onSubmit={handleDonate} action="/donate" method="POST" className="donateForm">
-      <h3>Donate</h3>
-      <p>Please help keep this webpage up by donating ;)</p>
       <input type="hidden" name="_csrf" value={props.csrf}/>
       <input className="donateSubmit" type="submit" value="$1" />
       <input className="donateSubmit" type="submit" value="$5" />
       <input className="donateSubmit" type="submit" value="$10" />
       <input className="donateSubmit" type="submit" value="$25" />
+			
+		<img id = "creditCards" src="assets/img/cc.png" alt="Credit Cards" />
     </form>
   );
 };
@@ -62,7 +62,7 @@ const setupSettings= function(csrf){
   if(donateContainer){	
     //renders form
     ReactDOM.render(
-      <DonateForm csrf={csrf} />,donateContainer
+      <DonateForm csrf={csrf} />,document.querySelector("#moneyForm")
     );
   } 
 };

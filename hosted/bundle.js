@@ -245,21 +245,12 @@ var DonateForm = function DonateForm(props) {
   return React.createElement(
     "form",
     { id: "donateForm", name: "donateForm", onSubmit: handleDonate, action: "/donate", method: "POST", className: "donateForm" },
-    React.createElement(
-      "h3",
-      null,
-      "Donate"
-    ),
-    React.createElement(
-      "p",
-      null,
-      "Please help keep this webpage up by donating ;)"
-    ),
     React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
     React.createElement("input", { className: "donateSubmit", type: "submit", value: "$1" }),
     React.createElement("input", { className: "donateSubmit", type: "submit", value: "$5" }),
     React.createElement("input", { className: "donateSubmit", type: "submit", value: "$10" }),
-    React.createElement("input", { className: "donateSubmit", type: "submit", value: "$25" })
+    React.createElement("input", { className: "donateSubmit", type: "submit", value: "$25" }),
+    React.createElement("img", { id: "creditCards", src: "assets/img/cc.png", alt: "Credit Cards" })
   );
 };
 
@@ -275,7 +266,7 @@ var setupSettings = function setupSettings(csrf) {
 
   if (donateContainer) {
     //renders form
-    ReactDOM.render(React.createElement(DonateForm, { csrf: csrf }), donateContainer);
+    ReactDOM.render(React.createElement(DonateForm, { csrf: csrf }), document.querySelector("#moneyForm"));
   }
 };
 
