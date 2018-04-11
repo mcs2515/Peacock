@@ -270,9 +270,9 @@ h3.featherName {
     font-size: 1.5em;
 }
 
-h3.featherRarity {
+img.favIcon {
     float: right;
-    width: 100px;
+    width: 40px;
     margin-top: 0px;
     margin-bottom: 10px;
     font-weight: bold;

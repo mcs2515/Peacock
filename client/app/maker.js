@@ -58,7 +58,7 @@ const FeatherList = (props) =>{
       <div data-key={feather._id} className="feather">
         <div className= "imageHeader">
           <h3 className="featherName"> {feather.name}</h3>
-          <h3 className="featherRarity"> Favorite: {feather.favorite}</h3>
+          <img className= "favIcon" src="assets/img/unfav.png" alt="favorite"></img>
         </div>
         <img src={feather.imageUrl} alt="feather face" className="featherFace" onLoad = {LoadColors}/>
         

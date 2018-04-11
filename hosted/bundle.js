@@ -80,12 +80,7 @@ var FeatherList = function FeatherList(props) {
           " ",
           feather.name
         ),
-        React.createElement(
-          "h3",
-          { className: "featherRarity" },
-          " Favorite: ",
-          feather.favorite
-        )
+        React.createElement("img", { className: "favIcon", src: "assets/img/unfav.png", alt: "favorite" })
       ),
       React.createElement("img", { src: feather.imageUrl, alt: "feather face", className: "featherFace", onLoad: LoadColors }),
       React.createElement("div", { id: "colorsContainer_" + feather._id, className: "colors" }),
