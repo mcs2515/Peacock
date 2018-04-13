@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Catamaran|Open+Sans|Roboto|Dancing+Script');
+
 html, body {
     height: 100%;
     width: 100%;
@@ -23,7 +25,7 @@ nav {
     background: linear-gradient(#444, #222);
     border-bottom: 1px solid #1b1b1b;
     box-shadow: inset 0 1px 0 rgba( 255, 255, 255, .15 ), 0 0 1.25em rgba( 0, 0, 0, .2 );
-    z-index: 1;
+    z-index: 10;
 }
 
 nav:nth-child(1) {
@@ -35,11 +37,12 @@ nav:nth-child(1) {
     margin: 0;
     padding: 0;
     letter-spacing: 2px;
-    padding-top: 10px;
-    padding-left: 20px;
+    padding-top: 5px;
+    padding-left: 45px;
     color: white;
-    font-size: 2em;
+    font-size: 2.5em;
     float: left;
+		font-family: 'Dancing Script', cursive;
 }
 
 #title:hover{
@@ -62,6 +65,7 @@ nav:nth-child(1) {
     color: white;
     text-decoration: none;
     padding: 5px;
+		font-family: 'Roboto', sans-serif;
 }
 
 .navlink a:hover {
@@ -90,7 +94,8 @@ nav:nth-child(1) {
     font-size: 1.2em;
     float: left;
     color: white;vertical-align: middle;
-    line-height: 30px;  
+    line-height: 30px;
+		font-family: 'Roboto', sans-serif;
 }
 
 .featherForm input[type=text] {
@@ -98,6 +103,7 @@ nav:nth-child(1) {
     height: 30px;
     border-radius: 5px;
     padding: 0px 10px;
+    border: 1px;
 }
 
 .makeFeatherSubmit {
@@ -283,8 +289,8 @@ h3.featherName {
     border: none;
     background-color: transparent;
     float: right;
-    width: 40px;
-    height: 36px;
+    width: 35px;
+    height: 30px;
     margin-top: -5px;
 }
 
@@ -353,7 +359,7 @@ h3.featherName {
     font-family: "Arial";
     height: 300px;
     width: 300px;
-    padding-top: 250px;
+    padding-top: 200px;
     font-size: 1.2em;
 }
 
@@ -410,6 +416,7 @@ h3.featherName {
 .passwordForm input[type=text] {
     width: 100%;
     margin-bottom: 20px;
+    border: 1px;
 }
 
 
@@ -460,4 +467,164 @@ h3.featherName {
 #creditCards{
 	width: 180px;
 	padding-top: 15px;
+}
+
+#aboutInfo{
+	margin: 0 auto;
+	width: 50%;
+	margin-top: 10em;
+}
+
+#aboutInfo h1{
+	padding: 30px 0px;
+	letter-spacing: 2px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 18pt;
+	color: white;
+	margin: 0;
+}
+
+#aboutInfo p{
+	margin: 0 auto;
+	font-family: 'Catamaran', sans-serif;
+	color: grey;
+}
+
+#aboutInfo a{
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 13pt;
+	color: white;
+}
+
+#steps ul{
+	list-style-type: none;
+	font-family: 'Catamaran', sans-serif;
+	padding: 10px;
+	padding-bottom: 20px;
+	margin-top: 5em;
+	margin-bottom: 0;
+	display: flex;
+  justify-content: space-between;
+}
+
+#steps li{
+	display: inline-flex;
+	padding: 10px;
+	width: 10em;
+	font-size: 18pt;
+}
+
+#steps strong{
+	margin-right: 10px;
+	font-size: 24pt;
+	margin-top: -10px;
+}
+
+#step1{
+	color: #55acee;
+}
+
+#step2{
+	color: #00eca6;
+}
+
+#step3{
+	color: whitesmoke;
+}
+
+#activityLog h1{
+	letter-spacing: 2px;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0 auto;
+	width: 50%;
+	padding: 30px 0px;
+	text-indent: 30px;
+	margin-top: 4em;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border: 1px solid #1b1b1b;
+	box-shadow: inset 0 1px 0 rgba( 255, 255, 255, .15 ), 0 0 1.25em rgba( 0, 0, 0, .5 );
+	font-size: 18pt;
+	color: white;
+}
+
+#logs{
+	margin: 0 auto;
+	width: 50%;
+	overflow-y: scroll;
+	height: 400px;
+}
+
+#logs ul{
+	list-style-type: none;
+	font-family: 'Catamaran', sans-serif;
+	background-color: whitesmoke;
+	padding: 10px;
+	padding-bottom: 20px;
+	margin: 0;
+}
+
+#logs li{
+	padding: 15px 0px;
+	padding-left: 20px;
+	border-bottom: 1px solid #b1b4bd;
+}
+
+#logs a{
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 13pt;
+	color: #55acee;
+}
+
+#logs time{
+	margin-right: 15px; 
+}
+
+/* Scrollbar styles */
+#logs::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+
+	background-color: #F5F5F5;
+}
+
+#logs::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+#logs::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+
+#logs::-webkit-scrollbar-thumb:hover
+{
+	transition: all 2s ease;
+	background-color: #55acee;
+}
+
+#logFooter{
+	margin: 0 auto;
+	width: 50%;
+	text-align: right;
+	font-family: 'Open Sans', sans-serif;
+	text-decoration: none;
+	color:grey;
+	font-size: 10pt;
+}
+
+#logFooter p{
+	display: inline-flex;
+}
+
+#logFooter a{
+	text-decoration: none;
+	font-weight: bold;
+	color: #55acee;
 }

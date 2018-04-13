@@ -1,5 +1,239 @@
 "use strict";
 
+var AboutForm = function AboutForm(props) {
+	return React.createElement(
+		"form",
+		null,
+		React.createElement(
+			"h1",
+			null,
+			"About: "
+		),
+		React.createElement(
+			"p",
+			null,
+			"Peacock was specifically made for those who are inspired by the colors of an image and would like to save the images to a library. Peacock allows users creates a 'Feather' on their page that has the saved image url and image name. ",
+			React.createElement(
+				"a",
+				{ href: "https://jariz.github.io/vibrant.js/" },
+				"Vibrant.js"
+			),
+			" is then used to extract out colors from the image to give the user the hex values of the vibrant and muted colors. Peacock was made with ",
+			React.createElement(
+				"a",
+				{ href: "https://nodejs.org/en/" },
+				"Node.js"
+			),
+			" and ",
+			React.createElement(
+				"a",
+				{ href: "https://reactjs.org/" },
+				"React.js"
+			),
+			". "
+		),
+		React.createElement(
+			"section",
+			{ id: "steps" },
+			React.createElement(
+				"ul",
+				null,
+				React.createElement(
+					"li",
+					{ id: "step1" },
+					React.createElement(
+						"strong",
+						null,
+						"1."
+					),
+					"Find an image from any website or Google image search."
+				),
+				React.createElement(
+					"li",
+					{ id: "step2" },
+					React.createElement(
+						"strong",
+						null,
+						"2."
+					),
+					" Right-click the image and click \"Copy image address\"."
+				),
+				React.createElement(
+					"li",
+					{ id: "step3" },
+					React.createElement(
+						"strong",
+						null,
+						"3."
+					),
+					" Paste the url in the \"Image\" url field and click \"Add\"."
+				)
+			)
+		)
+	);
+};
+
+var ActivityForm = function ActivityForm(props) {
+	return React.createElement(
+		"form",
+		null,
+		React.createElement(
+			"h1",
+			null,
+			"Website Updates:"
+		),
+		React.createElement(
+			"div",
+			{ id: "logs" },
+			React.createElement(
+				"ul",
+				null,
+				React.createElement(
+					"li",
+					null,
+					React.createElement(
+						"time",
+						null,
+						"Apr 13, 2018"
+					),
+					" Created about page."
+				),
+				React.createElement(
+					"li",
+					null,
+					React.createElement(
+						"time",
+						null,
+						"Apr 11, 2018"
+					),
+					" Added favorite 'Feather' feature."
+				),
+				React.createElement(
+					"li",
+					null,
+					React.createElement(
+						"time",
+						null,
+						"Apr 9, 2018"
+					),
+					" Styled the Settings page and included buttons and images for the donate section of the page."
+				),
+				React.createElement(
+					"li",
+					null,
+					React.createElement(
+						"time",
+						null,
+						"Apr 8, 2018"
+					),
+					" Created a Settings page to allow users to change their current passwords."
+				),
+				React.createElement(
+					"li",
+					null,
+					React.createElement(
+						"time",
+						null,
+						"Apr 6, 2018"
+					),
+					" Styled 'Feather' containers and removed Light Muted Swatches."
+				),
+				React.createElement(
+					"li",
+					null,
+					React.createElement(
+						"time",
+						null,
+						"Apr 5, 2018"
+					),
+					" ",
+					React.createElement(
+						"a",
+						{ href: "https://jariz.github.io/vibrant.js/" },
+						"Vibrant.js"
+					),
+					" now extracts colors from all images saved."
+				),
+				React.createElement(
+					"li",
+					null,
+					React.createElement(
+						"time",
+						null,
+						"Apr 4, 2018"
+					),
+					" Implemented ",
+					React.createElement(
+						"a",
+						{ href: "https://jariz.github.io/vibrant.js/" },
+						"Vibrant.js"
+					),
+					" to work for only one image. "
+				),
+				React.createElement(
+					"li",
+					null,
+					React.createElement(
+						"time",
+						null,
+						"Apr 2, 2018"
+					),
+					" Added new field to allow users to user image URls to create 'Feathers' with images."
+				),
+				React.createElement(
+					"li",
+					null,
+					React.createElement(
+						"time",
+						null,
+						"Mar 30, 2018"
+					),
+					" Added a delete feature for users to delete a 'Feather'."
+				)
+			)
+		),
+		React.createElement(
+			"section",
+			{ id: "logFooter" },
+			React.createElement(
+				"p",
+				null,
+				"For detailed list of changes: "
+			),
+			React.createElement(
+				"a",
+				{ href: "https://github.com/mcs2515/Peacock_Final/commits/master" },
+				" Github "
+			)
+		)
+	);
+};
+
+var setupAbout = function setupAbout(csrf) {
+
+	var aboutContainer = document.querySelector("#aboutContainer");
+
+	if (aboutContainer) {
+		//renders form
+		ReactDOM.render(React.createElement(AboutForm, { csrf: csrf }), document.querySelector("#aboutInfo"));
+
+		//renders form
+		ReactDOM.render(React.createElement(ActivityForm, { csrf: csrf }), document.querySelector("#activityLog"));
+	}
+};
+
+var getAboutToken = function getAboutToken() {
+	sendAjax('GET', '/getToken', null, function (result) {
+		//console.log(result.csrfToken);
+		setupAbout(result.csrfToken);
+	});
+};
+
+$(document).ready(function () {
+	getAboutToken();
+});
+"use strict";
+
 var csrf;
 
 var handleFeather = function handleFeather(e) {

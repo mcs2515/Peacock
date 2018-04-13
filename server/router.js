@@ -13,6 +13,7 @@ const router = (app) => {
   app.post('/maker', mid.requiresLogin, controllers.Feather.make);
   app.post('/changePassword', mid.requiresLogin, controllers.Account.changePassword);
   app.post('/favorite', mid.requiresLogin, controllers.Feather.toggleFavorite);
+  app.get('/about', mid.requiresLogin, controllers.Account.aboutPage);
   app.post('/delete', mid.requiresLogin, controllers.Feather.delete);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };
