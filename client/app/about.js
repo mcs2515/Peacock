@@ -61,7 +61,6 @@ const setupAbout= function(csrf){
 
 const getAboutToken = () =>{
   sendAjax('GET', '/getToken', null, (result)=>{
-    //console.log(result.csrfToken);
     setupAbout(result.csrfToken);
   });
 };

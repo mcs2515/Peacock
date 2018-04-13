@@ -154,7 +154,6 @@ const RenderColors = (props) => {
       {colorNodes}
 		</ul>
   );
-	console.log("done");
 };
 
 const LoadFavoriteImg=(props)=>{
@@ -167,14 +166,11 @@ const LoadFavoriteImg=(props)=>{
 		name = "unfavorite"
 	}
 	
-	console.log(name);
 	return name;
 };
 
 const setup = function() {
 	const contentContainer = document.querySelector("#contentContainer");
-	
-	console.log("contentContainer: " + contentContainer);
 	
 	if(contentContainer){
 		//renders form

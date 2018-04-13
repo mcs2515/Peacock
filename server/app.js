@@ -15,7 +15,7 @@ const csrf = require('csurf');
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 // MONGODB address to connect to.
-const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/FeatherMaker';
+const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/Peacock';
 
 mongoose.connect(dbURL, (err) => {
   if (err) {

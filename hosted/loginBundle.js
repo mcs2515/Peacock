@@ -10,9 +10,6 @@ var handleLogin = function handleLogin(e) {
     return false;
   }
 
-  console.log($("input[name=_csrf]").val());
-  //why
-
   sendAjax('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
 
   return false;

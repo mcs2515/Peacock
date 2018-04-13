@@ -105,10 +105,8 @@ const changePassword = (request, response) => {
       savePromise.catch((err) => {
         res.json(err);
       });
-			
-			savePromise.then(() => {
-        return res.json({ redirect: '/logout' });
-      });
+
+      savePromise.then(() => res.json({ redirect: '/logout' }));
     });
   });
 };

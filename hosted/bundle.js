@@ -224,7 +224,6 @@ var setupAbout = function setupAbout(csrf) {
 
 var getAboutToken = function getAboutToken() {
 	sendAjax('GET', '/getToken', null, function (result) {
-		//console.log(result.csrfToken);
 		setupAbout(result.csrfToken);
 	});
 };
@@ -415,7 +414,6 @@ var RenderColors = function RenderColors(props) {
     { "class": "colors" },
     colorNodes
   );
-  console.log("done");
 };
 
 var LoadFavoriteImg = function LoadFavoriteImg(props) {
@@ -427,14 +425,11 @@ var LoadFavoriteImg = function LoadFavoriteImg(props) {
     name = "unfavorite";
   }
 
-  console.log(name);
   return name;
 };
 
 var setup = function setup() {
   var contentContainer = document.querySelector("#contentContainer");
-
-  console.log("contentContainer: " + contentContainer);
 
   if (contentContainer) {
     //renders form
@@ -529,7 +524,6 @@ var setupSettings = function setupSettings(csrf) {
 
 var getSettingsToken = function getSettingsToken() {
   sendAjax('GET', '/getToken', null, function (result) {
-    //console.log(result.csrfToken);
     setupSettings(result.csrfToken);
   });
 };

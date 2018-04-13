@@ -69,7 +69,6 @@ const setupSettings= function(csrf){
 
 const getSettingsToken = () =>{
   sendAjax('GET', '/getToken', null, (result)=>{
-    //console.log(result.csrfToken);
     setupSettings(result.csrfToken);
   });
 };

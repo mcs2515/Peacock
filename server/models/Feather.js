@@ -51,7 +51,7 @@ FeatherSchema.statics.findByOwner = (ownerId, callback) => {
   return FeatherModel.find(search).select('name favorite imageUrl').exec(callback);
 };
 
-FeatherSchema.statics.deleteFeather = (ownerId, featherId, callback) => {
+FeatherSchema.statics.delete = (ownerId, featherId, callback) => {
   const search = {
     owner: convertId(ownerId),
     _id: convertId(featherId),
@@ -60,7 +60,7 @@ FeatherSchema.statics.deleteFeather = (ownerId, featherId, callback) => {
   return FeatherModel.findOneAndRemove(search, callback);
 };
 
-FeatherSchema.statics.favoriteFeather = (ownerId, featherId, callback) => {
+FeatherSchema.statics.favorite = (ownerId, featherId, callback) => {
   const search = {
     owner: convertId(ownerId),
     _id: convertId(featherId),

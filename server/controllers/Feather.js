@@ -13,12 +13,11 @@ const makerPage = (req, res) => {
 };
 
 const makeFeather = (req, res) => {
-
   if (!req.body.name || !req.body.imageUrl) {
     console.log('feather make issue');
     return res.status(400).json({ error: 'All fields are required' });
   }
-  
+
   const featherData = {
     name: req.body.name,
     favorite: req.body.favorite,
@@ -57,7 +56,7 @@ const deleteFeather = (request, response) => {
   const req = request;
   const res = response;
 
-  return Feather.FeatherModel.deleteFeather(req.session.account._id, req.body.feather_id, (err) => {
+  return Feather.FeatherModel.delete(req.session.account._id, req.body.feather_id, (err) => {
     if (err) {
       console.log(err);
 
@@ -69,31 +68,24 @@ const deleteFeather = (request, response) => {
   });
 };
 
-const toggleFavorite = (request, response) =>{
-	const req = request;
+const toggleFavorite = (request, response) => {
+  const req = request;
   const res = response;
 
-	return Feather.FeatherModel.favoriteFeather(req.session.account._id, req.body.feather_id, (err,doc) => {
+  return Feather.FeatherModel.favorite(req.session.account._id, req.body.feather_id, (err, doc) => {
     if (err) {
       return res.status(400).json({ error: 'An error occured.' });
     }
-		
-		const feather = doc;
-		const is_favorite = feather.favorite;
 
-		const newFeather = new Feather.FeatherModel(feather);
-		newFeather.favorite = !is_favorite;
+    const feather = doc;
+    const newFeather = new Feather.FeatherModel(feather);
+    newFeather.favorite = !feather.favorite;
     const featherPromise = newFeather.save();
 
-		console.log("feather name: "  + newFeather.name);
-		console.log("favorited: " + newFeather.favorite);
-		
-		featherPromise.then(() => {
-			return res.json({ redirect: '/maker' });
-		});
-		
-	});
-	
+    featherPromise.then(() => res.json({ redirect: '/maker' }));
+
+    return true;
+  });
 };
 
 module.exports.makerPage = makerPage;
