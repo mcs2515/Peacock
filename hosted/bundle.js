@@ -15,19 +15,19 @@ var AboutForm = function AboutForm(props) {
 			"Peacock was specifically made for those who are inspired by the colors of an image and would like to save the images to a library. Peacock allows users creates a 'Feather' on their page that has the saved image url and image name. ",
 			React.createElement(
 				"a",
-				{ href: "https://jariz.github.io/vibrant.js/" },
+				{ href: "https://jariz.github.io/vibrant.js/", target: "_blank" },
 				"Vibrant.js"
 			),
-			" is then used to extract out colors from the image to give the user the hex values of the vibrant and muted colors. Peacock was made with ",
+			" is then used to extract out prominent colors from the image to give the user the hex values of the vibrant and muted colors. Peacock was made with ",
 			React.createElement(
 				"a",
-				{ href: "https://nodejs.org/en/" },
+				{ href: "https://nodejs.org/en/", target: "_blank" },
 				"Node.js"
 			),
 			" and ",
 			React.createElement(
 				"a",
-				{ href: "https://reactjs.org/" },
+				{ href: "https://reactjs.org/", target: "_blank" },
 				"React.js"
 			),
 			". "
@@ -96,7 +96,7 @@ var ActivityForm = function ActivityForm(props) {
 						null,
 						"Apr 13, 2018"
 					),
-					" Created about page."
+					" Created about page with styling."
 				),
 				React.createElement(
 					"li",
@@ -149,7 +149,7 @@ var ActivityForm = function ActivityForm(props) {
 					" ",
 					React.createElement(
 						"a",
-						{ href: "https://jariz.github.io/vibrant.js/" },
+						{ href: "https://jariz.github.io/vibrant.js/", target: "_blank" },
 						"Vibrant.js"
 					),
 					" now extracts colors from all images saved."
@@ -165,7 +165,7 @@ var ActivityForm = function ActivityForm(props) {
 					" Implemented ",
 					React.createElement(
 						"a",
-						{ href: "https://jariz.github.io/vibrant.js/" },
+						{ href: "https://jariz.github.io/vibrant.js/", target: "_blank" },
 						"Vibrant.js"
 					),
 					" to work for only one image. "
@@ -202,7 +202,7 @@ var ActivityForm = function ActivityForm(props) {
 			),
 			React.createElement(
 				"a",
-				{ href: "https://github.com/mcs2515/Peacock_Final/commits/master" },
+				{ href: "https://github.com/mcs2515/Peacock_Final/commits/master", target: "_blank" },
 				" Github "
 			)
 		)
@@ -487,7 +487,7 @@ var PasswordForm = function PasswordForm(props) {
     React.createElement(
       "h3",
       null,
-      "Change Password"
+      "Change Password:"
     ),
     React.createElement("input", { id: "oldPass", type: "text", name: "oldPass", placeholder: "Old Password" }),
     React.createElement("input", { id: "newPass", type: "text", name: "newPass", placeholder: "New Password" }),

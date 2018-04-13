@@ -22,7 +22,7 @@ const PasswordForm= (props) =>{
 	//renders form
   return (
   	<form id="passwordForm" name="passwordForm" onSubmit={handlePassChange} action="/changePassword" method="POST" className="passwordForm">
-      <h3>Change Password</h3>
+      <h3>Change Password:</h3>
       <input id="oldPass" type="text" name="oldPass" placeholder="Old Password"/>
       <input id="newPass" type="text" name="newPass" placeholder="New Password"/>
       <input id="newPass2" type="text" name="newPass2" placeholder="Re-type Password"/>
