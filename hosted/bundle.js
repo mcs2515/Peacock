@@ -34,7 +34,7 @@ var deleteFeather = function deleteFeather(e) {
 
 var ToggleFav = function ToggleFav(e) {
   e.preventDefault();
-  sendAjax('POST', $("#favForm").attr("action"), $("#favForm").serialize(), function (data) {
+  sendAjax('POST', $("#favForm").attr("action"), $(e.target).serialize(), function () {
     loadFeathersFromServer();
   });
 
@@ -57,6 +57,7 @@ var FeatherForm = function FeatherForm(props) {
       "Image: "
     ),
     React.createElement("input", { id: "featherImg", type: "text", name: "imageUrl", placeholder: "url" }),
+    React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
     React.createElement("input", { className: "makeFeatherSubmit", type: "submit", value: "Add" })
   );
 };
@@ -90,7 +91,7 @@ var FeatherList = function FeatherList(props) {
         ),
         React.createElement(
           "form",
-          { id: "favForm", onClick: ToggleFav, name: "favForm", action: "/favorite", method: "POST", className: "favoriteFrom" },
+          { id: "favForm", onSubmit: ToggleFav, name: "favForm", action: "/favorite", method: "POST", className: "favoriteFrom" },
           React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
           React.createElement("input", { type: "hidden", name: "feather_id", value: feather._id }),
           React.createElement("input", { id: "favImg", className: LoadFavoriteImg(feather.favorite), type: "submit", value: "" })

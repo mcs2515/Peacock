@@ -32,7 +32,7 @@ const deleteFeather = (e) =>{
 
 const ToggleFav = (e) => {
 	e.preventDefault();
-	sendAjax('POST', $("#favForm").attr("action"),$("#favForm").serialize(),function(data) {
+	sendAjax('POST', $("#favForm").attr("action"),$(e.target).serialize(),function() {
 		loadFeathersFromServer();
 	});
 						
@@ -46,6 +46,7 @@ const FeatherForm = (props) => {
       <input id="featherName" type="text" name="name" placeholder="name"/>
       <label htmlFor="img">Image: </label>
       <input id="featherImg" type="text" name="imageUrl" placeholder="url"/>
+			<input type="hidden" name="_csrf" value={csrf} />
       <input className="makeFeatherSubmit" type="submit" value="Add"/>
     </form>
   );
@@ -67,7 +68,7 @@ const FeatherList = (props) =>{
         <div className= "imageHeader">
           <h3 className="featherName"> {feather.name}</h3>
 					
-					<form id="favForm" onClick= {ToggleFav} name="favForm" action="/favorite" method="POST" className="favoriteFrom">
+					<form id="favForm" onSubmit= {ToggleFav} name="favForm" action="/favorite" method="POST" className="favoriteFrom">
 						<input type="hidden" name="_csrf" value={csrf} />
 						<input type="hidden" name="feather_id" value={feather._id} />
 						<input id="favImg" className= {LoadFavoriteImg(feather.favorite)} type="submit" value= ""/>
