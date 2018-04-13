@@ -2,7 +2,7 @@ const AboutForm = (props) =>{
 	return(
 		<form>
 				<h1>About: </h1>
-				<p>Peacock was specifically made for those who are inspired by the colors of an image and would like to save the images to a library. Peacock allows users creates a 'Feather' on their page that has the saved image url and image name. <a href="https://jariz.github.io/vibrant.js/" target="_blank">Vibrant.js</a> is then used to extract out prominent colors from the image to give the user the hex values of the vibrant and muted colors. Peacock was made with <a href="https://nodejs.org/en/" target="_blank">Node.js</a> and <a href="https://reactjs.org/" target="_blank">React.js</a>. </p>
+				<p>Peacock was specifically made for those who are inspired by the colors of an image and would like to save the images to a library. Peacock allows users to create a 'Feather' on their page that has the saved image url and image name. <a href="https://jariz.github.io/vibrant.js/" target="_blank">Vibrant.js</a> is then used to extract out prominent colors from the image to give the user the hex values of the vibrant and muted colors. Peacock was made with <a href="https://nodejs.org/en/" target="_blank">Node.js</a> and <a href="https://reactjs.org/" target="_blank">React.js</a>. </p>
 				
 				<section id="steps">
 					<ul>
@@ -22,7 +22,7 @@ const ActivityForm = (props) =>{
 				
 				<div id="logs">
 					<ul>
-						<li><time>Apr 13, 2018</time> Created about page with styling.</li>
+						<li><time>Apr 13, 2018</time> Created the About page with styling.</li>
 						<li><time>Apr 11, 2018</time> Added favorite 'Feather' feature.</li>
 						<li><time>Apr 9, 2018</time> Styled the Settings page and included buttons and images for the donate section of the page.</li>
 						<li><time>Apr 8, 2018</time> Created a Settings page to allow users to change their current passwords.</li>

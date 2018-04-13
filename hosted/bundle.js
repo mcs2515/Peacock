@@ -12,7 +12,7 @@ var AboutForm = function AboutForm(props) {
 		React.createElement(
 			"p",
 			null,
-			"Peacock was specifically made for those who are inspired by the colors of an image and would like to save the images to a library. Peacock allows users creates a 'Feather' on their page that has the saved image url and image name. ",
+			"Peacock was specifically made for those who are inspired by the colors of an image and would like to save the images to a library. Peacock allows users to create a 'Feather' on their page that has the saved image url and image name. ",
 			React.createElement(
 				"a",
 				{ href: "https://jariz.github.io/vibrant.js/", target: "_blank" },
@@ -96,7 +96,7 @@ var ActivityForm = function ActivityForm(props) {
 						null,
 						"Apr 13, 2018"
 					),
-					" Created about page with styling."
+					" Created the About page with styling."
 				),
 				React.createElement(
 					"li",
