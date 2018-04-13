@@ -32,19 +32,19 @@ nav:nth-child(1) {
 
 #title{
     transition: 0.5s ease;
-	margin: 0;
-	padding: 0;
-	letter-spacing: 2px;
-	padding-top: 10px;
-	padding-left: 20px;
-	color: white;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 2px;
+    padding-top: 10px;
+    padding-left: 20px;
+    color: white;
     font-size: 2em;
-	float: left;
+    float: left;
 }
 
 #title:hover{
-  transition: color 0.4s ease;
-  color: #00eca6;
+    transition: color 0.4s ease;
+    color: #00eca6;
 }
 
 .navlink {
@@ -188,32 +188,38 @@ nav:nth-child(1) {
     z-index: 200;
     right: 0px;
     overflow: hidden;
+    padding-left: 200px;
 }
 
 #errorContainer h3 {
-    width: 200px;
+    width: 180px;
     position: absolute;
-    top: 0px;
-    left: 20px;
+    top: 30px;
+    left: 65px;
+    z-index:105; 
 }
 
 #speech {
-    height: 120px;
-    width: 250px;
-    z-index:300;
+    height: 190px;
+    width: 220px;
+    z-index:100;
+    position: relative;
+    right: 160px;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
 }
 
 #errorMessage {
     font-size: 1.2em;
     font-weight: bold;
-    color: red;
+    color: darkblue;
     font-style: italic;
 }
 
 #errorImage {
     z-index: 225;
-    margin-top: -20px;
-    margin-left: 135px;
+    margin-top: -140px;
+    margin-left: 75px;
     height: 450px;
     width: 300px;
     -ms-transform: rotate(330deg);
@@ -237,6 +243,7 @@ nav:nth-child(1) {
     border-radius: 4px;
     background-color: #f8f8f8;
     padding: 10px;
+    padding-top: 0px;
     padding-bottom: 0px;
     min-height:60px;
     overflow: hidden;
@@ -257,12 +264,14 @@ h3.emptyFeather {
     font-size: 1.5em;
     margin: 0 auto;
     text-align: center;
-    margin-top: 18px;
+    margin-top: 10em;
+    font-family: "Arial";
+    color: grey;
 }
 
 h3.featherName {
     float: left;
-    width: 100px;
+    width: 80%;
     margin-top: 0px;
     margin-bottom: 10px;
     font-weight: bold;
@@ -271,12 +280,24 @@ h3.featherName {
 }
 
 #favImg {
+    border: none;
+    background-color: transparent;
     float: right;
     width: 40px;
-    margin-top: 0px;
-    margin-bottom: 10px;
-    font-weight: bold;
-    font-size: 1.5em;
+    height: 36px;
+    margin-top: -5px;
+}
+
+#favImg:hover{
+    cursor: pointer;
+}
+
+.favorite{
+    background: url(img/fav.png);
+}
+
+.unfavorite{
+    background: url(img/unfav.png);
 }
 
 .colors ul li {

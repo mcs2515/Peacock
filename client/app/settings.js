@@ -4,7 +4,7 @@ const handlePassChange = (e) => {
     $("#errorContainer").animate({width:'hide'},350);
 	
 	if($("#oldPass").val() == '' || $("#newPass").val() == ''|| $("#newPass2").val() == ''){
-		handleError("All fields are required");
+		handleError("All fields are required!!");
 		return false;
 	}
 	
