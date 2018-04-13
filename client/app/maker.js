@@ -30,6 +30,15 @@ const deleteFeather = (e) =>{
   return false;
 }
 
+const ToggleFav = (e) => {
+	e.preventDefault();
+	sendAjax('POST', $("#favForm").attr("action"),$("#favForm").serialize(),function(data) {
+		loadFeathersFromServer();
+	});
+						
+	return false;
+}
+
 const FeatherForm = (props) => {
   return (
     <form id="featherForm" onSubmit={handleFeather} name="featherForm" action="/maker" method="POST" className="featherForm">
@@ -37,7 +46,6 @@ const FeatherForm = (props) => {
       <input id="featherName" type="text" name="name" placeholder="name"/>
       <label htmlFor="img">Image: </label>
       <input id="featherImg" type="text" name="imageUrl" placeholder="url"/>
-      <input type="hidden" name="_csrf" value={csrf} />
       <input className="makeFeatherSubmit" type="submit" value="Add"/>
     </form>
   );
@@ -58,8 +66,14 @@ const FeatherList = (props) =>{
       <div data-key={feather._id} className="feather">
         <div className= "imageHeader">
           <h3 className="featherName"> {feather.name}</h3>
-          <img className= "favIcon" src="assets/img/unfav.png" alt="favorite"></img>
+					
+					<form id="favForm" onClick= {ToggleFav} name="favForm" action="/favorite" method="POST" className="favoriteFrom">
+						<input type="hidden" name="_csrf" value={csrf} />
+						<input type="hidden" name="feather_id" value={feather._id} />
+						<input id="favImg" className= {LoadFavoriteImg(feather.favorite)} type="submit" value= ""/>
+					</form>
         </div>
+				
         <img src={feather.imageUrl} alt="feather face" className="featherFace" onLoad = {LoadColors}/>
         
         <div id= {"colorsContainer_"+feather._id} className= "colors">
@@ -140,6 +154,20 @@ const RenderColors = (props) => {
 		</ul>
   );
 	console.log("done");
+};
+
+const LoadFavoriteImg=(props)=>{
+	var name;
+	//if true
+	if(props){
+		name = "favorite";
+	}
+	else{
+		name = "unfavorite"
+	}
+	
+	console.log(name);
+	return name;
 };
 
 const setup = function() {

@@ -12,6 +12,7 @@ const router = (app) => {
   app.get('/maker', mid.requiresLogin, controllers.Feather.makerPage);
   app.post('/maker', mid.requiresLogin, controllers.Feather.make);
   app.post('/changePassword', mid.requiresLogin, controllers.Account.changePassword);
+  app.post('/favorite', mid.requiresLogin, controllers.Feather.toggleFavorite);
   app.post('/delete', mid.requiresLogin, controllers.Feather.delete);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };

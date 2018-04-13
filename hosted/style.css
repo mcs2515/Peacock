@@ -270,7 +270,7 @@ h3.featherName {
     font-size: 1.5em;
 }
 
-img.favIcon {
+#favImg {
     float: right;
     width: 40px;
     margin-top: 0px;
@@ -399,7 +399,7 @@ img.favIcon {
 #donateHeader {
     font-family: "Arial";
     font-size: 1.2em;
-	width: 300px;
+		width: 300px;
     color: white;
 }
 

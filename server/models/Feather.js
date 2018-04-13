@@ -60,6 +60,15 @@ FeatherSchema.statics.deleteFeather = (ownerId, featherId, callback) => {
   return FeatherModel.findOneAndRemove(search, callback);
 };
 
+FeatherSchema.statics.favoriteFeather = (ownerId, featherId, callback) => {
+  const search = {
+    owner: convertId(ownerId),
+    _id: convertId(featherId),
+  };
+
+  return FeatherModel.findOne(search).exec(callback);
+};
+
 FeatherModel = mongoose.model('Feather', FeatherSchema);
 
 module.exports.FeatherModel = FeatherModel;

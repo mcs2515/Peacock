@@ -18,7 +18,6 @@ const login = (request, response) => {
   const password = `${req.body.pass}`;
 
   if (!username || !password) {
-    console.log('login issue');
     return res.status(400).json({ error: 'All fields are required' });
   }
 
@@ -83,9 +82,6 @@ const changePassword = (request, response) => {
   req.body.newPass = `${req.body.newPass}`;
   req.body.newPass2 = `${req.body.newPass2}`;
 
-  console.log(req.body.newPass);
-  console.log(req.body.newPass2);
-
   if (req.body.newPass !== req.body.newPass2) {
     return res.status(400).json({ error: 'New passwords do not match' });
   }
@@ -106,15 +102,13 @@ const changePassword = (request, response) => {
 
       const savePromise = newAccount.save();
 
-      savePromise.then(() => res.json({
-        password: newAccount.password,
-      }));
-
       savePromise.catch((err) => {
         res.json(err);
       });
-
-      return res.json({ redirect: '/logout' });
+			
+			savePromise.then(() => {
+        return res.json({ redirect: '/logout' });
+      });
     });
   });
 };

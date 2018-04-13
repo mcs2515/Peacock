@@ -35,7 +35,6 @@ const makeFeather = (req, res) => {
     console.log(err);
   });
 
-  console.log('feather made');
   return featherPromise;
 };
 
@@ -70,7 +69,35 @@ const deleteFeather = (request, response) => {
   });
 };
 
+const toggleFavorite = (request, response) =>{
+	const req = request;
+  const res = response;
+
+	return Feather.FeatherModel.favoriteFeather(req.session.account._id, req.body.feather_id, (err,doc) => {
+    if (err) {
+      return res.status(400).json({ error: 'An error occured.' });
+    }
+		
+		const feather = doc;
+		const is_favorite = feather.favorite;
+
+		const newFeather = new Feather.FeatherModel(feather);
+		newFeather.favorite = !is_favorite;
+    const featherPromise = newFeather.save();
+
+		console.log("feather name: "  + newFeather.name);
+		console.log("favorited: " + newFeather.favorite);
+		
+		featherPromise.then(() => {
+			return res.json({ redirect: '/maker' });
+		});
+		
+	});
+	
+};
+
 module.exports.makerPage = makerPage;
 module.exports.getFeathers = getFeathers;
 module.exports.make = makeFeather;
 module.exports.delete = deleteFeather;
+module.exports.toggleFavorite = toggleFavorite;
