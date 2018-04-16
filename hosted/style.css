@@ -132,11 +132,20 @@ nav:nth-child(1) {
   cursor: pointer;
 }
 
+#welcome{
+  text-align: center;
+  margin: 0 auto;
+  width: 450px;
+  padding-top: 300px;
+  color: grey;
+  font-family: 'Open Sans', sans-serif;
+}
+
 .mainForm {
   height: 300px;
   width: 300px;
   margin: 0 auto;
-  padding-top: 350px;
+  padding-top: 50px;
   font-size: 1.2em;
   color: white;
 }
