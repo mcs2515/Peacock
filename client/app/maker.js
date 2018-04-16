@@ -35,7 +35,7 @@ const ToggleFav = (e) => {
 	sendAjax('POST', $("#favForm").attr("action"),$(e.target).serialize(),function() {
 		loadFeathersFromServer();
 	});
-						
+
 	return false;
 }
 
@@ -46,7 +46,7 @@ const FeatherForm = (props) => {
       <input id="featherName" type="text" name="name" placeholder="name"/>
       <label htmlFor="img">Image: </label>
       <input id="featherImg" type="text" name="imageUrl" placeholder="url"/>
-			<input type="hidden" name="_csrf" value={csrf} />
+      <input type="hidden" name="_csrf" value={csrf} />
       <input className="makeFeatherSubmit" type="submit" value="Add"/>
     </form>
   );
@@ -55,9 +55,22 @@ const FeatherForm = (props) => {
 const FeatherList = (props) =>{
   if(props.feathers.length === 0){
     return (
-      <div className="featherList">
-        <h3 className="emptyFeather">No Feathers yet</h3>
-      </div>
+      
+      <form>
+        <div className="featherList">
+          <h3 className="emptyFeather">No Feathers yet</h3>
+        </div>
+
+        <div id= "stepsContainer">
+          <section id="steps">
+            <ul>
+              <li id= "step1"><strong>1.</strong>Find an image from any website or Google image search.</li>
+              <li id= "step2"><strong>2.</strong> Right-click the image and click "Copy image address".</li>
+              <li id= "step3"><strong>3.</strong> Paste the url in the "Image" url field and click "Add".</li>
+            </ul>
+          </section>
+        </div>
+      </form>
     );
   }
   
@@ -68,11 +81,11 @@ const FeatherList = (props) =>{
         <div className= "imageHeader">
           <h3 className="featherName"> {feather.name}</h3>
 					
-					<form id="favForm" onSubmit= {ToggleFav} name="favForm" action="/favorite" method="POST" className="favoriteFrom">
-						<input type="hidden" name="_csrf" value={csrf} />
-						<input type="hidden" name="feather_id" value={feather._id} />
-						<input id="favImg" className= {LoadFavoriteImg(feather.favorite)} type="submit" value= ""/>
-					</form>
+          <form id="favForm" onSubmit= {ToggleFav} name="favForm" action="/favorite" method="POST" className="favoriteFrom">
+            <input type="hidden" name="_csrf" value={csrf} />
+            <input type="hidden" name="feather_id" value={feather._id} />
+            <input id="favImg" className= {LoadFavoriteImg(feather.favorite)} type="submit" value= ""/>
+          </form>
         </div>
 				
         <img src={feather.imageUrl} alt="feather face" className="featherFace" onLoad = {LoadColors}/>
@@ -110,16 +123,17 @@ const LoadColors = (e) =>{
 	
 	Vibrant.from(e.target.src).getPalette(function(err, palette) {
 
-		let colorArray= [];
-		
-		for ( var swatch in palette ) {
-			if (palette.hasOwnProperty(swatch) && palette[swatch]) { 
+      let colorArray= [];
 
-				let bg_color = palette[swatch].getHex();
-				let title_text_color =  palette[swatch].getTitleTextColor();			
-				let body_text_color = palette[swatch].getBodyTextColor();
-				let swatch_name = swatch;
-				if (swatch !='LightMuted') {
+      for ( var swatch in palette ) {
+        if (palette.hasOwnProperty(swatch) && palette[swatch]) { 
+
+          let bg_color = palette[swatch].getHex();
+          let title_text_color =  palette[swatch].getTitleTextColor();			
+          let body_text_color = palette[swatch].getBodyTextColor();
+          let swatch_name = swatch;
+
+          if (swatch !='LightMuted') {
             const code = {
               backgroundColor: bg_color,
               bodyTColor: body_text_color,
@@ -128,13 +142,12 @@ const LoadColors = (e) =>{
             }
 
             colorArray.push(code);
+          }
         }
-			}
-    }
-
-		ReactDOM.render(<RenderColors colors={colorArray} />, document.querySelector("#colorsContainer_" + index));
-    
-	});
+      }
+      
+      ReactDOM.render(<RenderColors colors={colorArray} />, document.querySelector("#colorsContainer_" + index));
+    });
 };
 
 const RenderColors = (props) => {
@@ -143,16 +156,16 @@ const RenderColors = (props) => {
 
     return (
       <li style={{backgroundColor: color.backgroundColor}}>
-          <p style = {{color: color.titleTColor}}> {color.backgroundColor}</p>
-          <small style ={{color: color.bodyTColor}}> {color.swatchName} </small>
+        <p style = {{color: color.titleTColor}}> {color.backgroundColor}</p>
+        <small style ={{color: color.bodyTColor}}> {color.swatchName} </small>
       </li>
     );
   });
 	
   return (
-		<ul class="colors">
+    <ul class="colors">
       {colorNodes}
-		</ul>
+    </ul>
   );
 };
 
@@ -170,21 +183,21 @@ const LoadFavoriteImg=(props)=>{
 };
 
 const setup = function() {
-	const contentContainer = document.querySelector("#contentContainer");
+  const contentContainer = document.querySelector("#contentContainer");
 	
-	if(contentContainer){
-		//renders form
-		ReactDOM.render(
-			<FeatherForm/>,document.querySelector("#makeFeather")
-		);
+  if(contentContainer){
+    //renders form
+    ReactDOM.render(
+        <FeatherForm/>,document.querySelector("#makeFeather")
+    );
 
-		//renders default feather list display
-		ReactDOM.render(
-			<FeatherList feathers={[]}/>,contentContainer
-		);
+    //renders default feather list display
+    ReactDOM.render(
+        <FeatherList feathers={[]}/>,contentContainer
+    );
 
-		loadFeathersFromServer();
-	}
+    loadFeathersFromServer();
+  }
 };
 
 

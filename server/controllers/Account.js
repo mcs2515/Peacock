@@ -85,6 +85,12 @@ const changePassword = (request, response) => {
   if (req.body.newPass !== req.body.newPass2) {
     return res.status(400).json({ error: 'New passwords do not match' });
   }
+  
+  if(req.body.newPass == req.body.newPass2){
+    if(req.body.oldPass == req.body.newPass){
+      return res.status(400).json({ error: 'New password cannot be your current one' });
+    }
+  }
 
   const username = req.session.account.username;
 

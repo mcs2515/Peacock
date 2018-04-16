@@ -23,9 +23,9 @@ const PasswordForm= (props) =>{
   return (
   	<form id="passwordForm" name="passwordForm" onSubmit={handlePassChange} action="/changePassword" method="POST" className="passwordForm">
       <h3>Change Password:</h3>
-      <input id="oldPass" type="text" name="oldPass" placeholder="Old Password"/>
-      <input id="newPass" type="text" name="newPass" placeholder="New Password"/>
-      <input id="newPass2" type="text" name="newPass2" placeholder="Re-type Password"/>
+      <input id="oldPass" type="password" name="oldPass" placeholder="Old Password"/>
+      <input id="newPass" type="password" name="newPass" placeholder="New Password"/>
+      <input id="newPass2" type="password" name="newPass2" placeholder="Re-type Password"/>
       <input type="hidden" name="_csrf" value={props.csrf}/>
       <input className="passwordSubmit" type="submit" value="Update" />
     </form>

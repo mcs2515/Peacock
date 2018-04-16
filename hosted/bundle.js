@@ -298,12 +298,58 @@ var FeatherForm = function FeatherForm(props) {
 var FeatherList = function FeatherList(props) {
   if (props.feathers.length === 0) {
     return React.createElement(
-      "div",
-      { className: "featherList" },
+      "form",
+      null,
       React.createElement(
-        "h3",
-        { className: "emptyFeather" },
-        "No Feathers yet"
+        "div",
+        { className: "featherList" },
+        React.createElement(
+          "h3",
+          { className: "emptyFeather" },
+          "No Feathers yet"
+        )
+      ),
+      React.createElement(
+        "div",
+        { id: "stepsContainer" },
+        React.createElement(
+          "section",
+          { id: "steps" },
+          React.createElement(
+            "ul",
+            null,
+            React.createElement(
+              "li",
+              { id: "step1" },
+              React.createElement(
+                "strong",
+                null,
+                "1."
+              ),
+              "Find an image from any website or Google image search."
+            ),
+            React.createElement(
+              "li",
+              { id: "step2" },
+              React.createElement(
+                "strong",
+                null,
+                "2."
+              ),
+              " Right-click the image and click \"Copy image address\"."
+            ),
+            React.createElement(
+              "li",
+              { id: "step3" },
+              React.createElement(
+                "strong",
+                null,
+                "3."
+              ),
+              " Paste the url in the \"Image\" url field and click \"Add\"."
+            )
+          )
+        )
       )
     );
   }
@@ -369,6 +415,7 @@ var LoadColors = function LoadColors(e) {
         var title_text_color = palette[swatch].getTitleTextColor();
         var body_text_color = palette[swatch].getBodyTextColor();
         var swatch_name = swatch;
+
         if (swatch != 'LightMuted') {
           var code = {
             backgroundColor: bg_color,
@@ -484,9 +531,9 @@ var PasswordForm = function PasswordForm(props) {
       null,
       "Change Password:"
     ),
-    React.createElement("input", { id: "oldPass", type: "text", name: "oldPass", placeholder: "Old Password" }),
-    React.createElement("input", { id: "newPass", type: "text", name: "newPass", placeholder: "New Password" }),
-    React.createElement("input", { id: "newPass2", type: "text", name: "newPass2", placeholder: "Re-type Password" }),
+    React.createElement("input", { id: "oldPass", type: "password", name: "oldPass", placeholder: "Old Password" }),
+    React.createElement("input", { id: "newPass", type: "password", name: "newPass", placeholder: "New Password" }),
+    React.createElement("input", { id: "newPass2", type: "password", name: "newPass2", placeholder: "Re-type Password" }),
     React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
     React.createElement("input", { className: "passwordSubmit", type: "submit", value: "Update" })
   );
