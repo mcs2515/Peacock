@@ -16,6 +16,7 @@ const router = (app) => {
   app.get('/about', mid.requiresLogin, controllers.Account.aboutPage);
   app.post('/delete', mid.requiresLogin, controllers.Feather.delete);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+  app.get('/*', mid.requiresLogin, controllers.Feather.makerPage);
 };
 
 module.exports = router;
