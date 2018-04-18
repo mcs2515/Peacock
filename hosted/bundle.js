@@ -94,6 +94,16 @@ var ActivityForm = function ActivityForm(props) {
           React.createElement(
             "time",
             null,
+            "Apr 18, 2018"
+          ),
+          " Moved web pages around and added redirect."
+        ),
+        React.createElement(
+          "li",
+          null,
+          React.createElement(
+            "time",
+            null,
             "Apr 16, 2018"
           ),
           " Replaced password fields with dots and new password cannot equal current password."
