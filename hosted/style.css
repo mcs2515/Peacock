@@ -28,10 +28,6 @@ nav {
   z-index: 10;
 }
 
-nav:nth-child(1) {
-  padding-left: 25px;
-}
-
 #title{
   transition: 0.5s ease;
   margin: 0;
@@ -97,7 +93,7 @@ nav:nth-child(1) {
   float: left;
   color: white;vertical-align: middle;
   line-height: 30px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Catamaran', sans-serif;
 }
 
 .featherForm input[type=text] {
@@ -119,7 +115,8 @@ nav:nth-child(1) {
   color: white;
   text-decoration: none;
   margin-left: 20px;
-  font-family: 'Open Sans', sans-serif;
+	font-size: 12pt;
+  font-family: 'Catamaran', sans-serif;
 }
 
 .makeFeatherSubmit:link, .makeFeatherSubmit:visited, .makeFeatherSubmit:hover, .makeFeatherSubmit:active {
@@ -138,7 +135,7 @@ nav:nth-child(1) {
   width: 450px;
   padding-top: 250px;
   padding-bottom: 10px;
-  font-size: 16pt;
+  font-size: 12pt;
   color: grey;
   font-family: 'Open Sans', sans-serif;
 }
@@ -155,7 +152,7 @@ nav:nth-child(1) {
   text-decoration: none;
   font-size: 18pt;
   color: white;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Arial', sans-serif;
   padding: 5px 0px;
 }
 

@@ -13,13 +13,16 @@
 </head>
 <body> 
   <nav>
-<!--<a href="/login"><img id="logo" src="/assets/img/face.png" alt="face logo"/></a>-->
-	<div><a href="/maker"><h1 id = "title">Peacock</h1></a></div>
-    <div class="navlink"><a id="loginButton" href="/login">Login</a></div>
-    <div class="navlink"><a id="signupButton" href="/signup">Sign up</a></div>
+		<div><a href="/maker"><h1 id = "title">Peacock</h1></a></div>
+		<div class="navlink"><a href="/about">About</a></div>
+		<div class="navlink"><a href="/login">Login</a></div>
   </nav>
   
-  <div id="welcome"><h1>Hello there. Welcome Back!</h1></div>
+	<div id="welcome"><h1>Hello there. Welcome Back!</h1></div>
+	<div id="signupButtons">
+		<a id="loginButton" class= "selected" href="/login">Login</a>
+		<a id="signupButton" class= "unselected" href="/signup">Sign up</a>
+	</div>
   <section id="content"></section>
   
   <div id="errorContainer"><img id="speech" src="/assets/img/speech.png" alt="speech box"/>

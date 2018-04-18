@@ -44,8 +44,8 @@ var LoginWindow = function LoginWindow(props) {
 			null,
 			"Login to your Account."
 		),
-		React.createElement("input", { id: "user", type: "text", name: "username", placeholder: "Username" }),
-		React.createElement("input", { id: "pass", type: "password", name: "pass", placeholder: "Password" }),
+		React.createElement("input", { id: "user", style: { fontSize: 14 + "pt" }, type: "text", name: "username", placeholder: "Username" }),
+		React.createElement("input", { id: "pass", style: { fontSize: 14 + "pt" }, type: "password", name: "pass", placeholder: "Password" }),
 		React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
 		React.createElement("input", { className: "formSubmit", type: "submit", value: "Sign In" })
 	);
@@ -60,9 +60,9 @@ var SignupWindow = function SignupWindow(props) {
 			null,
 			"Create a New Account."
 		),
-		React.createElement("input", { id: "user", type: "text", name: "username", placeholder: "Username" }),
-		React.createElement("input", { id: "pass", type: "password", name: "pass", placeholder: "Password" }),
-		React.createElement("input", { id: "pass2", type: "password", name: "pass2", placeholder: "Re-type Password" }),
+		React.createElement("input", { id: "user", style: { fontSize: 14 + "pt" }, type: "text", name: "username", placeholder: "Username" }),
+		React.createElement("input", { id: "pass", style: { fontSize: 14 + "pt" }, type: "password", name: "pass", placeholder: "Password" }),
+		React.createElement("input", { id: "pass2", style: { fontSize: 14 + "pt" }, type: "password", name: "pass2", placeholder: "Re-type Password" }),
 		React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
 		React.createElement("input", { className: "formSubmit", type: "submit", value: "Sign Up" })
 	);
@@ -83,12 +83,24 @@ var setup = function setup(csrf) {
 	signupButton.addEventListener("click", function (e) {
 		e.preventDefault();
 		createSignupWindow(csrf);
+
+		loginButton.classList.remove("selected");
+		loginButton.classList.add("unselected");
+		signupButton.classList.remove("unselected");
+		signupButton.classList.add("selected");
+
 		return false;
 	});
 
 	loginButton.addEventListener("click", function (e) {
 		e.preventDefault();
 		createLoginWindow(csrf);
+
+		signupButton.classList.remove("selected");
+		signupButton.classList.add("unselected");
+		loginButton.classList.remove("unselected");
+		loginButton.classList.add("selected");
+
 		return false;
 	});
 

@@ -35,16 +35,10 @@ const handleSignup = (e) => {
 
 const LoginWindow = (props) =>{
 	return(
-		<div id="welcome"><h1>Hello there. Welcome Back!</h1></div>
-		<div id="signupButtons">
-			<a id="loginButton" class= "selected" href="/login">Login</a>
-			<a id="signupButton" class= "unselected" href="/signup">Sign up</a>
-		</div>
-		
 		<form id="loginForm" name="loginForm" onSubmit={handleLogin} action="/login" method="POST" className="mainForm">
 			<h3>Login to your Account.</h3>
-			<input id="user" type="text" name="username" placeholder="Username"/>
-			<input id="pass" type="password" name="pass" placeholder="Password"/>
+			<input id="user" style= {{fontSize: 14 + "pt"}} type="text" name="username" placeholder="Username"/>
+			<input id="pass" style= {{fontSize: 14 + "pt"}} type="password" name="pass" placeholder="Password"/>
 			<input type="hidden" name="_csrf" value={props.csrf}/>
 			<input className="formSubmit" type="submit" value="Sign In" />
 		</form>
@@ -53,17 +47,11 @@ const LoginWindow = (props) =>{
 
 const SignupWindow = (props) => {
   return (
-	  <div id="welcome"><h1>Hello there. Welcome Back!</h1></div>
-	  <div id="signupButtons">
-		  <a id="loginButton" class= "selected" href="/login">Login</a>
-		  <a id="signupButton" class= "unselected" href="/signup">Sign up</a>
-	  </div>
-	  
 	  <form id="signupForm" name="signupForm" onSubmit={handleSignup} action="/signup" method="POST" className="mainForm">
 		  <h3>Create a New Account.</h3>
-		  <input id="user" type="text" name="username" placeholder="Username"/>
-		  <input id="pass" type="password" name="pass" placeholder="Password"/>
-		  <input id="pass2" type="password" name="pass2" placeholder="Re-type Password"/>
+		  <input id="user" style= {{fontSize: 14 + "pt"}} type="text" name="username" placeholder="Username"/>
+		  <input id="pass" style= {{fontSize: 14 + "pt"}} type="password" name="pass" placeholder="Password"/>
+		  <input id="pass2" style= {{fontSize: 14 + "pt"}} type="password" name="pass2" placeholder="Re-type Password"/>
 		  <input type="hidden" name="_csrf" value={props.csrf}/>
 		  <input className="formSubmit" type="submit" value="Sign Up" />
 	  </form>
@@ -91,12 +79,24 @@ const setup = (csrf) => {
   signupButton.addEventListener("click", (e) => {
     e.preventDefault();
     createSignupWindow(csrf);
+		
+		loginButton.classList.remove("selected");
+		loginButton.classList.add("unselected");
+		signupButton.classList.remove("unselected");
+		signupButton.classList.add("selected");
+		
     return false;
   });
   
   loginButton.addEventListener("click", (e) => {
     e.preventDefault();
     createLoginWindow(csrf);
+		
+		signupButton.classList.remove("selected");
+		signupButton.classList.add("unselected");
+		loginButton.classList.remove("unselected");
+		loginButton.classList.add("selected");
+		
     return false;
   });
 	

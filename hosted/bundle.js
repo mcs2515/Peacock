@@ -541,9 +541,9 @@ var PasswordForm = function PasswordForm(props) {
       null,
       "Change Password:"
     ),
-    React.createElement("input", { id: "oldPass", type: "password", name: "oldPass", placeholder: "Old Password" }),
-    React.createElement("input", { id: "newPass", type: "password", name: "newPass", placeholder: "New Password" }),
-    React.createElement("input", { id: "newPass2", type: "password", name: "newPass2", placeholder: "Re-type Password" }),
+    React.createElement("input", { id: "oldPass", style: { fontSize: 14 + "pt" }, type: "password", name: "oldPass", placeholder: "Old Password" }),
+    React.createElement("input", { id: "newPass", style: { fontSize: 14 + "pt" }, type: "password", name: "newPass", placeholder: "New Password" }),
+    React.createElement("input", { id: "newPass2", style: { fontSize: 14 + "pt" }, type: "password", name: "newPass2", placeholder: "Re-type Password" }),
     React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
     React.createElement("input", { className: "passwordSubmit", type: "submit", value: "Update" })
   );
