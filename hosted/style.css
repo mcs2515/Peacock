@@ -136,22 +136,55 @@ nav:nth-child(1) {
   text-align: center;
   margin: 0 auto;
   width: 450px;
-  padding-top: 300px;
+  padding-top: 250px;
+  padding-bottom: 10px;
+  font-size: 16pt;
   color: grey;
   font-family: 'Open Sans', sans-serif;
 }
 
+#signupButtons{
+  text-align: center;
+  width: 400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+#signupButtons a{
+  text-decoration: none;
+  font-size: 18pt;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  padding: 5px 0px;
+}
+
+#loginButton, #signupButton{
+  width: 50%;
+}
+
+.selected{
+  background-color: #00eca6;
+  cursor: default;
+}
+
+.unselected{
+  background-color: grey;
+  cursor: pointer;
+}
+
 .mainForm {
   height: 300px;
-  width: 300px;
+  width: 400px;
   margin: 0 auto;
-  padding-top: 50px;
+  padding-top: 40px;
   font-size: 1.2em;
   color: white;
 }
 
 .mainForm h3 {
   text-align: left;
+  font-size: 14pt;
   font-family: 'Open Sans', sans-serif;
 }
 

@@ -35,7 +35,13 @@ const handleSignup = (e) => {
 
 const LoginWindow = (props) =>{
 	return(
-		<form id="loginForm" name="loginForm" onSubmit={handleLogin} action="/login" method="POST" className="mainForm"> 
+		<div id="welcome"><h1>Hello there. Welcome Back!</h1></div>
+		<div id="signupButtons">
+			<a id="loginButton" class= "selected" href="/login">Login</a>
+			<a id="signupButton" class= "unselected" href="/signup">Sign up</a>
+		</div>
+		
+		<form id="loginForm" name="loginForm" onSubmit={handleLogin} action="/login" method="POST" className="mainForm">
 			<h3>Login to your Account.</h3>
 			<input id="user" type="text" name="username" placeholder="Username"/>
 			<input id="pass" type="password" name="pass" placeholder="Password"/>
@@ -47,14 +53,20 @@ const LoginWindow = (props) =>{
 
 const SignupWindow = (props) => {
   return (
-  <form id="signupForm" name="signupForm" onSubmit={handleSignup} action="/signup" method="POST" className="mainForm">
-      <h3>Create a New Account.</h3>
-      <input id="user" type="text" name="username" placeholder="Username"/>
-      <input id="pass" type="password" name="pass" placeholder="Password"/>
-      <input id="pass2" type="password" name="pass2" placeholder="Re-type Password"/>
-      <input type="hidden" name="_csrf" value={props.csrf}/>
-      <input className="formSubmit" type="submit" value="Sign Up" />
-    </form>
+	  <div id="welcome"><h1>Hello there. Welcome Back!</h1></div>
+	  <div id="signupButtons">
+		  <a id="loginButton" class= "selected" href="/login">Login</a>
+		  <a id="signupButton" class= "unselected" href="/signup">Sign up</a>
+	  </div>
+	  
+	  <form id="signupForm" name="signupForm" onSubmit={handleSignup} action="/signup" method="POST" className="mainForm">
+		  <h3>Create a New Account.</h3>
+		  <input id="user" type="text" name="username" placeholder="Username"/>
+		  <input id="pass" type="password" name="pass" placeholder="Password"/>
+		  <input id="pass2" type="password" name="pass2" placeholder="Re-type Password"/>
+		  <input type="hidden" name="_csrf" value={props.csrf}/>
+		  <input className="formSubmit" type="submit" value="Sign Up" />
+	  </form>
   );
 };
 
