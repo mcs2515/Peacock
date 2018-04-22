@@ -253,6 +253,78 @@ $(document).ready(function () {
 });
 "use strict";
 
+var GalleryList = function GalleryList(props) {
+  if (props.feathers.length === 0) {
+    return React.createElement(
+      "form",
+      null,
+      React.createElement(
+        "div",
+        { className: "featherList" },
+        React.createElement(
+          "h3",
+          { className: "emptyFeather" },
+          "No public Feathers yet."
+        )
+      )
+    );
+  }
+
+  var featherNodes = props.feathers.map(function (feather, index) {
+
+    return React.createElement(
+      "div",
+      { "data-key": feather._id, className: "feather" },
+      React.createElement(
+        "div",
+        { className: "imageHeader" },
+        React.createElement(
+          "h3",
+          { className: "featherName" },
+          " ",
+          feather.name
+        ),
+        React.createElement(
+          "form",
+          { id: "favForm", onSubmit: ToggleFav, name: "favForm", action: "/favorite", method: "POST", className: "favoriteFrom" },
+          React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
+          React.createElement("input", { type: "hidden", name: "feather_id", value: feather._id })
+        )
+      ),
+      React.createElement("img", { src: feather.imageUrl, alt: "feather face", className: "featherFace", onLoad: LoadColors }),
+      React.createElement("div", { id: "colorsContainer_" + feather._id, className: "colors" })
+    );
+  });
+
+  return React.createElement(
+    "div",
+    { id: "featherList" },
+    featherNodes
+  );
+};
+
+var setupGallery = function setupGallery(csrf) {
+
+  var galleryContainer = document.querySelector("#galleryContainer");
+  console.log(galleryContainer);
+
+  if (galleryContainer) {
+    //renders form
+    ReactDOM.render(React.createElement(GalleryList, { csrf: csrf }), galleryContainer);
+  }
+};
+
+var getGalleryToken = function getGalleryToken() {
+  sendAjax('GET', '/getToken', null, function (result) {
+    setupGallery(result.csrfToken);
+  });
+};
+
+$(document).ready(function () {
+  getGalleryToken();
+});
+"use strict";
+
 var csrf;
 
 var handleFeather = function handleFeather(e) {
@@ -279,6 +351,16 @@ var deleteFeather = function deleteFeather(e) {
   e.preventDefault();
 
   sendAjax('POST', $(e.target).attr("action"), $(e.target).serialize(), function () {
+    loadFeathersFromServer();
+  });
+
+  return false;
+};
+
+var TogglePrivacy = function TogglePrivacy(e) {
+  e.preventDefault();
+
+  sendAjax('POST', $("#shareForm").attr("action"), $(e.target).serialize(), function () {
     loadFeathersFromServer();
   });
 
@@ -400,6 +482,13 @@ var FeatherList = function FeatherList(props) {
       React.createElement("div", { id: "colorsContainer_" + feather._id, className: "colors" }),
       React.createElement(
         "form",
+        { id: "shareForm", onSubmit: TogglePrivacy, name: "shareForm", action: "/share", method: "POST", className: "shareFeather" },
+        React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
+        React.createElement("input", { type: "hidden", name: "feather_id", value: feather._id }),
+        React.createElement("input", { className: "shareFeatherSubmit", type: "submit", value: LoadPrivacy(feather.public) })
+      ),
+      React.createElement(
+        "form",
         { id: "deleteForm", onSubmit: deleteFeather, name: "deleteForm", action: "/delete", method: "POST", className: "deleteFeather" },
         React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
         React.createElement("input", { type: "hidden", name: "feather_id", value: feather._id }),
@@ -493,6 +582,19 @@ var LoadFavoriteImg = function LoadFavoriteImg(props) {
   }
 
   return name;
+};
+
+var LoadPrivacy = function LoadPrivacy(props) {
+  var string;
+
+  //if true
+  if (props) {
+    string = "Public";
+  } else {
+    string = "Private";
+  }
+
+  return string;
 };
 
 var setup = function setup() {

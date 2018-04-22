@@ -35,12 +35,18 @@ const FeatherSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+	
+	public:{
+		type: Boolean,
+    default: false,
+	}
 });
 
 FeatherSchema.statics.toAPI = (doc) => ({
   name: doc.name,
   favorite: doc.favorite,
   imageUrl: doc.imageUrl,
+  public: doc.public,
 });
 
 FeatherSchema.statics.findByOwner = (ownerId, callback) => {
@@ -48,7 +54,7 @@ FeatherSchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertId(ownerId),
   };
 
-  return FeatherModel.find(search).select('name favorite imageUrl').exec(callback);
+  return FeatherModel.find(search).select('name favorite imageUrl public').exec(callback);
 };
 
 FeatherSchema.statics.delete = (ownerId, featherId, callback) => {

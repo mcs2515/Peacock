@@ -22,6 +22,7 @@ const makeFeather = (req, res) => {
     name: req.body.name,
     favorite: req.body.favorite,
     imageUrl: req.body.imageUrl,
+    public: req.body.public,
     owner: req.session.account._id,
   };
 
@@ -88,8 +89,30 @@ const toggleFavorite = (request, response) => {
   });
 };
 
+const togglePrivacy = (request, response) => {
+  const req = request;
+  const res = response;
+
+  return Feather.FeatherModel.favorite(req.session.account._id, req.body.feather_id, (err, doc) => {
+    if (err) {
+      return res.status(400).json({ error: 'An error occured.' });
+    }
+		
+    const feather = doc;
+    const newFeather = new Feather.FeatherModel(feather);
+    newFeather.public = !feather.public;
+		console.log("public: " + newFeather.public);
+    const featherPromise = newFeather.save();
+
+    featherPromise.then(() => res.json({ redirect: '/maker' }));
+
+    return true;
+  });
+};
+
 module.exports.makerPage = makerPage;
 module.exports.getFeathers = getFeathers;
 module.exports.make = makeFeather;
 module.exports.delete = deleteFeather;
 module.exports.toggleFavorite = toggleFavorite;
+module.exports.togglePrivacy = togglePrivacy;

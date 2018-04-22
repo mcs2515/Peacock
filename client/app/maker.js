@@ -30,6 +30,16 @@ const deleteFeather = (e) =>{
   return false;
 }
 
+const TogglePrivacy = (e) => {
+	e.preventDefault();
+
+	sendAjax('POST', $("#shareForm").attr("action"),$(e.target).serialize(),function() {
+		loadFeathersFromServer();
+	});
+
+	return false;
+}
+
 const ToggleFav = (e) => {
 	e.preventDefault();
 	sendAjax('POST', $("#favForm").attr("action"),$(e.target).serialize(),function() {
@@ -90,9 +100,13 @@ const FeatherList = (props) =>{
 				
         <img src={feather.imageUrl} alt="feather face" className="featherFace" onLoad = {LoadColors}/>
         
-        <div id= {"colorsContainer_"+feather._id} className= "colors">
-
-        </div>
+        <div id= {"colorsContainer_"+feather._id} className= "colors"></div>
+				
+				<form id="shareForm"  onSubmit= {TogglePrivacy} name="shareForm" action="/share" method="POST" className="shareFeather">
+          <input type="hidden" name="_csrf" value={csrf} />
+          <input type="hidden" name="feather_id" value={feather._id} />
+          <input className="shareFeatherSubmit" type="submit" value={LoadPrivacy(feather.public)}/>
+        </form>
 				
         <form id="deleteForm" onSubmit={deleteFeather} name="deleteForm" action="/delete" method="POST" className="deleteFeather">
           <input type="hidden" name="_csrf" value={csrf} />
@@ -180,6 +194,20 @@ const LoadFavoriteImg=(props)=>{
 	}
 	
 	return name;
+};
+
+const LoadPrivacy=(props)=>{
+	var string;
+	
+	//if true
+	if(props){
+		string = "Public";
+	}
+	else{
+		string = "Private"
+	}
+	
+	return string;
 };
 
 const setup = function() {

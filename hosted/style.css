@@ -334,9 +334,10 @@ h3.featherName {
   border: none;
   background-color: transparent;
   float: right;
-  width: 35px;
+  width: 36px;
   height: 30px;
   margin-top: -5px;
+	transform: scale(0.8);
 }
 
 #favImg:hover{
@@ -375,13 +376,14 @@ h3.featherName {
 }
 
 #deleteForm{
-  text-align: right;
+  float: right;
   background-color: none;
-  margin-bottom: 0;
+  margin: 0;
+	height: 25px;
+	margin-top: 5px;
 }
 
-.deleteFeatherSubmit{
-  height: 30px;
+.deleteFeatherSubmit, .shareFeatherSubmit{
   margin: 0;
   padding: 0;
   background: none;
@@ -390,10 +392,18 @@ h3.featherName {
   font-family: 'Roboto', sans-serif;
 }
 
-.deleteFeatherSubmit:hover{
+.deleteFeatherSubmit:hover, .shareFeatherSubmit:hover{
   cursor: pointer;
+	color:black;
 }
 
+#shareForm{
+	float: left;
+  background-color: transparent;
+	margin: 0;
+  height: 25px;
+	margin-top: 5px;
+}
 
 #passwordContainer, #donateContainer{
   margin: 0 auto;
