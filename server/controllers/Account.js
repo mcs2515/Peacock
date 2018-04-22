@@ -124,7 +124,6 @@ const aboutPage = (req, res) => {
 };
 
 const galleryPage = (req, res) => {
-	console.log("Whyyy");
   res.render('gallery', { csrfToken: req.csrfToken() });
 };
 

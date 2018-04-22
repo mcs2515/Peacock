@@ -6,6 +6,7 @@ let FeatherModel = {};
 
 const convertId = mongoose.Types.ObjectId;
 const setName = (name) => _.escape(name).trim();
+const setOwnerName = ownerName => _.escape(ownerName).trim();
 
 const FeatherSchema = new mongoose.Schema({
   name: {
@@ -19,6 +20,13 @@ const FeatherSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     required: true,
     ref: 'Account',
+  },
+
+  ownerName: {
+    type: String,
+    required: true,
+    trim: true,
+    set: setOwnerName,
   },
 
   createdData: {
@@ -35,15 +43,16 @@ const FeatherSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-	
-	public:{
-		type: Boolean,
+
+  public: {
+    type: Boolean,
     default: false,
-	}
+  },
 });
 
 FeatherSchema.statics.toAPI = (doc) => ({
   name: doc.name,
+  ownerName: doc.ownerName,
   favorite: doc.favorite,
   imageUrl: doc.imageUrl,
   public: doc.public,
@@ -73,6 +82,13 @@ FeatherSchema.statics.favorite = (ownerId, featherId, callback) => {
   };
 
   return FeatherModel.findOne(search).exec(callback);
+};
+
+FeatherSchema.statics.getSharedFeathers = (callback) => {
+  const search = {
+    public: true,
+  };
+  return FeatherModel.find(search).select('name imageUrl ownerName').exec(callback);
 };
 
 FeatherModel = mongoose.model('Feather', FeatherSchema);

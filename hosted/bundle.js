@@ -94,6 +94,26 @@ var ActivityForm = function ActivityForm(props) {
           React.createElement(
             "time",
             null,
+            "Apr 22, 2018"
+          ),
+          " Added gallery page for all public Feathers."
+        ),
+        React.createElement(
+          "li",
+          null,
+          React.createElement(
+            "time",
+            null,
+            "Apr 21, 2018"
+          ),
+          " Added Public & Private buttons to allow for Feather sharing."
+        ),
+        React.createElement(
+          "li",
+          null,
+          React.createElement(
+            "time",
+            null,
             "Apr 18, 2018"
           ),
           " Moved web pages around and added redirect."
@@ -254,6 +274,7 @@ $(document).ready(function () {
 "use strict";
 
 var GalleryList = function GalleryList(props) {
+
   if (props.feathers.length === 0) {
     return React.createElement(
       "form",
@@ -292,7 +313,18 @@ var GalleryList = function GalleryList(props) {
         )
       ),
       React.createElement("img", { src: feather.imageUrl, alt: "feather face", className: "featherFace", onLoad: LoadColors }),
-      React.createElement("div", { id: "colorsContainer_" + feather._id, className: "colors" })
+      React.createElement("div", { id: "colorsContainer_" + feather._id, className: "colors" }),
+      React.createElement(
+        "form",
+        { id: "ownerForm" },
+        React.createElement(
+          "label",
+          { className: "ownerNameLabel" },
+          "Created By: ",
+          feather.ownerName,
+          " "
+        )
+      )
     );
   });
 
@@ -303,14 +335,19 @@ var GalleryList = function GalleryList(props) {
   );
 };
 
+var getSharedFeathersFromServer = function getSharedFeathersFromServer() {
+  sendAjax('GET', '/getSharedFeathers', null, function (data) {
+
+    ReactDOM.render(React.createElement(GalleryList, { feathers: data.feathers }), document.querySelector("#galleryContainer"));
+  });
+};
+
 var setupGallery = function setupGallery(csrf) {
 
   var galleryContainer = document.querySelector("#galleryContainer");
-  console.log(galleryContainer);
 
   if (galleryContainer) {
-    //renders form
-    ReactDOM.render(React.createElement(GalleryList, { csrf: csrf }), galleryContainer);
+    getSharedFeathersFromServer();
   }
 };
 

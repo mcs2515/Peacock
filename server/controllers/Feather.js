@@ -24,6 +24,7 @@ const makeFeather = (req, res) => {
     imageUrl: req.body.imageUrl,
     public: req.body.public,
     owner: req.session.account._id,
+    ownerName: req.session.account.username,
   };
 
   const newFeather = new Feather.FeatherModel(featherData);
@@ -97,16 +98,28 @@ const togglePrivacy = (request, response) => {
     if (err) {
       return res.status(400).json({ error: 'An error occured.' });
     }
-		
+
     const feather = doc;
     const newFeather = new Feather.FeatherModel(feather);
     newFeather.public = !feather.public;
-		console.log("public: " + newFeather.public);
+		
     const featherPromise = newFeather.save();
 
     featherPromise.then(() => res.json({ redirect: '/maker' }));
 
     return true;
+  });
+};
+
+const findSharedFeathers = (req, res) => {
+	
+  return Feather.FeatherModel.getSharedFeathers((err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error has occured' });
+    }
+
+    return res.json({ feathers: docs });
   });
 };
 
@@ -116,3 +129,4 @@ module.exports.make = makeFeather;
 module.exports.delete = deleteFeather;
 module.exports.toggleFavorite = toggleFavorite;
 module.exports.togglePrivacy = togglePrivacy;
+module.exports.findSharedFeathers = findSharedFeathers;

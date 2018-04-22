@@ -22,6 +22,8 @@ const ActivityForm = (props) =>{
 
       <div id="logs">
         <ul>
+          <li><time>Apr 22, 2018</time> Added gallery page for all public Feathers.</li>
+          <li><time>Apr 21, 2018</time> Added Public & Private buttons to allow for Feather sharing.</li>
           <li><time>Apr 18, 2018</time> Moved web pages around and added redirect.</li>
           <li><time>Apr 16, 2018</time> Replaced password fields with dots and new password cannot equal current password.</li>
           <li><time>Apr 13, 2018</time> Created the About page with styling.</li>

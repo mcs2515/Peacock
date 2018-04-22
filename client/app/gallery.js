@@ -1,4 +1,5 @@
 const GalleryList = (props) =>{
+	
   if(props.feathers.length === 0){
     return (
       
@@ -26,6 +27,10 @@ const GalleryList = (props) =>{
         <img src={feather.imageUrl} alt="feather face" className="featherFace" onLoad = {LoadColors}/>
         
         <div id= {"colorsContainer_"+feather._id} className= "colors"></div>
+				
+				<form id="ownerForm">
+				<label className="ownerNameLabel">Created By: {feather.ownerName} </label>
+				</form>
       </div>
     );
   });
@@ -37,16 +42,21 @@ const GalleryList = (props) =>{
   );
 };
 
+const getSharedFeathersFromServer = ()=>{
+	sendAjax('GET','/getSharedFeathers', null, (data) => {
+
+		ReactDOM.render(
+      <GalleryList feathers={data.feathers} />, document.querySelector("#galleryContainer")
+    );
+	});
+}
+
 const setupGallery= function(csrf){
     
   const galleryContainer = document.querySelector("#galleryContainer");
-	console.log(galleryContainer);
 
   if(galleryContainer){	
-    //renders form
-    ReactDOM.render(
-      <GalleryList csrf={csrf} />,galleryContainer
-    );
+		getSharedFeathersFromServer();
   } 
 };
 

@@ -302,7 +302,7 @@ nav {
 }
 
 img.featherFace {
-  height: 40%;
+  height: 30%;
   max-height: 300px;
   object-fit: cover;
   object-position: center;
@@ -337,7 +337,7 @@ h3.featherName {
   width: 36px;
   height: 30px;
   margin-top: -5px;
-	transform: scale(0.8);
+	transform: scale(0.9);
 }
 
 #favImg:hover{
@@ -375,7 +375,7 @@ h3.featherName {
   margin-bottom: 0px;
 }
 
-#deleteForm{
+#deleteForm, #ownerForm{
   float: right;
   background-color: none;
   margin: 0;
@@ -383,13 +383,14 @@ h3.featherName {
 	margin-top: 5px;
 }
 
-.deleteFeatherSubmit, .shareFeatherSubmit{
+.deleteFeatherSubmit, .shareFeatherSubmit, .ownerNameLabel{
   margin: 0;
   padding: 0;
   background: none;
   border: 0;
   color: grey;
   font-family: 'Roboto', sans-serif;
+	font-size: 10pt;
 }
 
 .deleteFeatherSubmit:hover, .shareFeatherSubmit:hover{

@@ -10,8 +10,9 @@ const router = (app) => {
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
   app.get('/settings', mid.requiresLogin, controllers.Account.settingsPage);
   app.get('/maker', mid.requiresLogin, controllers.Feather.makerPage);
-  app.get('/maker', mid.requiresLogin, controllers.Feather.makerPage);
+  app.post('/maker', mid.requiresLogin, controllers.Feather.make);
   app.get('/gallery', mid.requiresLogin, controllers.Account.galleryPage);
+  app.get('/getSharedFeathers', mid.requiresLogin, controllers.Feather.findSharedFeathers);
   app.post('/changePassword', mid.requiresLogin, controllers.Account.changePassword);
   app.post('/favorite', mid.requiresLogin, controllers.Feather.toggleFavorite);
   app.post('/share', mid.requiresLogin, controllers.Feather.togglePrivacy);
