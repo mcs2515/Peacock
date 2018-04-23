@@ -7,7 +7,7 @@ const makerPage = (req, res) => {
       console.log(err);
       return res.status(400).json({ error: 'An error occurred' });
     }
-
+    
     return res.render('app', { csrfToken: req.csrfToken(), feathers: docs });
   });
 };
@@ -17,7 +17,7 @@ const makeFeather = (req, res) => {
     console.log('feather make issue');
     return res.status(400).json({ error: 'All fields are required' });
   }
-
+  
   const featherData = {
     name: req.body.name,
     favorite: req.body.favorite,
@@ -26,16 +26,16 @@ const makeFeather = (req, res) => {
     owner: req.session.account._id,
     ownerName: req.session.account.username,
   };
-
+  
   const newFeather = new Feather.FeatherModel(featherData);
   const featherPromise = newFeather.save();
-
+  
   featherPromise.then(() => res.json({ redirect: '/maker' }));
-
+  
   featherPromise.catch((err) => {
     console.log(err);
   });
-
+  
   return featherPromise;
 };
 
@@ -46,10 +46,10 @@ const getFeathers = (request, response) => {
   return Feather.FeatherModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
       console.log(err);
-
+      
       return res.status(400).json({ error: 'An error occured.' });
     }
-
+    
     return res.json({ feathers: docs });
   });
 };
@@ -57,14 +57,14 @@ const getFeathers = (request, response) => {
 const deleteFeather = (request, response) => {
   const req = request;
   const res = response;
-
+  
   return Feather.FeatherModel.delete(req.session.account._id, req.body.feather_id, (err) => {
     if (err) {
       console.log(err);
-
+      
       return res.status(400).json({ error: 'An error occured.' });
     }
-
+    
     // random return value
     return res.json({ success: 'true' });
   });
@@ -78,14 +78,14 @@ const toggleFavorite = (request, response) => {
     if (err) {
       return res.status(400).json({ error: 'An error occured.' });
     }
-
+    
     const feather = doc;
     const newFeather = new Feather.FeatherModel(feather);
     newFeather.favorite = !feather.favorite;
     const featherPromise = newFeather.save();
-
+    
     featherPromise.then(() => res.json({ redirect: '/maker' }));
-
+    
     return true;
   });
 };
@@ -98,15 +98,15 @@ const togglePrivacy = (request, response) => {
     if (err) {
       return res.status(400).json({ error: 'An error occured.' });
     }
-
+    
     const feather = doc;
     const newFeather = new Feather.FeatherModel(feather);
     newFeather.public = !feather.public;
-		
+    
     const featherPromise = newFeather.save();
-
+    
     featherPromise.then(() => res.json({ redirect: '/maker' }));
-
+    
     return true;
   });
 };
@@ -118,7 +118,7 @@ const findSharedFeathers = (req, res) => {
       console.log(err);
       return res.status(400).json({ error: 'An error has occured' });
     }
-
+    
     return res.json({ feathers: docs });
   });
 };

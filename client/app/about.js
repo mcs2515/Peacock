@@ -3,7 +3,7 @@ const AboutForm = (props) =>{
     <form>
       <h1>About: </h1>
       <p>Peacock was specifically made for those who are inspired by the colors of an image and would like to save the images to a library. Peacock allows users to create a 'Feather' on their page that has the saved image url and image name. <a href="https://jariz.github.io/vibrant.js/" target="_blank">Vibrant.js</a> is then used to extract out prominent colors from the image to give the user the hex values of the vibrant and muted colors. Peacock was made with <a href="https://nodejs.org/en/" target="_blank">Node.js</a> and <a href="https://reactjs.org/" target="_blank">React.js</a>. </p>
-
+      
       <section id="steps">
         <ul>
           <li id= "step1"><strong>1.</strong>Find an image from any website or Google image search.</li>
@@ -19,7 +19,7 @@ const ActivityForm = (props) =>{
   return(
     <form>
       <h1>Website Updates:</h1>
-
+      
       <div id="logs">
         <ul>
           <li><time>Apr 22, 2018</time> Added gallery page for all public Feathers.</li>
@@ -37,7 +37,7 @@ const ActivityForm = (props) =>{
           <li><time>Mar 30, 2018</time> Added a delete feature for users to delete a 'Feather'.</li>
         </ul>			
       </div>
-
+      
       <section id="logFooter">
         <p>For detailed list of changes: </p><a href="https://github.com/mcs2515/Peacock_Final/commits/master" target="_blank"> Github </a>
       </section>
@@ -49,13 +49,13 @@ const ActivityForm = (props) =>{
 const setupAbout= function(csrf){
     
   const aboutContainer = document.querySelector("#aboutContainer");
-
+  
   if(aboutContainer){	
     //renders form
     ReactDOM.render(
       <AboutForm csrf={csrf} />,document.querySelector("#aboutInfo")
     );
-
+    
     //renders form
     ReactDOM.render(
       <ActivityForm csrf={csrf} />,document.querySelector("#activityLog")

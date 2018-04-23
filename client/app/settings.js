@@ -1,16 +1,16 @@
 const handlePassChange = (e) => {
-	e.preventDefault();
-	
-    $("#errorContainer").animate({width:'hide'},350);
-	
-	if($("#oldPass").val() == '' || $("#newPass").val() == ''|| $("#newPass2").val() == ''){
-		handleError("All fields are required!!");
-		return false;
-	}
-	
-	sendAjax('POST', $("#passwordForm").attr("action"), $("#passwordForm").serialize(), redirect);
-		
-	return false;
+  e.preventDefault();
+  
+  $("#errorContainer").animate({width:'hide'},350);
+  
+  if($("#oldPass").val() == '' || $("#newPass").val() == ''|| $("#newPass2").val() == ''){
+    handleError("All fields are required!!");
+    return false;
+  }
+  
+  sendAjax('POST', $("#passwordForm").attr("action"), $("#passwordForm").serialize(), redirect);
+  
+  return false;
 };
 
 const handleDonate = (e) =>{
@@ -35,14 +35,13 @@ const PasswordForm= (props) =>{
 const DonateForm= (props) =>{
 	//renders form
   return (
-  	<form id="donateForm" name="donateForm" onSubmit={handleDonate} action="/donate" method="POST" className="donateForm">
+    <form id="donateForm" name="donateForm" onSubmit={handleDonate} action="/donate" method="POST" className="donateForm">
       <input type="hidden" name="_csrf" value={props.csrf}/>
       <input className="donateSubmit" type="submit" value="$1" />
       <input className="donateSubmit" type="submit" value="$5" />
       <input className="donateSubmit" type="submit" value="$10" />
       <input className="donateSubmit" type="submit" value="$25" />
-			
-		<img id = "creditCards" src="assets/img/cc.png" alt="Credit Cards" />
+      <img id = "creditCards" src="assets/img/cc.png" alt="Credit Cards" />
     </form>
   );
 };
