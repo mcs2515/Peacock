@@ -94,6 +94,16 @@ var ActivityForm = function ActivityForm(props) {
           React.createElement(
             "time",
             null,
+            "Apr 29, 2018"
+          ),
+          " Created a filter by feature."
+        ),
+        React.createElement(
+          "li",
+          null,
+          React.createElement(
+            "time",
+            null,
             "Apr 22, 2018"
           ),
           " Added gallery page for all public Feathers."

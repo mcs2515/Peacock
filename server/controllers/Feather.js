@@ -94,24 +94,26 @@ const togglePrivacy = (request, response) => {
   const req = request;
   const res = response;
 
-  return Feather.FeatherModel.favorite(req.session.account._id, req.body.feather_id, (err, docs) => {
-    if (err) {
-      return res.status(400).json({ error: 'An error occured.' });
-    }
+  return Feather.FeatherModel
+		.favorite(req.session.account._id, req.body.feather_id, (err, docs) => {
+			if (err) {
+				return res.status(400).json({ error: 'An error occured.' });
+			}
 
-    const feather = docs;
-    const newFeather = new Feather.FeatherModel(feather);
-    newFeather.public = !feather.public;
+			const feather = docs;
+			const newFeather = new Feather.FeatherModel(feather);
+			newFeather.public = !feather.public;
 
-    const featherPromise = newFeather.save();
+			const featherPromise = newFeather.save();
 
-    featherPromise.then(() => res.json({ redirect: '/maker' }));
+			featherPromise.then(() => res.json({ redirect: '/maker' }));
 
-    return true;
-  });
+			return true;
+		});
 };
 
-const findSharedFeathers = (req, res) => Feather.FeatherModel.getSharedFeathers((err, docs) => {
+const findSharedFeathers = (req, res) =>
+Feather.FeatherModel.getSharedFeathers((err, docs) => {
   if (err) {
     console.log(err);
     return res.status(400).json({ error: 'An error has occured' });
@@ -120,7 +122,8 @@ const findSharedFeathers = (req, res) => Feather.FeatherModel.getSharedFeathers(
   return res.json({ feathers: docs });
 });
 
-const findFiltered = (req, res) => Feather.FeatherModel.findByFilter(req.session.account._id, req.body.selectFilter, (err, docs) => {
+const findFiltered = (req, res) =>
+Feather.FeatherModel.findByFilter(req.session.account._id, req.body.selectFilter, (err, docs) => {
   if (err) {
     return res.status(400).json({ error: 'An error occured.' });
   }
