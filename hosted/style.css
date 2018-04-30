@@ -71,6 +71,42 @@ nav {
   transition: 0.5s ease;
 }
 
+.filterForm{
+	height: 45px;
+  width: 160px;
+  margin-top:60px;
+  padding: 0px;
+  padding-top:15px;
+  padding-left:15px;
+  background-color: #222;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+  position: absolute;
+  z-index: 1;
+	right: 130px;
+	display: inline-flex;
+}
+
+#filterOptions, option{
+	letter-spacing: 1px;
+	width: 90px;
+	height: 25px;
+	border-radius: 5px;
+	background-color: #666;
+	color: #f2f2f2;
+	border: none;
+	font-family: 'Catamaran', sans-serif;
+}
+
+#filterForm label{
+	letter-spacing: 1px;
+	color: #f2f2f2;
+	border: none;
+	font-family: 'Catamaran', sans-serif;
+	padding-right: 10px;
+	
+}
+
 .featherForm {
   height: 45px;
   width: 690px;

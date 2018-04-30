@@ -115,8 +115,8 @@ const changePassword = (request, response) => {
   });
 };
 
-const settingsPage = (req, res) => {
-  res.render('settings', { csrfToken: req.csrfToken() });
+const accountPage = (req, res) => {
+  res.render('account', { csrfToken: req.csrfToken() });
 };
 
 const aboutPage = (req, res) => {
@@ -144,7 +144,7 @@ module.exports.login = login;
 module.exports.logout = logout;
 module.exports.signup = signup;
 module.exports.getToken = getToken;
-module.exports.settingsPage = settingsPage;
+module.exports.accountPage = accountPage;
 module.exports.aboutPage = aboutPage;
 module.exports.changePassword = changePassword;
 module.exports.galleryPage = galleryPage;

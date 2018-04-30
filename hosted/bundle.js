@@ -1,84 +1,5 @@
 "use strict";
 
-var handlePassChange = function handlePassChange(e) {
-  e.preventDefault();
-
-  $("#errorContainer").animate({ width: 'hide' }, 350);
-
-  if ($("#oldPass").val() == '' || $("#newPass").val() == '' || $("#newPass2").val() == '') {
-    handleError("All fields are required!!");
-    return false;
-  }
-
-  sendAjax('POST', $("#passwordForm").attr("action"), $("#passwordForm").serialize(), redirect);
-
-  return false;
-};
-
-var handleDonate = function handleDonate(e) {
-  e.preventDefault();
-  return false;
-};
-
-var PasswordForm = function PasswordForm(props) {
-  //renders form
-  return React.createElement(
-    "form",
-    { id: "passwordForm", name: "passwordForm", onSubmit: handlePassChange, action: "/changePassword", method: "POST", className: "passwordForm" },
-    React.createElement(
-      "h3",
-      null,
-      "Change Password:"
-    ),
-    React.createElement("input", { id: "oldPass", style: { fontSize: 14 + "pt" }, type: "password", name: "oldPass", placeholder: "Old Password" }),
-    React.createElement("input", { id: "newPass", style: { fontSize: 14 + "pt" }, type: "password", name: "newPass", placeholder: "New Password" }),
-    React.createElement("input", { id: "newPass2", style: { fontSize: 14 + "pt" }, type: "password", name: "newPass2", placeholder: "Re-type Password" }),
-    React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
-    React.createElement("input", { className: "passwordSubmit", type: "submit", value: "Update" })
-  );
-};
-
-var DonateForm = function DonateForm(props) {
-  //renders form
-  return React.createElement(
-    "form",
-    { id: "donateForm", name: "donateForm", onSubmit: handleDonate, action: "/donate", method: "POST", className: "donateForm" },
-    React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
-    React.createElement("input", { className: "donateSubmit", type: "submit", value: "$1" }),
-    React.createElement("input", { className: "donateSubmit", type: "submit", value: "$5" }),
-    React.createElement("input", { className: "donateSubmit", type: "submit", value: "$10" }),
-    React.createElement("input", { className: "donateSubmit", type: "submit", value: "$25" }),
-    React.createElement("img", { id: "creditCards", src: "assets/img/cc.png", alt: "Credit Cards" })
-  );
-};
-
-var setupSettings = function setupSettings(csrf) {
-
-  var passwordContainer = document.querySelector("#passwordContainer");
-  var donateContainer = document.querySelector("#donateContainer");
-
-  if (passwordContainer) {
-    //renders form
-    ReactDOM.render(React.createElement(PasswordForm, { csrf: csrf }), document.querySelector("#updateForm"));
-  }
-
-  if (donateContainer) {
-    //renders form
-    ReactDOM.render(React.createElement(DonateForm, { csrf: csrf }), document.querySelector("#moneyForm"));
-  }
-};
-
-var getSettingsToken = function getSettingsToken() {
-  sendAjax('GET', '/getToken', null, function (result) {
-    setupSettings(result.csrfToken);
-  });
-};
-
-$(document).ready(function () {
-  getSettingsToken();
-});
-"use strict";
-
 var AboutForm = function AboutForm(props) {
   return React.createElement(
     "form",
@@ -352,6 +273,85 @@ $(document).ready(function () {
 });
 "use strict";
 
+var handlePassChange = function handlePassChange(e) {
+  e.preventDefault();
+
+  $("#errorContainer").animate({ width: 'hide' }, 350);
+
+  if ($("#oldPass").val() == '' || $("#newPass").val() == '' || $("#newPass2").val() == '') {
+    handleError("All fields are required!!");
+    return false;
+  }
+
+  sendAjax('POST', $("#passwordForm").attr("action"), $("#passwordForm").serialize(), redirect);
+
+  return false;
+};
+
+var handleDonate = function handleDonate(e) {
+  e.preventDefault();
+  return false;
+};
+
+var PasswordForm = function PasswordForm(props) {
+  //renders form
+  return React.createElement(
+    "form",
+    { id: "passwordForm", name: "passwordForm", onSubmit: handlePassChange, action: "/changePassword", method: "POST", className: "passwordForm" },
+    React.createElement(
+      "h3",
+      null,
+      "Change Password:"
+    ),
+    React.createElement("input", { id: "oldPass", style: { fontSize: 14 + "pt" }, type: "password", name: "oldPass", placeholder: "Old Password" }),
+    React.createElement("input", { id: "newPass", style: { fontSize: 14 + "pt" }, type: "password", name: "newPass", placeholder: "New Password" }),
+    React.createElement("input", { id: "newPass2", style: { fontSize: 14 + "pt" }, type: "password", name: "newPass2", placeholder: "Re-type Password" }),
+    React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
+    React.createElement("input", { className: "passwordSubmit", type: "submit", value: "Update" })
+  );
+};
+
+var DonateForm = function DonateForm(props) {
+  //renders form
+  return React.createElement(
+    "form",
+    { id: "donateForm", name: "donateForm", onSubmit: handleDonate, action: "/donate", method: "POST", className: "donateForm" },
+    React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
+    React.createElement("input", { className: "donateSubmit", type: "submit", value: "$1" }),
+    React.createElement("input", { className: "donateSubmit", type: "submit", value: "$5" }),
+    React.createElement("input", { className: "donateSubmit", type: "submit", value: "$10" }),
+    React.createElement("input", { className: "donateSubmit", type: "submit", value: "$25" }),
+    React.createElement("img", { id: "creditCards", src: "assets/img/cc.png", alt: "Credit Cards" })
+  );
+};
+
+var setupAccountPage = function setupAccountPage(csrf) {
+
+  var passwordContainer = document.querySelector("#passwordContainer");
+  var donateContainer = document.querySelector("#donateContainer");
+
+  if (passwordContainer) {
+    //renders form
+    ReactDOM.render(React.createElement(PasswordForm, { csrf: csrf }), document.querySelector("#updateForm"));
+  }
+
+  if (donateContainer) {
+    //renders form
+    ReactDOM.render(React.createElement(DonateForm, { csrf: csrf }), document.querySelector("#moneyForm"));
+  }
+};
+
+var getAccountToken = function getAccountToken() {
+  sendAjax('GET', '/getToken', null, function (result) {
+    setupAccountPage(result.csrfToken);
+  });
+};
+
+$(document).ready(function () {
+  getAccountToken();
+});
+"use strict";
+
 var GalleryList = function GalleryList(props) {
 
   if (props.feathers.length === 0) {
@@ -451,10 +451,24 @@ var handleFeather = function handleFeather(e) {
   }
 
   sendAjax('POST', $("#featherForm").attr("action"), $("#featherForm").serialize(), function () {
-    loadFeathersFromServer();
+    handleFilter(e);
     $('#featherName').val('');
     $('#featherImg').val('');
   });
+
+  return false;
+};
+
+var handleFilter = function handleFilter(e) {
+  e.preventDefault();
+
+  if ($("#filterOptions").val() == 'added') {
+    loadFeathersFromServer();
+  } else {
+    sendAjax('POST', $("#filterForm").attr("action"), $("#filterForm").serialize(), function (data) {
+      ReactDOM.render(React.createElement(FeatherList, { feathers: data.feathers }), contentContainer);
+    });
+  };
 
   return false;
 };
@@ -463,7 +477,7 @@ var deleteFeather = function deleteFeather(e) {
   e.preventDefault();
 
   sendAjax('POST', $(e.target).attr("action"), $(e.target).serialize(), function () {
-    loadFeathersFromServer();
+    handleFilter(e);
   });
 
   return false;
@@ -473,7 +487,7 @@ var TogglePrivacy = function TogglePrivacy(e) {
   e.preventDefault();
 
   sendAjax('POST', $("#shareForm").attr("action"), $(e.target).serialize(), function () {
-    loadFeathersFromServer();
+    handleFilter(e);
   });
 
   return false;
@@ -483,7 +497,7 @@ var ToggleFav = function ToggleFav(e) {
   e.preventDefault();
 
   sendAjax('POST', $("#favForm").attr("action"), $(e.target).serialize(), function () {
-    loadFeathersFromServer();
+    handleFilter(e);
   });
 
   return false;
@@ -507,6 +521,42 @@ var FeatherForm = function FeatherForm(props) {
     React.createElement("input", { id: "featherImg", type: "text", name: "imageUrl", placeholder: "url" }),
     React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
     React.createElement("input", { className: "makeFeatherSubmit", type: "submit", value: "Add" })
+  );
+};
+
+var FilterForm = function FilterForm(props) {
+  return React.createElement(
+    "form",
+    { id: "filterForm", onChange: handleFilter, name: "filterForm", action: "/filtered", method: "GET", className: "filterForm" },
+    React.createElement(
+      "label",
+      { htmlFor: "filter" },
+      "Filter: "
+    ),
+    React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
+    React.createElement(
+      "div",
+      { "class": "filtersContainer" },
+      React.createElement(
+        "select",
+        { id: "filterOptions", name: "selectFilter" },
+        React.createElement(
+          "option",
+          { value: "added" },
+          "Added"
+        ),
+        React.createElement(
+          "option",
+          { value: "favorites" },
+          "Favorites"
+        ),
+        React.createElement(
+          "option",
+          { value: "name" },
+          "Name"
+        )
+      )
+    )
   );
 };
 
@@ -714,6 +764,8 @@ var setup = function setup() {
   if (contentContainer) {
     //renders form
     ReactDOM.render(React.createElement(FeatherForm, null), document.querySelector("#makeFeather"));
+
+    ReactDOM.render(React.createElement(FilterForm, null), document.querySelector("#filterFeather"));
 
     //renders default feather list display
     ReactDOM.render(React.createElement(FeatherList, { feathers: [] }), contentContainer);

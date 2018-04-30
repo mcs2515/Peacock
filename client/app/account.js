@@ -46,7 +46,7 @@ const DonateForm= (props) =>{
   );
 };
 
-const setupSettings= function(csrf){
+const setupAccountPage= function(csrf){
     
   const passwordContainer = document.querySelector("#passwordContainer");
   const donateContainer = document.querySelector("#donateContainer");
@@ -66,12 +66,12 @@ const setupSettings= function(csrf){
   } 
 };
 
-const getSettingsToken = () =>{
+const getAccountToken = () =>{
   sendAjax('GET', '/getToken', null, (result)=>{
-    setupSettings(result.csrfToken);
+    setupAccountPage(result.csrfToken);
   });
 };
 
 $(document).ready(function(){
-  getSettingsToken();
+  getAccountToken();
 });

@@ -91,6 +91,25 @@ FeatherSchema.statics.getSharedFeathers = (callback) => {
   return FeatherModel.find(search).select('name imageUrl ownerName').exec(callback);
 };
 
+FeatherSchema.statics.findByFilter = (ownerId, filter, callback) => {
+  const search = {
+    owner: convertId(ownerId),
+  };
+
+  if (filter === 'favorites') {
+    return FeatherModel.find(search).sort({ favorite: -1 })
+			.select('name favorite imageUrl public')
+			.exec(callback);
+  }	else if (filter === 'name') {
+    return FeatherModel.find(search).sort({ name: 1 })
+			.select('name favorite imageUrl public')
+			.exec(callback);
+  }
+
+
+  return FeatherModel.find(search).select('name favorite imageUrl public').exec(callback);
+};
+
 FeatherModel = mongoose.model('Feather', FeatherSchema);
 
 module.exports.FeatherModel = FeatherModel;

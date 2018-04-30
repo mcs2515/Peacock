@@ -11,10 +11,27 @@ const handleFeather = (e) => {
   }
   
   sendAjax('POST', $("#featherForm").attr("action"),$("#featherForm").serialize(),function() {
-    loadFeathersFromServer();
+    handleFilter(e);
     $('#featherName').val('');
     $('#featherImg').val('');
   });
+  
+  return false;
+}
+
+const handleFilter = (e) => {
+  e.preventDefault();
+	
+	if($("#filterOptions").val() == 'added'){
+		loadFeathersFromServer();
+	}
+	else{
+		sendAjax('POST',$("#filterForm").attr("action"), $("#filterForm").serialize(), function(data){
+			ReactDOM.render(
+				<FeatherList feathers={data.feathers}/>,contentContainer
+			);
+		});
+	};
   
   return false;
 }
@@ -23,7 +40,7 @@ const deleteFeather = (e) =>{
   e.preventDefault();
   
   sendAjax('POST', $(e.target).attr("action"),$(e.target).serialize(),function() {
-    loadFeathersFromServer();
+    handleFilter(e);
   });
   
   return false;
@@ -33,7 +50,7 @@ const TogglePrivacy = (e) => {
   e.preventDefault();
   
   sendAjax('POST', $("#shareForm").attr("action"),$(e.target).serialize(),function() {
-    loadFeathersFromServer();
+    handleFilter(e);
   });
   
   return false;
@@ -43,7 +60,7 @@ const ToggleFav = (e) => {
   e.preventDefault();
   
   sendAjax('POST', $("#favForm").attr("action"),$(e.target).serialize(),function() {
-    loadFeathersFromServer();
+    handleFilter(e);
   });
   
   return false;
@@ -61,6 +78,23 @@ const FeatherForm = (props) => {
     </form>
   );
 }
+
+const FilterForm = (props) => {
+  return (
+    <form id="filterForm" onChange={handleFilter} name="filterForm" action="/filtered" method="GET" className="filterForm">
+			<label htmlFor="filter">Filter: </label>
+      <input type="hidden" name="_csrf" value={csrf} />
+			<div class= "filtersContainer"> 
+				<select id= "filterOptions" name ="selectFilter">
+					<option value = "added">Added</option>
+					<option value = "favorites">Favorites</option>
+					<option value = "name">Name</option>
+				</select>
+			</div>
+    </form>
+  );
+}
+
 
 const FeatherList = (props) =>{
   if(props.feathers.length === 0){
@@ -215,7 +249,12 @@ const setup = function() {
     ReactDOM.render(
       <FeatherForm/>,document.querySelector("#makeFeather")
     );
+		
+		ReactDOM.render(
+      <FilterForm/>,document.querySelector("#filterFeather")
+    );
     
+		
     //renders default feather list display
     ReactDOM.render(
       <FeatherList feathers={[]}/>,contentContainer
