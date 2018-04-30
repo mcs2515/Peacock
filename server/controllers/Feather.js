@@ -96,20 +96,20 @@ const togglePrivacy = (request, response) => {
 
   return Feather.FeatherModel
 		.favorite(req.session.account._id, req.body.feather_id, (err, docs) => {
-			if (err) {
-				return res.status(400).json({ error: 'An error occured.' });
-			}
+  if (err) {
+    return res.status(400).json({ error: 'An error occured.' });
+  }
 
-			const feather = docs;
-			const newFeather = new Feather.FeatherModel(feather);
-			newFeather.public = !feather.public;
+  const feather = docs;
+  const newFeather = new Feather.FeatherModel(feather);
+  newFeather.public = !feather.public;
 
-			const featherPromise = newFeather.save();
+  const featherPromise = newFeather.save();
 
-			featherPromise.then(() => res.json({ redirect: '/maker' }));
+  featherPromise.then(() => res.json({ redirect: '/maker' }));
 
-			return true;
-		});
+  return true;
+});
 };
 
 const findSharedFeathers = (req, res) =>

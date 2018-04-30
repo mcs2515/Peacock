@@ -10,6 +10,11 @@ const handleFeather = (e) => {
     return false;
   }
   
+  if($("#featherImg").val().match(/\.(jpeg|jpg|png)$/) == null){
+    handleError("Not a .png or .jpg or jpeg image");
+    return false;
+  }
+  
   sendAjax('POST', $("#featherForm").attr("action"),$("#featherForm").serialize(),function() {
     handleFilter(e);
     $('#featherName').val('');
@@ -70,7 +75,7 @@ const FeatherForm = (props) => {
   return (
     <form id="featherForm" onSubmit={handleFeather} name="featherForm" action="/maker" method="POST" className="featherForm">
       <label htmlFor="name">Name: </label>
-      <input id="featherName" type="text" name="name" placeholder="name"/>
+      <input id="featherName" type="text" name="name" placeholder="name" maxLength="20"/>
       <label htmlFor="img">Image: </label>
       <input id="featherImg" type="text" name="imageUrl" placeholder="url"/>
       <input type="hidden" name="_csrf" value={csrf} />

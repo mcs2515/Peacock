@@ -22,7 +22,8 @@ const ActivityForm = (props) =>{
       
       <div id="logs">
         <ul>
-					<li><time>Apr 29, 2018</time> Created a filter by feature.</li>
+          <li><time>Apr 30, 2018</time> Limited name for feathers to 25 characters long. Added check for .png and .jpeg images.</li>
+          <li><time>Apr 29, 2018</time> Users can now filter their images by favorites, name, and when they were added.</li>
           <li><time>Apr 22, 2018</time> Added gallery page for all public Feathers.</li>
           <li><time>Apr 21, 2018</time> Added Public & Private buttons to allow for Feather sharing.</li>
           <li><time>Apr 18, 2018</time> Moved web pages around and added redirect.</li>

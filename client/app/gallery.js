@@ -27,7 +27,7 @@ const GalleryList = (props) =>{
         <div id= {"colorsContainer_"+feather._id} className= "colors"></div>
         
         <form id="ownerForm">
-          <label className="ownerNameLabel">Created By: {feather.ownerName} </label>
+          <label className="ownerNameLabel">Added by: {feather.ownerName} </label>
         </form>
       </div>
     );
