@@ -653,7 +653,6 @@ var FeatherList = function FeatherList(props) {
   }
 
   var featherNodes = props.feathers.map(function (feather, index) {
-    console.log("featherNodes: " + feather.name);
     return React.createElement(
       "div",
       { "data-key": feather._id, className: "feather" },

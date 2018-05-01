@@ -123,7 +123,6 @@ const FeatherList = (props) =>{
   }
   
   const featherNodes = props.feathers.map(function(feather,index) {
-		console.log("featherNodes: " + feather.name);
     return (
       <div data-key={feather._id} className="feather">
         <div className= "imageHeader">
