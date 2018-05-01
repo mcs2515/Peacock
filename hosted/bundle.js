@@ -1,91 +1,5 @@
 "use strict";
 
-var GalleryList = function GalleryList(props) {
-
-  if (props.feathers.length === 0) {
-    return React.createElement(
-      "form",
-      null,
-      React.createElement(
-        "div",
-        { className: "featherList" },
-        React.createElement(
-          "h3",
-          { className: "emptyFeather" },
-          "No public Feathers yet."
-        )
-      )
-    );
-  }
-
-  var featherNodes = props.feathers.map(function (feather, index) {
-    return React.createElement(
-      "div",
-      { "data-key": feather._id, className: "feather" },
-      React.createElement(
-        "div",
-        { className: "imageHeader" },
-        React.createElement(
-          "h3",
-          { className: "featherName" },
-          " ",
-          feather.name
-        ),
-        React.createElement(
-          "form",
-          { id: "favForm", onSubmit: ToggleFav, name: "favForm", action: "/favorite", method: "POST", className: "favoriteFrom" },
-          React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
-          React.createElement("input", { type: "hidden", name: "feather_id", value: feather._id })
-        )
-      ),
-      React.createElement("img", { src: feather.imageUrl, alt: "feather face", className: "featherFace", onLoad: LoadColors }),
-      React.createElement("div", { id: "colorsContainer_" + feather._id, className: "colors" }),
-      React.createElement(
-        "form",
-        { id: "ownerForm" },
-        React.createElement(
-          "label",
-          { className: "ownerNameLabel" },
-          "Added by: ",
-          feather.ownerName,
-          " "
-        )
-      )
-    );
-  });
-
-  return React.createElement(
-    "div",
-    { id: "featherList" },
-    featherNodes
-  );
-};
-
-var getSharedFeathersFromServer = function getSharedFeathersFromServer() {
-  sendAjax('GET', '/getSharedFeathers', null, function (data) {
-    ReactDOM.render(React.createElement(GalleryList, { feathers: data.feathers }), document.querySelector("#galleryContainer"));
-  });
-};
-
-var setupGallery = function setupGallery(csrf) {
-  var galleryContainer = document.querySelector("#galleryContainer");
-
-  if (galleryContainer) {
-    getSharedFeathersFromServer();
-  }
-};
-
-var getGalleryToken = function getGalleryToken() {
-  sendAjax('GET', '/getToken', null, function (result) {
-    setupGallery(result.csrfToken);
-  });
-};
-
-$(document).ready(function () {
-  getGalleryToken();
-});
-"use strict";
-
 var AboutForm = function AboutForm(props) {
   return React.createElement(
     "form",
@@ -458,6 +372,100 @@ $(document).ready(function () {
 });
 "use strict";
 
+var GalleryList = function GalleryList(props) {
+
+  if (props.feathers.length === 0) {
+    return React.createElement(
+      "form",
+      null,
+      React.createElement(
+        "div",
+        { className: "featherList" },
+        React.createElement(
+          "h3",
+          { className: "emptyFeather" },
+          "No public Feathers yet."
+        )
+      )
+    );
+  }
+
+  var featherNodes = props.feathers.map(function (feather, index) {
+    return React.createElement(
+      "div",
+      { "data-key": feather._id, className: "feather" },
+      React.createElement(
+        "div",
+        { className: "imageHeader" },
+        React.createElement(
+          "h3",
+          { className: "featherName" },
+          " ",
+          DecodeName(feather.name)
+        ),
+        React.createElement(
+          "form",
+          { id: "favForm", onSubmit: ToggleFav, name: "favForm", action: "/favorite", method: "POST", className: "favoriteFrom" },
+          React.createElement("input", { type: "hidden", name: "_csrf", value: csrf }),
+          React.createElement("input", { type: "hidden", name: "feather_id", value: feather._id })
+        )
+      ),
+      React.createElement("img", { src: feather.imageUrl, alt: "feather face", className: "featherFace", onLoad: LoadColors }),
+      React.createElement("div", { id: "colorsContainer_" + feather._id, className: "colors" }),
+      React.createElement(
+        "form",
+        { id: "ownerForm" },
+        React.createElement(
+          "label",
+          { className: "ownerNameLabel" },
+          "Added by: ",
+          feather.ownerName,
+          " "
+        )
+      )
+    );
+  });
+
+  return React.createElement(
+    "div",
+    { id: "featherList" },
+    featherNodes
+  );
+};
+
+var DecodeName = function DecodeName(props) {
+  var parser = new DOMParser();
+  var dom = parser.parseFromString(props, 'text/html');
+  var name = dom.body.textContent;
+
+  return name;
+};
+
+var getSharedFeathersFromServer = function getSharedFeathersFromServer() {
+  sendAjax('GET', '/getSharedFeathers', null, function (data) {
+    ReactDOM.render(React.createElement(GalleryList, { feathers: data.feathers }), document.querySelector("#galleryContainer"));
+  });
+};
+
+var setupGallery = function setupGallery(csrf) {
+  var galleryContainer = document.querySelector("#galleryContainer");
+
+  if (galleryContainer) {
+    getSharedFeathersFromServer();
+  }
+};
+
+var getGalleryToken = function getGalleryToken() {
+  sendAjax('GET', '/getToken', null, function (result) {
+    setupGallery(result.csrfToken);
+  });
+};
+
+$(document).ready(function () {
+  getGalleryToken();
+});
+"use strict";
+
 var csrf;
 
 var handleFeather = function handleFeather(e) {
@@ -645,7 +653,7 @@ var FeatherList = function FeatherList(props) {
   }
 
   var featherNodes = props.feathers.map(function (feather, index) {
-
+    console.log("featherNodes: " + feather.name);
     return React.createElement(
       "div",
       { "data-key": feather._id, className: "feather" },
@@ -656,7 +664,7 @@ var FeatherList = function FeatherList(props) {
           "h3",
           { className: "featherName" },
           " ",
-          feather.name
+          ParseName(feather.name)
         ),
         React.createElement(
           "form",
@@ -781,6 +789,14 @@ var LoadPrivacy = function LoadPrivacy(props) {
     string = "Private";
   }
   return string;
+};
+
+var ParseName = function ParseName(props) {
+  var parser = new DOMParser();
+  var dom = parser.parseFromString(props, 'text/html');
+  var name = dom.body.textContent;
+
+  return name;
 };
 
 var setup = function setup() {

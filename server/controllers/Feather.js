@@ -80,9 +80,8 @@ const toggleFavorite = (request, response) => {
     }
 
     const feather = doc;
-    const newFeather = new Feather.FeatherModel(feather);
-    newFeather.favorite = !feather.favorite;
-    const featherPromise = newFeather.save();
+    feather.favorite = !feather.favorite;
+    const featherPromise = feather.save();
 
     featherPromise.then(() => res.json({ redirect: '/maker' }));
 
@@ -101,10 +100,8 @@ const togglePrivacy = (request, response) => {
   }
 
   const feather = docs;
-  const newFeather = new Feather.FeatherModel(feather);
-  newFeather.public = !feather.public;
-
-  const featherPromise = newFeather.save();
+  feather.public = !feather.public;
+  const featherPromise = feather.save();
 
   featherPromise.then(() => res.json({ redirect: '/maker' }));
 

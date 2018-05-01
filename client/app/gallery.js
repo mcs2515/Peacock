@@ -14,7 +14,7 @@ const GalleryList = (props) =>{
     return (
       <div data-key={feather._id} className="feather">
         <div className= "imageHeader">
-          <h3 className="featherName"> {feather.name}</h3>
+          <h3 className="featherName"> {DecodeName(feather.name)}</h3>
           
           <form id="favForm" onSubmit= {ToggleFav} name="favForm" action="/favorite" method="POST" className="favoriteFrom">
             <input type="hidden" name="_csrf" value={csrf} />
@@ -39,6 +39,14 @@ const GalleryList = (props) =>{
     </div>
   );
 };
+
+const DecodeName=(props) => {
+	var parser = new DOMParser;
+	var dom = parser.parseFromString(props, 'text/html');
+	var name = dom.body.textContent;
+
+	return name;
+}
 
 const getSharedFeathersFromServer = ()=>{
   sendAjax('GET','/getSharedFeathers', null, (data) => {

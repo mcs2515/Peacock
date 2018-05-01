@@ -123,11 +123,11 @@ const FeatherList = (props) =>{
   }
   
   const featherNodes = props.feathers.map(function(feather,index) {
-		
+		console.log("featherNodes: " + feather.name);
     return (
       <div data-key={feather._id} className="feather">
         <div className= "imageHeader">
-          <h3 className="featherName"> {feather.name}</h3>
+          <h3 className="featherName"> {ParseName(feather.name)}</h3>
           
           <form id="favForm" onSubmit= {ToggleFav} name="favForm" action="/favorite" method="POST" className="favoriteFrom">
             <input type="hidden" name="_csrf" value={csrf} />
@@ -245,6 +245,14 @@ const LoadPrivacy=(props)=>{
   }
   return string;
 };
+
+const ParseName=(props)=>{
+	var parser = new DOMParser;
+	var dom = parser.parseFromString(props, 'text/html');
+	var name = dom.body.textContent;
+
+	return name;
+}
 
 const setup = function() {
   const contentContainer = document.querySelector("#contentContainer");
