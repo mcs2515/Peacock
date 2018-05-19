@@ -94,6 +94,16 @@ var ActivityForm = function ActivityForm(props) {
           React.createElement(
             "time",
             null,
+            "May 19, 2018"
+          ),
+          " Added a Home button and fixed GitHub link."
+        ),
+        React.createElement(
+          "li",
+          null,
+          React.createElement(
+            "time",
+            null,
             "Apr 30, 2018"
           ),
           " Limited name for feathers to 25 characters long. Added check for .png and .jpeg images."
@@ -262,7 +272,7 @@ var ActivityForm = function ActivityForm(props) {
       ),
       React.createElement(
         "a",
-        { href: "https://github.com/mcs2515/Peacock_Final/commits/master", target: "_blank" },
+        { href: "https://github.com/mcs2515/Peacock", target: "_blank" },
         " Github "
       )
     )
