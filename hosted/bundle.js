@@ -46,7 +46,7 @@ var AboutForm = function AboutForm(props) {
             null,
             "1."
           ),
-          "Find an image from any website or Google image search."
+          "Find an image from websites like Imgur.."
         ),
         React.createElement(
           "li",
@@ -634,7 +634,7 @@ var FeatherList = function FeatherList(props) {
                 null,
                 "1."
               ),
-              "Find an image from any website or Google image search."
+              "Find an image from websites like Imgur.."
             ),
             React.createElement(
               "li",

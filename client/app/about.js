@@ -6,7 +6,7 @@ const AboutForm = (props) =>{
       
       <section id="steps">
         <ul>
-          <li id= "step1"><strong>1.</strong>Find an image from any website or Google image search.</li>
+          <li id= "step1"><strong>1.</strong>Find an image from websites like Imgur.</li>
           <li id= "step2"><strong>2.</strong> Right-click the image and click "Copy image address".</li>
           <li id= "step3"><strong>3.</strong> Paste the url in the "Image" url field and click "Add".</li>
         </ul>
