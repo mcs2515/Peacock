@@ -5,7 +5,7 @@
     "node": "7.5.0",
     "npm": "4.0.5"
   },
-  "description": "A Simple Login Example using Node.js, Mongo and Redis",
+  "description": "Image upload web app.",
   "main": "./server/app.js",
   "scripts": {
     "buildLoginBundle": "babel ./client/login --presets react --out-file ./hosted/loginBundle.js",
@@ -22,9 +22,10 @@
     "Node",
     "MVC",
     "Redis",
-    "Login"
+    "Peacock",
+		"Images"
   ],
-  "author": "Cody Van De Mark",
+  "author": "Megan C. Smith",
   "license": "Apache 2.0",
   "dependencies": {
     "body-parser": "^1.15.0",
