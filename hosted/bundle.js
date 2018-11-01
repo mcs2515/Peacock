@@ -483,18 +483,24 @@ var handleFeather = function handleFeather(e) {
 
   $("#errorContainer").animate({ width: 'hide' }, 350);
 
+  //check for empty fields
   if ($("#featherName").val() == '' || $("#featherImg").val() == '') {
     handleError("All fields are required!!");
     return false;
   }
 
+  //check to see if url is a image file
   if ($("#featherImg").val().match(/\.(jpeg|jpg|png)$/) == null) {
     handleError("Not a .png or .jpg or jpeg image");
     return false;
   }
 
+  //invoke the post request to create a new feather sending over name and imageUrl
   sendAjax('POST', $("#featherForm").attr("action"), $("#featherForm").serialize(), function () {
+    //set order images based on filters
     handleFilter(e);
+
+    //reset name and img url field
     $('#featherName').val('');
     $('#featherImg').val('');
   });
@@ -502,9 +508,11 @@ var handleFeather = function handleFeather(e) {
   return false;
 };
 
+//reorder images on page based on selection in filters
 var handleFilter = function handleFilter(e) {
   e.preventDefault();
 
+  //default filter
   if ($("#filterOptions").val() == 'added') {
     loadFeathersFromServer();
   } else {
@@ -516,6 +524,7 @@ var handleFilter = function handleFilter(e) {
   return false;
 };
 
+//makes appropriate calls to delete a father
 var deleteFeather = function deleteFeather(e) {
   e.preventDefault();
 
@@ -526,6 +535,7 @@ var deleteFeather = function deleteFeather(e) {
   return false;
 };
 
+//makes appropriate calls to share a father or make feather private or not
 var TogglePrivacy = function TogglePrivacy(e) {
   e.preventDefault();
 
@@ -536,6 +546,7 @@ var TogglePrivacy = function TogglePrivacy(e) {
   return false;
 };
 
+//makes appropriate calls for user to un/favorite their feather(s)
 var ToggleFav = function ToggleFav(e) {
   e.preventDefault();
 
@@ -546,6 +557,7 @@ var ToggleFav = function ToggleFav(e) {
   return false;
 };
 
+//create the html for the name and image url field forms
 var FeatherForm = function FeatherForm(props) {
   return React.createElement(
     "form",
@@ -567,6 +579,7 @@ var FeatherForm = function FeatherForm(props) {
   );
 };
 
+//create the html for the filters drop down selection
 var FilterForm = function FilterForm(props) {
   return React.createElement(
     "form",
@@ -603,7 +616,9 @@ var FilterForm = function FilterForm(props) {
   );
 };
 
+//show feathers on page
 var FeatherList = function FeatherList(props) {
+  //if no feather's exist, create instructions for user
   if (props.feathers.length === 0) {
     return React.createElement(
       "form",
@@ -662,6 +677,7 @@ var FeatherList = function FeatherList(props) {
     );
   }
 
+  //show all feathers web page with correct properties
   var featherNodes = props.feathers.map(function (feather, index) {
     return React.createElement(
       "div",
@@ -715,6 +731,7 @@ var loadFeathersFromServer = function loadFeathersFromServer() {
   });
 };
 
+//use the vibrant library to extract colors from image source
 var LoadColors = function LoadColors(e) {
 
   var index = e.target.parentElement.getAttribute("data-key");
@@ -744,10 +761,12 @@ var LoadColors = function LoadColors(e) {
       }
     }
 
+    //render the array of colors by calling RenderColors
     ReactDOM.render(React.createElement(RenderColors, { colors: colorArray }), document.querySelector("#colorsContainer_" + index));
   });
 };
 
+//create the html for the array of colors
 var RenderColors = function RenderColors(props) {
 
   var colorNodes = props.colors.map(function (color) {
@@ -778,6 +797,7 @@ var RenderColors = function RenderColors(props) {
   );
 };
 
+//return string to be used as a className to be styled for favoriting
 var LoadFavoriteImg = function LoadFavoriteImg(props) {
   var name;
   //if true
@@ -789,6 +809,7 @@ var LoadFavoriteImg = function LoadFavoriteImg(props) {
   return name;
 };
 
+//return string to be used as a className to be styled for privacy
 var LoadPrivacy = function LoadPrivacy(props) {
   var string;
   //if true

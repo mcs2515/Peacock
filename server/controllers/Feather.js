@@ -1,6 +1,9 @@
 const models = require('../models');
 const Feather = models.Feather;
 
+var httpRequest = require('request');
+var fs = require('fs');
+
 const makerPage = (req, res) => {
 	Feather.FeatherModel.findByOwner(req.session.account._id, (err, docs) => {
 		if (err) {
@@ -25,10 +28,12 @@ const makeFeather = (req, res) => {
 		});
 	}
 	
-		//do i put it here??
-	let encodedImg = encodeURIComponent(req.body.imageUrl);
-	console.log("hello");
-  
+	//do i put it here??
+	//let encodedImg = encodeURIComponent(req.body.imageUrl);
+	//console.log(encodedImg);
+	downloadImg(req.body.imageUrl, req.body.name, function(){
+		console.log('done');
+	});
 
 	const featherData = {
 		name: req.body.name,
@@ -139,7 +144,7 @@ const togglePrivacy = (request, response) => {
 		});
 };
 
-const findSharedFeathers = (req, res) =>
+const findSharedFeathers = (req, res) => {
 	Feather.FeatherModel.getSharedFeathers((err, docs) => {
 		if (err) {
 			console.log(err);
@@ -152,13 +157,9 @@ const findSharedFeathers = (req, res) =>
 			feathers: docs
 		});
 	});
+};
 
-//uhhhh
-const processImg = (req, res) => {
-	//req.params;
-}
-
-const findFiltered = (req, res) =>
+const findFiltered = (req, res) => {
 	Feather.FeatherModel.findByFilter(req.session.account._id, req.body.selectFilter, (err, docs) => {
 		if (err) {
 			return res.status(400).json({
@@ -170,6 +171,14 @@ const findFiltered = (req, res) =>
 			feathers: docs
 		});
 	});
+};
+
+const downloadImg = (uri, filename, callback) => {
+  httpRequest.head(uri, function(err, res, body){
+		var imgType = uri.split('.').pop();
+    httpRequest(uri).pipe(fs.createWriteStream(`downloaded/${filename}.${imgType}`)).on('close', callback);
+  });
+};
 
 module.exports.makerPage = makerPage;
 module.exports.getFeathers = getFeathers;
@@ -178,5 +187,4 @@ module.exports.delete = deleteFeather;
 module.exports.toggleFavorite = toggleFavorite;
 module.exports.togglePrivacy = togglePrivacy;
 module.exports.findSharedFeathers = findSharedFeathers;
-module.exports.processImg = processImg;
 module.exports.findFiltered = findFiltered;
