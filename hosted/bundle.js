@@ -699,7 +699,7 @@ var FeatherList = function FeatherList(props) {
           React.createElement("input", { id: "favImg", className: LoadFavoriteImg(feather.favorite), type: "submit", value: "" })
         )
       ),
-      React.createElement("img", { src: feather.imageUrl, alt: "feather face", className: "featherFace", onLoad: LoadColors }),
+      React.createElement("img", { src: '/imageRoute?url=' + feather.imageUrl, alt: "feather face", className: "featherFace", onLoad: LoadColors }),
       React.createElement("div", { id: "colorsContainer_" + feather._id, className: "colors" }),
       React.createElement(
         "form",

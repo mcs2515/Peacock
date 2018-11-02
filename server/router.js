@@ -11,7 +11,7 @@ const router = (app) => {
   app.get('/account', mid.requiresLogin, controllers.Account.accountPage);
   app.get('/maker', mid.requiresLogin, controllers.Feather.makerPage);
   app.post('/maker', mid.requiresLogin, controllers.Feather.make);
-  //app.post('/imageRoute', mid.requiresLogin, controllers.Feather.processImg);
+  app.get('/imageRoute', mid.requiresLogin, controllers.Feather.getImg);
   app.get('/gallery', mid.requiresLogin, controllers.Account.galleryPage);
   app.get('/getSharedFeathers', mid.requiresLogin, controllers.Feather.findSharedFeathers);
   app.post('/filtered', mid.requiresLogin, controllers.Feather.findFiltered);

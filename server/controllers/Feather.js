@@ -2,10 +2,6 @@ const models = require('../models');
 const Feather = models.Feather;
 
 var httpRequest = require('request');
-var fs = require('fs');
-//i dont know where the img is being stored
-var directory = require('path').join(__dirname, '/../hosted/downloaded/');
-console.log(directory);
 
 const makerPage = (req, res) => {
 	Feather.FeatherModel.findByOwner(req.session.account._id, (err, docs) => {
@@ -30,22 +26,11 @@ const makeFeather = (req, res) => {
 			error: 'All fields are required'
 		});
 	}
-	
-	//do i put it here??
-	//let encodedImg = encodeURIComponent(req.body.imageUrl);
-	//console.log(encodedImg);
-	var imgType = req.body.imageUrl.split('.').pop();
-	downloadImg(req.body.imageUrl, req.body.name, imgType, function(){
-		console.log('done');
-	});
-	
-	console.log(directory);
-	var imgLocation = directory + req.body.name +imgType;
 
 	const featherData = {
 		name: req.body.name,
 		favorite: req.body.favorite,
-		imageUrl: imgLocation,
+		imageUrl: req.body.imageUrl,
 		public: req.body.public,
 		owner: req.session.account._id,
 		ownerName: req.session.account.username,
@@ -180,11 +165,12 @@ const findFiltered = (req, res) => {
 	});
 };
 
-const downloadImg = (uri, filename, type, callback) => {
-  httpRequest.head(uri, function(err, res, body){
-		//not sure where to put this img
-    httpRequest(uri).pipe(fs.createWriteStream(`hosted/downloaded/${filename}.${type}`)).on('close', callback);
-  });
+const getImg = (req, res) => {
+	//console.log(req.url);
+	var url = req.url.split('/imageRoute?url=').pop();
+
+	//let encodedImg = encodeURIComponent(url);
+	 return httpRequest.get(url).pipe(res);
 };
 
 module.exports.makerPage = makerPage;
@@ -195,3 +181,4 @@ module.exports.toggleFavorite = toggleFavorite;
 module.exports.togglePrivacy = togglePrivacy;
 module.exports.findSharedFeathers = findSharedFeathers;
 module.exports.findFiltered = findFiltered;
+module.exports.getImg = getImg;

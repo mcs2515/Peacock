@@ -150,7 +150,7 @@ const FeatherList = (props) =>{
           </form>
         </div>
         
-        <img src={feather.imageUrl} alt="feather face" className="featherFace" onLoad = {LoadColors}/>
+        <img src={'/imageRoute?url=' + feather.imageUrl} alt="feather face" className="featherFace" onLoad = {LoadColors}/>
         
         <div id= {"colorsContainer_"+feather._id} className= "colors"></div>
         
