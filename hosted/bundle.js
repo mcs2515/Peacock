@@ -11,7 +11,7 @@ var AboutForm = function AboutForm(props) {
     ),
     React.createElement(
       "p",
-      null,
+      { className: "about" },
       "Peacock was specifically made for those who are inspired by the colors of an image and would like to save the images to a library. Peacock allows users to create a 'Feather' on their page that has the saved image url and image name. ",
       React.createElement(
         "a",
@@ -44,9 +44,19 @@ var AboutForm = function AboutForm(props) {
           React.createElement(
             "strong",
             null,
-            "1."
+            "1 ."
           ),
-          "Find an image from websites like Imgur."
+          " ",
+          React.createElement(
+            "p",
+            null,
+            "Find an image of .png or .jpeg or .jpg format from the web ",
+            React.createElement(
+              "span",
+              null,
+              "( websites like Imgur or Google Images )"
+            )
+          )
         ),
         React.createElement(
           "li",
@@ -54,9 +64,9 @@ var AboutForm = function AboutForm(props) {
           React.createElement(
             "strong",
             null,
-            "2."
+            "2 ."
           ),
-          " Right-click the image and click \"Copy image address\"."
+          " Right-click the image and click \"Copy image address\""
         ),
         React.createElement(
           "li",
@@ -64,9 +74,9 @@ var AboutForm = function AboutForm(props) {
           React.createElement(
             "strong",
             null,
-            "3."
+            "3 ."
           ),
-          " Paste the url in the \"Image\" url field and click \"Add\"."
+          " Give the image a name, paste the image url in the url field, and click \"Add\" "
         )
       )
     )
@@ -259,6 +269,26 @@ var ActivityForm = function ActivityForm(props) {
             "Mar 30, 2018"
           ),
           " Added a delete feature for users to delete a 'Feather'."
+        ),
+        React.createElement(
+          "li",
+          null,
+          React.createElement(
+            "time",
+            null,
+            "Nov 1, 2018"
+          ),
+          " Fixed CORs issue with using Google Image links."
+        ),
+        React.createElement(
+          "li",
+          null,
+          React.createElement(
+            "time",
+            null,
+            "Nov 3, 2018"
+          ),
+          " Made steps more clear & changed title text color."
         )
       )
     ),
@@ -647,9 +677,19 @@ var FeatherList = function FeatherList(props) {
               React.createElement(
                 "strong",
                 null,
-                "1."
+                "1 ."
               ),
-              "Find an image from websites like Imgur."
+              " ",
+              React.createElement(
+                "p",
+                null,
+                "Find an image of .png or .jpeg or .jpg format from the web ",
+                React.createElement(
+                  "span",
+                  null,
+                  "( websites like Imgur or Google Images )"
+                )
+              )
             ),
             React.createElement(
               "li",
@@ -657,9 +697,9 @@ var FeatherList = function FeatherList(props) {
               React.createElement(
                 "strong",
                 null,
-                "2."
+                "2 ."
               ),
-              " Right-click the image and click \"Copy image address\"."
+              " Right-click the image and click \"Copy image address\""
             ),
             React.createElement(
               "li",
@@ -667,9 +707,9 @@ var FeatherList = function FeatherList(props) {
               React.createElement(
                 "strong",
                 null,
-                "3."
+                "3 ."
               ),
-              " Paste the url in the \"Image\" url field and click \"Add\"."
+              " Give the image a name, paste the image url in the url field, and click \"Add\" "
             )
           )
         )

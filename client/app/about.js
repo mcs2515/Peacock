@@ -2,13 +2,13 @@ const AboutForm = (props) =>{
   return(
     <form>
       <h1>About: </h1>
-      <p>Peacock was specifically made for those who are inspired by the colors of an image and would like to save the images to a library. Peacock allows users to create a 'Feather' on their page that has the saved image url and image name. <a href="https://jariz.github.io/vibrant.js/" target="_blank">Vibrant.js</a> is then used to extract out prominent colors from the image to give the user the hex values of the vibrant and muted colors. Peacock was made with <a href="https://nodejs.org/en/" target="_blank">Node.js</a> and <a href="https://reactjs.org/" target="_blank">React.js</a>. </p>
+      <p className='about'>Peacock was specifically made for those who are inspired by the colors of an image and would like to save the images to a library. Peacock allows users to create a 'Feather' on their page that has the saved image url and image name. <a href="https://jariz.github.io/vibrant.js/" target="_blank">Vibrant.js</a> is then used to extract out prominent colors from the image to give the user the hex values of the vibrant and muted colors. Peacock was made with <a href="https://nodejs.org/en/" target="_blank">Node.js</a> and <a href="https://reactjs.org/" target="_blank">React.js</a>. </p>
       
       <section id="steps">
         <ul>
-          <li id= "step1"><strong>1.</strong>Find an image from websites like Imgur.</li>
-          <li id= "step2"><strong>2.</strong> Right-click the image and click "Copy image address".</li>
-          <li id= "step3"><strong>3.</strong> Paste the url in the "Image" url field and click "Add".</li>
+					<li id= "step1"><strong>1 .</strong> <p>Find an image of .png or .jpeg or .jpg format from the web <span>( websites like Imgur or Google Images )</span></p></li>
+					<li id= "step2"><strong>2 .</strong> Right-click the image and click "Copy image address"</li>
+					<li id= "step3"><strong>3 .</strong> Give the image a name, paste the image url in the url field, and click "Add" </li>
         </ul>
       </section>
     </form>
@@ -38,6 +38,8 @@ const ActivityForm = (props) =>{
           <li><time>Apr 4, 2018</time> Implemented <a href="https://jariz.github.io/vibrant.js/" target="_blank">Vibrant.js</a> to work for only one image. </li>
           <li><time>Apr 2, 2018</time> Added new field to allow users to user image URls to create 'Feathers' with images.</li>
           <li><time>Mar 30, 2018</time> Added a delete feature for users to delete a 'Feather'.</li>
+          <li><time>Nov 1, 2018</time> Fixed CORs issue with using Google Image links.</li>
+          <li><time>Nov 3, 2018</time> Made steps more clear & changed title text color.</li>
         </ul>			
       </div>
       
