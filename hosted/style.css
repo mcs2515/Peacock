@@ -40,7 +40,6 @@ nav {
 	letter-spacing: 2px;
 	padding-top: 5px;
 	padding-left: 45px;
-	color: white;
 	font-size: 2.5em;
 	float: left;
 	font-family: 'Dancing Script', cursive;
@@ -48,13 +47,6 @@ nav {
   -webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
-
-/*
-#title:hover {
-	transition: color 0.4s ease;
-	color: #00eca6;
-}
-*/
 
 .navlink {
 	transition: 0.5s ease;
@@ -183,6 +175,10 @@ option {
 	transition: background-color 0.4s ease;
 	background-color: #338acc;
 	cursor: pointer;
+}
+
+.vibrant-canvas{
+	display: none;
 }
 
 #welcome {
